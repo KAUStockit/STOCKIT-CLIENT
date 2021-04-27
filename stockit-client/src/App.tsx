@@ -7,17 +7,16 @@ import Trade from "./pages/Trade";
 import Balance from "./pages/Balance";
 import MyPage from "./pages/MyPage";
 import PlayGround from "./pages/PlayGround";
-import { BrowserRouter, Link, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 export default function App() {
-	const [isAdvanced, setIsAdvanced] = useState<boolean>(false);
+	const [isAdvanced, setIsAdvanced] = useState(false);
 
 	return (
 		<VersionContext.Provider value={{ isAdvanced, setIsAdvanced }}>
 			<div className="App">
 				<Header />
 				<BrowserRouter>
-					<div className="header__bar"></div>
 					<Switch>
 						<Route exact path="/" component={Main} />
 						<Route exact path="/trade" component={Trade} />

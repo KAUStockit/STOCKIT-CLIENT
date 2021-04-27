@@ -6,23 +6,7 @@ function Trade() {
 	return (
 		<>
 			<div>{isAdvanced && "고급버전"}</div>
-			<div>
-				거래소페이지입니다.
-				<br></br>
-				<br></br>
-				<br></br>
-				<br></br>
-				<br></br>
-				<br></br>
-				<br></br>
-				<br></br>
-				<br></br>
-				<br></br>
-				<br></br>
-				<br></br>
-				<br></br>
-				<br></br>
-			</div>
+			<div>거래소페이지입니다.</div>
 		</>
 	);
 }
