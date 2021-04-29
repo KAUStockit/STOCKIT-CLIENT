@@ -1,21 +1,24 @@
 import "./App.css";
 import React, { useState, useEffect, useContext } from "react";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+
+// components
+import Header from "./components/common/Header";
+import Footer from "./components/common/Footer";
 import Main from "./pages/Main";
 import Trade from "./pages/Trade";
 import Balance from "./pages/Balance";
 import MyPage from "./pages/MyPage";
 import PlayGround from "./pages/PlayGround";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 export default function App() {
 	const [isAdvanced, setIsAdvanced] = useState(false);
+	const [user, setUser] = useState("");
 
 	return (
 		<VersionContext.Provider value={{ isAdvanced, setIsAdvanced }}>
 			<div className="App">
-				<Header />
+				<Header user={user} />
 				<BrowserRouter>
 					<Switch>
 						<Route exact path="/" component={Main} />

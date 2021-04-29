@@ -1,12 +1,16 @@
 import React from "react";
-import { COLOR } from "../constants/theme";
+import { COLOR } from "../../constants/theme";
 import styled from "@emotion/styled";
-import { useVersionContext } from "../App";
+import { useVersionContext } from "../../App";
 
-const Header: React.FC = () => {
+type HeaderProp = {
+	user: string;
+};
+
+const Header: React.FC<HeaderProp> = ({ user }) => {
 	const { isAdvanced, setIsAdvanced }: any = useVersionContext();
 
-	const onAdvanceClick = (e: any) => {
+	const onAdvanceClick = (e: React.MouseEvent) => {
 		e.preventDefault();
 		console.log("고급버전 전환");
 		setIsAdvanced(!isAdvanced);
@@ -25,7 +29,17 @@ const Header: React.FC = () => {
 				<a href="/trade">거래소</a>
 				<a href="/balance">투자내역</a>
 			</div>
-			<a href="/mypage">마이페이지</a>
+			<div>
+				{user === "" ? (
+					<>
+						<div>로그인</div>|<div>회원가입</div>
+					</>
+				) : (
+					<>
+						<div>{user}</div>|<div>내정보</div>
+					</>
+				)}
+			</div>
 		</Container>
 	);
 };
