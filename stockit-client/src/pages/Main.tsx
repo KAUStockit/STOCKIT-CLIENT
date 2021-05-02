@@ -1,9 +1,12 @@
+// 메인 화면 컴포넌트
+
 import React, { useState } from "react";
 
 // components
 import StockList from "../components/Main/StockList";
 import StockCard from "../components/Main/StockCard";
 
+// interface
 type StockObject = {
 	id: number;
 	name: string;

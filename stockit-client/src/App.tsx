@@ -1,4 +1,3 @@
-import "./App.css";
 import React, { useState, useEffect, useContext } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
@@ -10,6 +9,14 @@ import Trade from "./pages/Trade";
 import Balance from "./pages/Balance";
 import MyPage from "./pages/MyPage";
 import PlayGround from "./pages/PlayGround";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+
+// interface
+export enum LEVEL {
+	EASY = "easy",
+	HARD = "hard",
+}
 
 export default function App() {
 	const [isAdvanced, setIsAdvanced] = useState(false);
@@ -30,6 +37,8 @@ export default function App() {
 							path="/playground"
 							component={PlayGround}
 						/>
+						<Route exact path="/signin" component={SignIn} />
+						<Route exact path="/signup" component={SignUp} />
 					</Switch>
 				</BrowserRouter>
 				<Footer />

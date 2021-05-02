@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 // components
 import RateBox from "../common/RateBox";
 
+// interface
 type StockCardProp = {
 	name: string;
 	rate: number;
