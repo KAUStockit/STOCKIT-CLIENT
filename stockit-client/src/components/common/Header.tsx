@@ -17,14 +17,21 @@ const Header: React.FC<HeaderProp> = ({ user }) => {
 		setIsAdvanced(!isAdvanced);
 	};
 
+	const onLogoClick = (e: React.MouseEvent) => {
+		e.preventDefault();
+		window.location.href = "../";
+	};
+
 	return (
 		<Container>
 			<Logo>
 				<svg
+					onClick={onLogoClick}
 					xmlns="http://www.w3.org/2000/svg"
 					width="107"
 					height="32"
 					viewBox="0 0 107 32"
+					style={{ cursor: "pointer" }}
 				>
 					<text
 						id="Stockit"
