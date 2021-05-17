@@ -1,10 +1,11 @@
 // 메인 화면 컴포넌트
-
 import React, { useState } from "react";
+import styled from "@emotion/styled";
 
 // components
 import StockList from "../components/Main/StockList";
 import StockCard from "../components/Main/StockCard";
+import { COLOR } from "../constants/theme";
 
 // interface
 type StockObject = {
@@ -35,17 +36,23 @@ function Main() {
 	]);
 
 	return (
-		<div>
+		<Content>
 			<div>
 				<p>
 					Stockit<b>TOP100</b>
 				</p>
-				<div>
-					<div>인기순 탑100</div>
-					<div>시총순 탑100</div>
-					<div>수익률 탑100</div>
-				</div>
-				<div>
+				<MainCards>
+					<MainCard>
+						<p>인기순 탑100</p>
+					</MainCard>
+					<MainCard>
+						<p>시총순 탑100</p>
+					</MainCard>
+					<MainCard>
+						<p>수익률 탑100</p>
+					</MainCard>
+				</MainCards>
+				<MainRank>
 					<div>
 						{popularStockList.map((stock, idx) => (
 							<StockList
@@ -73,18 +80,64 @@ function Main() {
 							/>
 						))}
 					</div>
-				</div>
-				<div>
-					<p>10000원으로 살 수 있는 주식</p>
+				</MainRank>
+				<MainBottom>
+					<h3>10000원으로 살 수 있는 주식</h3>
 					<div>
 						{tenThousandStockList.map((stock, idx) => (
 							<StockCard name={stock.name} rate={stock.rate} />
 						))}
 					</div>
-				</div>
+				</MainBottom>
 			</div>
-		</div>
+		</Content>
 	);
 }
+
+const Content = styled.div`
+	margin: 50px 10% 0 10%;
+`;
+
+const MainCards = styled.div`
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+`;
+
+const MainCard = styled.div`
+	max-width: 40vh;
+	min-width: 30vh;
+	height: 20vh;
+	background-color: ${COLOR.GRAPH_BLUE};
+	border-radius: 10px;
+
+	& > p {
+		color: white;
+		display: block;
+		position: relative;
+		font-weight: 700px;
+		font-size: 20px;
+	}
+`;
+
+const MainRank = styled.div`
+	display: flex;
+	justify-content: space-evenly;
+	margin-top: 30px;
+`;
+
+const MainBottom = styled.div`
+	margin-top: 50px;
+
+	& > h3 {
+		font-weight: 700;
+		font-size: 18px;
+	}
+
+	& > div {
+		display: flex;
+		justify-content: space-around;
+	}
+`;
 
 export default Main;

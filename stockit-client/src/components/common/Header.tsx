@@ -18,7 +18,7 @@ const Header: React.FC<HeaderProp> = ({ user }) => {
 
 	return (
 		<Container>
-			<div>
+			<Logo>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="107"
@@ -44,14 +44,14 @@ const Header: React.FC<HeaderProp> = ({ user }) => {
 				<a href="" onClick={onAdvanceClick}>
 					{isAdvanced ? "쉬운버전으로" : "고급버전으로"}
 				</a>
-			</div>
+			</Logo>
 
 			<div>
 				<a href="/playground">놀이터</a>
 				<a href="/trade">거래소</a>
 				<a href="/balance">투자내역</a>
 			</div>
-			<HeaderLeftBox>
+			<HeaderRightBox>
 				{user === "" ? (
 					<div>
 						<span>로그인</span>|<span>회원가입</span>
@@ -61,7 +61,7 @@ const Header: React.FC<HeaderProp> = ({ user }) => {
 						<span>{user}</span>|<span>내정보</span>
 					</div>
 				)}
-			</HeaderLeftBox>
+			</HeaderRightBox>
 		</Container>
 	);
 };
@@ -74,10 +74,14 @@ const Container = styled.div`
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
+	align-
 	color: white;
 
 	& > div {
 		width: 20%;
+		height: 100%;
+		display: flex;
+		align-items:center;
 	}
 
 	& > div > a {
@@ -90,10 +94,17 @@ const Container = styled.div`
 	}
 `;
 
-const HeaderLeftBox = styled.div`
-	width: 100px;
-	height: 60%;
+const Logo = styled.div`
+	display: flex;
+	align-items: baseline;
+`;
+
+const HeaderRightBox = styled.div`
+	max-width: 150px;
+	height: 60% !important;
 	background: ${COLOR.GRAPH_BLUE};
+	color: white;
+	justify-content: space-around;
 
 	$ > div {
 		margin-top: 8px;
