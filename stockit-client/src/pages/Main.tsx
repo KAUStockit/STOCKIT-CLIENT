@@ -38,9 +38,9 @@ function Main() {
 	return (
 		<Content>
 			<div>
-				<p>
-					Stockit<b>TOP100</b>
-				</p>
+				<h3>
+					Stockit<b style={{ color: COLOR.BLUE }}> TOP100</b>
+				</h3>
 				<MainCards>
 					<MainCard>
 						<p>인기순 탑100</p>
@@ -56,7 +56,9 @@ function Main() {
 					<div>
 						{popularStockList.map((stock, idx) => (
 							<StockList
+								key={idx}
 								idx={idx + 1}
+								id={stock.id}
 								name={stock.name}
 								rate={stock.rate}
 							/>
@@ -65,7 +67,9 @@ function Main() {
 					<div>
 						{valuableStockList.map((stock, idx) => (
 							<StockList
+								key={idx}
 								idx={idx + 1}
+								id={stock.id}
 								name={stock.name}
 								rate={stock.rate}
 							/>
@@ -74,7 +78,9 @@ function Main() {
 					<div>
 						{raisedStockList.map((stock, idx) => (
 							<StockList
+								key={idx}
 								idx={idx + 1}
+								id={stock.id}
 								name={stock.name}
 								rate={stock.rate}
 							/>
@@ -85,7 +91,11 @@ function Main() {
 					<h3>10000원으로 살 수 있는 주식</h3>
 					<div>
 						{tenThousandStockList.map((stock, idx) => (
-							<StockCard name={stock.name} rate={stock.rate} />
+							<StockCard
+								key={idx}
+								name={stock.name}
+								rate={stock.rate}
+							/>
 						))}
 					</div>
 				</MainBottom>
@@ -93,6 +103,8 @@ function Main() {
 		</Content>
 	);
 }
+
+//* css : @emotion/styled
 
 const Content = styled.div`
 	margin: 50px 10% 0 10%;

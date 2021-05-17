@@ -29,7 +29,7 @@ export default function App() {
 				<BrowserRouter>
 					<Switch>
 						<Route exact path="/" component={Main} />
-						<Route exact path="/trade" component={Trade} />
+						<Route path="/:stockId/trade" component={Trade} />
 						<Route exact path="/balance" component={Balance} />
 						<Route exact path="/mypage" component={MyPage} />
 						<Route
@@ -52,8 +52,7 @@ type VersionContextType = {
 	setIsAdvanced: (v: boolean) => void;
 };
 
-export const VersionContext = React.createContext<
-	VersionContextType | undefined
->(undefined);
+export const VersionContext =
+	React.createContext<VersionContextType | undefined>(undefined);
 
 export const useVersionContext = () => useContext(VersionContext);

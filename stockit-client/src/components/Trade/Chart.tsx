@@ -16,15 +16,15 @@ type ChartProp = {
 const Chart: React.FC<ChartProp> = ({ stockId, level }) => {
 	return (
 		<div>
-			<div className="chart__chart">
-				<div className="chart__picker">
+			<ChartGraph className="chart__chart">
+				<Picker className="chart__picker">
 					<div>1일</div>
 					<div>1주</div>
 					<div>1개월</div>
 					<div>3개월</div>
 					<div>1년</div>
 					<div>5년</div>
-				</div>
+				</Picker>
 				<div className="linechart">
 					{level === LEVEL.EASY ? (
 						// 쉬운 버전 차트
@@ -34,9 +34,32 @@ const Chart: React.FC<ChartProp> = ({ stockId, level }) => {
 						<Line type="line" data={{}} />
 					)}
 				</div>
-			</div>
+			</ChartGraph>
 		</div>
 	);
 };
+
+//* css : @emotion/styled
+
+const ChartGraph = styled.div`
+	box-shadow: 1px 1px 2px 2px #e2e2e2;
+`;
+
+const Picker = styled.div`
+	display: flex;
+	justify-content: flex-start;
+	border-bottom: 1px solid #dedede;
+
+	& > div {
+		border-right: 1px solid #dedede;
+		width: 50px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: #4d4d4d;
+		height: 40px;
+		font-size: 15px;
+	}
+`;
 
 export default Chart;

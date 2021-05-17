@@ -21,7 +21,7 @@ const StockCard: React.FC<StockCardProp> = ({ name, rate }) => {
 
 const Card = styled.div`
 	background: white;
-	box-shadow: 1px 1px 3px #dedede;
+	box-shadow: 1px 1px 3px 1px #dedede;
 	min-width: 30vh;
 	max-width: 40vh;
 	height: 20vh;

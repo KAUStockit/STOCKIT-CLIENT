@@ -3,6 +3,7 @@ import { COLOR } from "../../constants/theme";
 import styled from "@emotion/styled";
 import { useVersionContext } from "../../App";
 
+// interface
 type HeaderProp = {
 	user: string;
 };
@@ -54,11 +55,11 @@ const Header: React.FC<HeaderProp> = ({ user }) => {
 			<HeaderRightBox>
 				{user === "" ? (
 					<div>
-						<span>로그인</span>|<span>회원가입</span>
+						<span>로그인</span> | <span>회원가입</span>
 					</div>
 				) : (
 					<div>
-						<span>{user}</span>|<span>내정보</span>
+						<span>{user}</span> | <span>내정보</span>
 					</div>
 				)}
 			</HeaderRightBox>
@@ -66,7 +67,8 @@ const Header: React.FC<HeaderProp> = ({ user }) => {
 	);
 };
 
-//* css : @emotion
+//* css : @emotion/styled
+
 const Container = styled.div`
 	width: 100%;
 	height: 69px;
