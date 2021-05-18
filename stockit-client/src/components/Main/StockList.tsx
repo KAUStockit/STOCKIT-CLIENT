@@ -18,7 +18,6 @@ const StockList: React.FC<StockListProps> = ({ idx, id, name, rate }) => {
 	const history = useHistory();
 
 	const onclick = () => {
-		console.log(id);
 		history.push(`./${id}/trade`);
 	};
 

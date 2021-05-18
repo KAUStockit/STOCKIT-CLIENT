@@ -1,5 +1,5 @@
 // 거래소 화면
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useVersionContext } from "../App";
 import styled from "@emotion/styled";
 
@@ -13,17 +13,28 @@ import Chat from "../components/Trade/Chat";
 // interface
 import { LEVEL } from "../App";
 import { COLOR } from "../constants/theme";
+import { useHistory } from "react-router-dom";
 type TradeProp = {
+	match?: any;
 	stockId: number;
 	stockName: string;
 	stockPrice: number;
 };
 
-const Trade: React.FC<TradeProp> = ({ stockId, stockName, stockPrice }) => {
+const Trade: React.FC<TradeProp> = ({
+	match,
+	stockId,
+	stockName,
+	stockPrice,
+}) => {
 	const { isAdvanced, setIsAdvanced }: any = useVersionContext();
 
 	const [sellModalDisplay, setSellModalDisplay] = useState(false);
 	const [buyModalDisplay, setBuyModalDisplay] = useState(false);
+
+	if (match) {
+		stockId = match.params.stockId;
+	}
 
 	const onTradeClick = (e: React.MouseEvent) => {
 		console.log(e.currentTarget.textContent);
@@ -33,6 +44,13 @@ const Trade: React.FC<TradeProp> = ({ stockId, stockName, stockPrice }) => {
 			setSellModalDisplay(true);
 		}
 	};
+
+	useEffect(() => {
+		console.log(stockId);
+		// stockId로 주식정보 받아오기
+		// 받아온 정보대로 데이터 업데이트
+	}, [stockId]);
+
 	return (
 		<Container>
 			{/* <div>{isAdvanced && "고급버전"}</div>
@@ -58,10 +76,20 @@ const Trade: React.FC<TradeProp> = ({ stockId, stockName, stockPrice }) => {
 				<Chat />
 			</Grid>
 			{buyModalDisplay && (
-				<TradeModal type="buy" hide={setBuyModalDisplay} />
+				<TradeModal
+					type="buy"
+					hide={setBuyModalDisplay}
+					price={20000}
+					isAdvanced={isAdvanced}
+				/>
 			)}
 			{sellModalDisplay && (
-				<TradeModal type="sell" hide={setSellModalDisplay} />
+				<TradeModal
+					type="sell"
+					hide={setSellModalDisplay}
+					price={20000}
+					isAdvanced={isAdvanced}
+				/>
 			)}
 		</Container>
 	);

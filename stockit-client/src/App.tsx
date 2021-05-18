@@ -24,7 +24,7 @@ export default function App() {
 
 	return (
 		<VersionContext.Provider value={{ isAdvanced, setIsAdvanced }}>
-			<div className="App">
+			<div className="App" style={{ fontFamily: "Noto Sans KR" }}>
 				<Header user={user} />
 				<BrowserRouter>
 					<Switch>

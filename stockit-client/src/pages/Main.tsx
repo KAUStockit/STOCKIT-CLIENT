@@ -114,19 +114,23 @@ const MainCards = styled.div`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-evenly;
+	overflow: auto;
 `;
 
 const MainCard = styled.div`
-	max-width: 40vh;
-	min-width: 30vh;
+	min-width: 270px;
+	max-width: 270px;
 	height: 20vh;
 	background-color: ${COLOR.GRAPH_BLUE};
 	border-radius: 10px;
+	margin-right: 20px;
 
 	& > p {
 		color: white;
 		display: block;
 		position: relative;
+		right: -120px;
+		bottom: -120px;
 		font-weight: 700px;
 		font-size: 20px;
 	}
@@ -136,6 +140,7 @@ const MainRank = styled.div`
 	display: flex;
 	justify-content: space-evenly;
 	margin-top: 30px;
+	overflow: auto;
 `;
 
 const MainBottom = styled.div`

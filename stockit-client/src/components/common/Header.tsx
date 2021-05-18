@@ -19,7 +19,17 @@ const Header: React.FC<HeaderProp> = ({ user }) => {
 
 	const onLogoClick = (e: React.MouseEvent) => {
 		e.preventDefault();
-		window.location.href = "../";
+		window.location.href = "/";
+	};
+
+	const onSignUpClick = (e: React.MouseEvent) => {
+		e.preventDefault();
+		window.location.href = "/signup";
+	};
+
+	const onSignInClick = (e: React.MouseEvent) => {
+		e.preventDefault();
+		window.location.href = "/signin";
 	};
 
 	return (
@@ -62,7 +72,8 @@ const Header: React.FC<HeaderProp> = ({ user }) => {
 			<HeaderRightBox>
 				{user === "" ? (
 					<div>
-						<span>로그인</span> | <span>회원가입</span>
+						<span onClick={onSignInClick}>로그인</span> |{" "}
+						<span onClick={onSignUpClick}>회원가입</span>
 					</div>
 				) : (
 					<div>
@@ -77,20 +88,24 @@ const Header: React.FC<HeaderProp> = ({ user }) => {
 //* css : @emotion/styled
 
 const Container = styled.div`
-	width: 100%;
+	width: 100vw;
 	height: 69px;
 	background: ${COLOR.BLUE};
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
-	align-
 	color: white;
 
-	& > div {
+	& > span {
+		cursor: pointer;
+	}
+
+	& > div:nth-of-type(2) {
 		width: 20%;
+		min-width: 300px;
 		height: 100%;
 		display: flex;
-		align-items:center;
+		align-items: center;
 	}
 
 	& > div > a {
@@ -105,18 +120,25 @@ const Container = styled.div`
 
 const Logo = styled.div`
 	display: flex;
-	align-items: baseline;
+	align-items: center;
+	width: 40vw;
+
+	$ > a {
+		width: 150px;
+	}
 `;
 
 const HeaderRightBox = styled.div`
-	max-width: 150px;
+	width: 150px;
+	display: flex;
+	align-items: center;
 	height: 60% !important;
 	background: ${COLOR.GRAPH_BLUE};
 	color: white;
 	justify-content: space-around;
 
-	$ > div {
-		margin-top: 8px;
+	& > div > span {
+		cursor: pointer;
 	}
 `;
 

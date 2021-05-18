@@ -135,8 +135,11 @@ const Bottom = styled.div`
 	max-width: 80vh;
 
 	& > p {
-		display: relative;
+		display: block;
 		left: 5px;
+		font-size: 14px;
+		padding-bottom: 5px;
+		border-bottom: 1px solid ${COLOR.INPUT_BORDER};
 	}
 	& > button {
 		min-width: 40vh;
