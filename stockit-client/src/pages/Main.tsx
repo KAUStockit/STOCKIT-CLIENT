@@ -113,7 +113,7 @@ const Content = styled.div`
 const MainCards = styled.div`
 	display: flex;
 	flex-direction: row;
-	justify-content: space-evenly;
+	justify-content: flex-start;
 	overflow-x: auto;
 `;
 

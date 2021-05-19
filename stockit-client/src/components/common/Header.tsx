@@ -66,8 +66,14 @@ const Header: React.FC<HeaderProp> = ({ user }) => {
 
 			<div>
 				<a href="/playground">놀이터</a>
-				<a href="/trade">거래소</a>
-				<a href="/balance">투자내역</a>
+				<a
+					href={`/${window.localStorage.getItem(
+						"lastStockId"
+					)}/trade`}
+				>
+					거래소
+				</a>
+				<a href="/balance">내지갑</a>
 			</div>
 			<HeaderRightBox>
 				{user === "" ? (

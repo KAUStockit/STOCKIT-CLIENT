@@ -22,6 +22,15 @@ export default function App() {
 	const [isAdvanced, setIsAdvanced] = useState(false);
 	const [user, setUser] = useState("");
 
+	// didRendered
+	// 제일 최근에 봤던 주식 정보가 있으면
+	useEffect(() => {
+		window.localStorage.setItem(
+			"lastStockId",
+			window.localStorage.getItem("lastStockId") || "1"
+		);
+	}, []);
+
 	return (
 		<VersionContext.Provider value={{ isAdvanced, setIsAdvanced }}>
 			<div className="App" style={{ fontFamily: "Noto Sans KR" }}>

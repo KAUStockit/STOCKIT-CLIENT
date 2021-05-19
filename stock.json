@@ -1,0 +1,37 @@
+// 거래소 화면에서 쓸 개별 주식 데이터
+{
+    id: number,
+    name: string,
+    // prices_s: [
+
+    // ],
+    // prices_m: [
+
+    // ],
+    // prices_h: [
+
+    // ],
+    prices_D: [
+
+    ],
+    prices_W: [
+
+    ],
+    prices_M: [
+
+    ],
+    prices_3M: [
+
+    ],
+    
+}
+
+// 매도 / 매수 신청 데이터 - rest
+
+// 호가 데이터
+
+// 회원가입 - rest
+
+// 로그인 - rest
+
+// 

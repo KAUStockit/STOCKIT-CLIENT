@@ -8,22 +8,42 @@ import { Line } from "react-chartjs-2";
 
 // interface
 import { LEVEL } from "../../App";
+import { COLOR } from "../../constants/theme";
 type ChartProp = {
 	stockId: number;
 	level: LEVEL;
 };
 
+const filters = ["1일", "1주", "1개월", "3개월", "1년", "3년"];
+
 const Chart: React.FC<ChartProp> = ({ stockId, level }) => {
+	// states
+	const [filter, setFilter] = useState("1일");
+
+	const onFilterClick = (e: React.MouseEvent) => {
+		setFilter(e.currentTarget.innerHTML);
+	};
+
 	return (
 		<div>
 			<ChartGraph className="chart__chart">
 				<Picker className="chart__picker">
-					<div>1일</div>
-					<div>1주</div>
-					<div>1개월</div>
-					<div>3개월</div>
-					<div>1년</div>
-					<div>5년</div>
+					{filters.map((item, idx) => (
+						<div
+							key={idx}
+							onClick={onFilterClick}
+							style={
+								item === filter
+									? {
+											backgroundColor: COLOR.BLUE,
+											color: "white",
+									  }
+									: {}
+							}
+						>
+							{item}
+						</div>
+					))}
 				</Picker>
 				<div className="linechart">
 					{level === LEVEL.EASY ? (

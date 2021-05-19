@@ -1,19 +1,41 @@
 // 거래소 화면 우측에 있는 검색, 관심, 미체결 현황 확인을 위한 컴포넌트
 
 import styled from "@emotion/styled";
-import React from "react";
+import React, { useState } from "react";
+import { COLOR } from "../../constants/theme";
 
 // interface
 type EntryProp = {};
 
+const filters = ["목록", "관심", "대기"];
+
 const Entry: React.FC = () => {
+	const [filter, setfilter] = useState("목록");
+
+	const onFilterClick = (e: React.MouseEvent) => {
+		setfilter(e.currentTarget.innerHTML);
+	};
+
 	return (
 		<EntryComponent>
 			<div className="entry__header">
 				<Filter>
-					<div>목록</div>
-					<div>관심</div>
-					<div>대기</div>
+					{filters.map((item, idx) => (
+						<div
+							key={idx}
+							style={
+								filter === item
+									? {
+											backgroundColor: COLOR.BLUE,
+											color: "white",
+									  }
+									: {}
+							}
+							onClick={onFilterClick}
+						>
+							{item}
+						</div>
+					))}
 					<SearchBox>
 						<input type="text" placeholder="검색어를 입력하세요" />
 						<div>검색</div>

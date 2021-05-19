@@ -13,7 +13,6 @@ import Chat from "../components/Trade/Chat";
 // interface
 import { LEVEL } from "../App";
 import { COLOR } from "../constants/theme";
-import { useHistory } from "react-router-dom";
 type TradeProp = {
 	match?: any;
 	stockId: number;
@@ -47,6 +46,7 @@ const Trade: React.FC<TradeProp> = ({
 
 	useEffect(() => {
 		console.log(stockId);
+		window.localStorage.setItem("lastStockId", String(stockId));
 		// stockId로 주식정보 받아오기
 		// 받아온 정보대로 데이터 업데이트
 	}, [stockId]);
