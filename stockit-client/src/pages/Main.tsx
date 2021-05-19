@@ -114,7 +114,7 @@ const MainCards = styled.div`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-evenly;
-	overflow: auto;
+	overflow-x: auto;
 `;
 
 const MainCard = styled.div`

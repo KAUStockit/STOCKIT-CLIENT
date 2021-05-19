@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import styled from "@emotion/styled";
 
 // theme
@@ -9,28 +9,56 @@ type InputWithLabelProps = {
 	label: string;
 	password: boolean;
 	placeholder: string;
-	message: "";
+	validation: (text: string) => string;
 };
 
 const InputWithLabel: React.FC<InputWithLabelProps> = ({
 	label,
 	password,
 	placeholder,
-	message,
+	validation,
 }) => {
-	const messageRef = useRef<HTMLParagraphElement>(null);
 	const inputRef = useRef<HTMLInputElement>(null);
+
+	// states
+	const [inputValue, setInputValue] = useState<string>("");
+	const [message, setMessage] = useState<string>("");
+
+	const onInputChange = (e: React.FormEvent<HTMLInputElement>) => {
+		setInputValue(e.currentTarget.value);
+		console.log(inputValue);
+	};
+
+	const inputEventHandler = () =>
+		setTimeout(() => {
+			let msg = validation(inputValue);
+			setMessage(msg);
+		}, 500);
+
+	useEffect(() => {
+		if (inputRef && inputRef.current) {
+			inputRef.current.addEventListener("blur", inputEventHandler);
+
+			return () => {
+				inputRef.current?.removeEventListener(
+					"blur",
+					inputEventHandler
+				);
+			};
+		}
+	});
 
 	return (
 		<Container>
 			<div>
 				<p>{label}</p>
-				<p ref={messageRef}>{message}</p>
+				<p>{message}</p>
 			</div>
 			<input
 				type={password ? "password" : "text"}
 				placeholder={placeholder}
 				ref={inputRef}
+				onChange={onInputChange}
 			/>
 		</Container>
 	);

@@ -1,5 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
+import {
+	validateId,
+	validatePassword,
+	validateRePassword,
+} from "../utils/InputValidation";
 
 // theme
 import { COLOR } from "../constants/theme";
@@ -11,6 +16,9 @@ import InputWithLabel from "../components/common/InputWithLabel";
 type SignUpProps = {};
 
 const SignUp: React.FC<SignUpProps> = () => {
+	// States
+	const [id, setId] = useState<string>("");
+
 	return (
 		<Container>
 			<h3 style={{ margin: "40px 0 40px 0" }}>회원가입</h3>
@@ -19,19 +27,19 @@ const SignUp: React.FC<SignUpProps> = () => {
 					label="아이디"
 					password={false}
 					placeholder="아이디를 입력해주세요."
-					message=""
+					validation={validateId}
 				></InputWithLabel>
 				<InputWithLabel
 					label="비밀번호"
 					password={true}
 					placeholder="비밀번호를 입력해주세요."
-					message=""
+					validation={validatePassword}
 				></InputWithLabel>
 				<InputWithLabel
 					label="비밀번호 확인"
 					password={true}
 					placeholder="비밀번호를 재입력해주세요."
-					message=""
+					validation={validateRePassword}
 				></InputWithLabel>
 				<EmailForm>
 					<p>이메일 인증</p>
@@ -54,6 +62,8 @@ const SignUp: React.FC<SignUpProps> = () => {
 		</Container>
 	);
 };
+
+// Input Validation Functions
 
 //* css : @emotion/styled
 const Container = styled.div`
