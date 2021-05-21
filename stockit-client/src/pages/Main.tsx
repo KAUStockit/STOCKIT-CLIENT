@@ -33,6 +33,10 @@ function Main() {
 	>([
 		{ id: 36, name: "이트론", price: 675, rate: 1.7 },
 		{ id: 11, name: "LG화학", price: 900, rate: 3.7 },
+		{ id: 36, name: "이트론", price: 675, rate: 1.7 },
+		{ id: 11, name: "LG화학", price: 900, rate: 3.7 },
+		{ id: 36, name: "이트론", price: 675, rate: 1.7 },
+		{ id: 11, name: "LG화학", price: 900, rate: 3.7 },
 	]);
 
 	return (
@@ -113,7 +117,7 @@ const Content = styled.div`
 const MainCards = styled.div`
 	display: flex;
 	flex-direction: row;
-	justify-content: flex-start;
+	justify-content: space-evenly;
 	overflow-x: auto;
 `;
 
@@ -153,7 +157,12 @@ const MainBottom = styled.div`
 
 	& > div {
 		display: flex;
-		justify-content: space-around;
+		justify-content: flex-start;
+		overflow-x: auto;
+	}
+
+	& > div > div {
+		margin-right: 20px;
 	}
 `;
 
