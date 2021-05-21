@@ -43,7 +43,7 @@ const MyPage: React.FC<MyPageProp> = () => {
 					)}
 				</div>
 			</LeftMenu>
-			<Ranking />
+			<Ranking name="imnotmoon" rank={45} />
 		</Container>
 	);
 };
