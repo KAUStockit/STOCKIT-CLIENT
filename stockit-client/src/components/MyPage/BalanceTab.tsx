@@ -84,7 +84,15 @@ const BalanceTab: React.FC<BalanceTabProp> = () => {
 						{totalPages.map((item, idx) => {
 							console.log(item);
 							return (
-								<p key={idx} onClick={onPageClick}>
+								<p
+									key={idx}
+									onClick={onPageClick}
+									style={
+										item === currentPage
+											? { color: "black" }
+											: { color: "grey" }
+									}
+								>
 									{item}
 								</p>
 							);
