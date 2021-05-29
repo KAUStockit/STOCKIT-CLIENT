@@ -104,6 +104,7 @@ const EmailForm = styled.div`
 	& > div > input:focus {
 		background-color: white;
 		outline: none;
+		border: 1px solid ${COLOR.BLUE};
 		box-shadow: 1px 1px 3px ${COLOR.INPUT_BORDER};
 	}
 
@@ -126,7 +127,7 @@ const Button = styled.button`
 	margin-top: 40px;
 	color: white;
 	min-width: 40vh;
-	max-width: 80vh;
+	max-width: 60vh;
 	height: 50px;
 	background-color: ${COLOR.GRAPH_BLUE};
 	outline: none;
@@ -142,7 +143,7 @@ const Button = styled.button`
 
 const Bottom = styled.div`
 	min-width: 40vh;
-	max-width: 80vh;
+	max-width: 60vh;
 
 	& > p {
 		display: block;
@@ -153,7 +154,7 @@ const Bottom = styled.div`
 	}
 	& > button {
 		min-width: 40vh;
-		max-width: 80vh;
+		max-width: 60vh;
 		outline: none;
 		border: none;
 		border-radius: 5px;

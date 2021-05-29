@@ -95,6 +95,7 @@ const Container = styled.div`
 	& > input:focus {
 		background-color: white;
 		outline: none;
+		border: 1px solid ${COLOR.BLUE};
 		box-shadow: 1px 1px 3px ${COLOR.INPUT_BORDER};
 	}
 `;
