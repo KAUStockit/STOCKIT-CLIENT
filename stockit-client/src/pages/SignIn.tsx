@@ -9,6 +9,8 @@ import { COLOR } from "../constants/theme";
 import InputWithLabel from "../components/common/InputWithLabel";
 
 function SignIn() {
+	const onLoginClick = (e: React.FormEvent<HTMLButtonElement>) => {};
+
 	return (
 		<Container>
 			<h3 style={{ margin: "40px 0 40px 0" }}>로그인</h3>
