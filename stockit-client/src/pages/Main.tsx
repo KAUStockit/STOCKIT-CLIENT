@@ -16,17 +16,67 @@ type StockObject = {
 };
 
 function Main() {
-	const [popularStockList, setPopularStockList] = useState<StockObject[]>([
-		{ id: 123, name: "대한항공", price: 999, rate: 3 },
-		{ id: 124, name: "카카오게임즈", price: 1050, rate: 13 },
-	]);
-	const [valuableStockList, setValuableStockList] = useState<StockObject[]>([
-		{ id: 3, name: "삼성전자", price: 82400, rate: -5 },
-		{ id: 50, name: "SK하이닉스", price: 140000, rate: 0.3 },
-	]);
-	const [raisedStockList, setRaisedStockList] = useState<StockObject[]>([
-		{ id: 32, name: "대원미디어", price: 26000, rate: 85.3 },
-		{ id: 44, name: "HMM", price: 56000, rate: 69.4 },
+	const [stockRankList, setStockRankList] = useState([
+		[
+			{ id: 123, name: "대한항공", price: 999, rate: 3 },
+			{ id: 124, name: "카카오게임즈", price: 1050, rate: 13 },
+			{ id: 32, name: "대원미디어", price: 26000, rate: 85.3 },
+			{ id: 44, name: "HMM", price: 56000, rate: 69.4 },
+			{ id: 3, name: "삼성전자", price: 82400, rate: -5 },
+			{ id: 50, name: "SK하이닉스", price: 140000, rate: 0.3 },
+			{ id: 123, name: "대한항공", price: 999, rate: 3 },
+			{ id: 124, name: "카카오게임즈", price: 1050, rate: 13 },
+			{ id: 32, name: "대원미디어", price: 26000, rate: 85.3 },
+			{ id: 44, name: "HMM", price: 56000, rate: 69.4 },
+			{ id: 3, name: "삼성전자", price: 82400, rate: -5 },
+			{ id: 50, name: "SK하이닉스", price: 140000, rate: 0.3 },
+			{ id: 123, name: "대한항공", price: 999, rate: 3 },
+			{ id: 124, name: "카카오게임즈", price: 1050, rate: 13 },
+			{ id: 32, name: "대원미디어", price: 26000, rate: 85.3 },
+			{ id: 44, name: "HMM", price: 56000, rate: 69.4 },
+			{ id: 3, name: "삼성전자", price: 82400, rate: -5 },
+			{ id: 50, name: "SK하이닉스", price: 140000, rate: 0.3 },
+		],
+		[
+			{ id: 123, name: "대한항공", price: 999, rate: 3 },
+			{ id: 124, name: "카카오게임즈", price: 1050, rate: 13 },
+			{ id: 32, name: "대원미디어", price: 26000, rate: 85.3 },
+			{ id: 44, name: "HMM", price: 56000, rate: 69.4 },
+			{ id: 32, name: "대원미디어", price: 26000, rate: 85.3 },
+			{ id: 44, name: "HMM", price: 56000, rate: 69.4 },
+			{ id: 3, name: "삼성전자", price: 82400, rate: -5 },
+			{ id: 50, name: "SK하이닉스", price: 140000, rate: 0.3 },
+			{ id: 123, name: "대한항공", price: 999, rate: 3 },
+			{ id: 124, name: "카카오게임즈", price: 1050, rate: 13 },
+			{ id: 32, name: "대원미디어", price: 26000, rate: 85.3 },
+			{ id: 44, name: "HMM", price: 56000, rate: 69.4 },
+			{ id: 3, name: "삼성전자", price: 82400, rate: -5 },
+			{ id: 50, name: "SK하이닉스", price: 140000, rate: 0.3 },
+			{ id: 3, name: "삼성전자", price: 82400, rate: -5 },
+			{ id: 50, name: "SK하이닉스", price: 140000, rate: 0.3 },
+			{ id: 123, name: "대한항공", price: 999, rate: 3 },
+			{ id: 124, name: "카카오게임즈", price: 1050, rate: 13 },
+		],
+		[
+			{ id: 32, name: "대원미디어", price: 26000, rate: 85.3 },
+			{ id: 44, name: "HMM", price: 56000, rate: 69.4 },
+			{ id: 3, name: "삼성전자", price: 82400, rate: -5 },
+			{ id: 50, name: "SK하이닉스", price: 140000, rate: 0.3 },
+			{ id: 123, name: "대한항공", price: 999, rate: 3 },
+			{ id: 32, name: "대원미디어", price: 26000, rate: 85.3 },
+			{ id: 44, name: "HMM", price: 56000, rate: 69.4 },
+			{ id: 3, name: "삼성전자", price: 82400, rate: -5 },
+			{ id: 50, name: "SK하이닉스", price: 140000, rate: 0.3 },
+			{ id: 123, name: "대한항공", price: 999, rate: 3 },
+			{ id: 124, name: "카카오게임즈", price: 1050, rate: 13 },
+			{ id: 32, name: "대원미디어", price: 26000, rate: 85.3 },
+			{ id: 44, name: "HMM", price: 56000, rate: 69.4 },
+			{ id: 3, name: "삼성전자", price: 82400, rate: -5 },
+			{ id: 50, name: "SK하이닉스", price: 140000, rate: 0.3 },
+			{ id: 123, name: "대한항공", price: 999, rate: 3 },
+			{ id: 124, name: "카카오게임즈", price: 1050, rate: 13 },
+			{ id: 124, name: "카카오게임즈", price: 1050, rate: 13 },
+		],
 	]);
 	const [tenThousandStockList, setTenThousandStockList] = useState<
 		StockObject[]
@@ -39,6 +89,12 @@ function Main() {
 		{ id: 11, name: "LG화학", price: 900, rate: 3.7 },
 	]);
 
+	const [selectedCard, setSelectedCard] = useState(0);
+	const onCardClick = (e: React.MouseEvent) => {
+		let tmp = String(e.currentTarget.id);
+		setSelectedCard((selectedCard) => Number(tmp));
+	};
+
 	return (
 		<Content>
 			<div>
@@ -46,41 +102,27 @@ function Main() {
 					Stockit<b style={{ color: COLOR.BLUE }}> TOP100</b>
 				</h3>
 				<MainCards>
-					<MainCard>
+					<MainCard onClick={onCardClick} id="0">
 						<p>인기순 탑100</p>
 					</MainCard>
-					<MainCard>
+					<MainCard
+						onClick={onCardClick}
+						style={{ backgroundColor: "#53E8C0" }}
+						id="1"
+					>
 						<p>시총순 탑100</p>
 					</MainCard>
-					<MainCard>
+					<MainCard
+						onClick={onCardClick}
+						style={{ backgroundColor: "#6C45EF" }}
+						id="2"
+					>
 						<p>수익률 탑100</p>
 					</MainCard>
 				</MainCards>
 				<MainRank>
 					<div>
-						{popularStockList.map((stock, idx) => (
-							<StockList
-								key={idx}
-								idx={idx + 1}
-								id={stock.id}
-								name={stock.name}
-								rate={stock.rate}
-							/>
-						))}
-					</div>
-					<div>
-						{valuableStockList.map((stock, idx) => (
-							<StockList
-								key={idx}
-								idx={idx + 1}
-								id={stock.id}
-								name={stock.name}
-								rate={stock.rate}
-							/>
-						))}
-					</div>
-					<div>
-						{raisedStockList.map((stock, idx) => (
+						{stockRankList[selectedCard].map((stock, idx) => (
 							<StockList
 								key={idx}
 								idx={idx + 1}
@@ -111,19 +153,18 @@ function Main() {
 //* css : @emotion/styled
 
 const Content = styled.div`
-	margin: 50px 10% 0 10%;
+	margin: 50px 15% 0 15%;
 `;
 
 const MainCards = styled.div`
-	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
-	overflow-x: auto;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	column-gap: 20px;
 `;
 
 const MainCard = styled.div`
+	width: 20vw;
 	min-width: 270px;
-	max-width: 270px;
 	height: 20vh;
 	background-color: ${COLOR.GRAPH_BLUE};
 	border-radius: 10px;
@@ -133,18 +174,27 @@ const MainCard = styled.div`
 		color: white;
 		display: block;
 		position: relative;
-		right: -120px;
-		bottom: -120px;
-		font-weight: 700px;
+		right: -140px;
+		bottom: -100px;
+		font-weight: 800;
 		font-size: 20px;
 	}
 `;
 
 const MainRank = styled.div`
-	display: flex;
-	justify-content: space-evenly;
 	margin-top: 30px;
-	overflow: auto;
+
+	& > div {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		column-gap: 20px;
+
+		& > div {
+			width: 20vw;
+			min-width: 270px;
+			margin-right: 20px;
+		}
+	}
 `;
 
 const MainBottom = styled.div`
