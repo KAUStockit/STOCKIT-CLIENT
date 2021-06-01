@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { validateId, validatePassword } from "../utils/InputValidation";
+import { useHistory } from "react-router";
 
 // theme
 import { COLOR } from "../constants/theme";
@@ -9,7 +10,12 @@ import { COLOR } from "../constants/theme";
 import InputWithLabel from "../components/common/InputWithLabel";
 
 function SignIn() {
-	const onLoginClick = (e: React.FormEvent<HTMLButtonElement>) => {};
+	const history = useHistory();
+
+	const onLoginClick = (e: React.FormEvent<HTMLButtonElement>) => {
+		console.log("메인 페이지로 이동합니다.");
+		history.push(`/`);
+	};
 
 	return (
 		<Container>
@@ -28,7 +34,7 @@ function SignIn() {
 					validation={validatePassword}
 				></InputWithLabel>
 			</Form>
-			<Button>확인</Button>
+			<Button onClick={onLoginClick}>확인</Button>
 
 			<br />
 			<Bottom>

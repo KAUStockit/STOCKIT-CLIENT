@@ -79,6 +79,7 @@ const Picker = styled.div`
 		color: #4d4d4d;
 		height: 40px;
 		font-size: 15px;
+		cursor: pointer;
 	}
 `;
 

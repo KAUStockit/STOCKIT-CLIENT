@@ -69,6 +69,7 @@ const Filter = styled.div`
 		color: #4d4d4d;
 		font-size: 14px;
 		border-right: 1px solid #dedede;
+		cursor: pointer;
 	}
 
 	& > div:nth-of-type(4) {

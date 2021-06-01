@@ -174,8 +174,8 @@ const MainCard = styled.div`
 		color: white;
 		display: block;
 		position: relative;
-		right: -140px;
-		bottom: -100px;
+		right: -60%;
+		bottom: -60%;
 		font-weight: 800;
 		font-size: 20px;
 	}
@@ -192,7 +192,8 @@ const MainRank = styled.div`
 		& > div {
 			width: 20vw;
 			min-width: 270px;
-			margin-right: 20px;
+			margin-right: 10px;
+			padding-left: 10px;
 		}
 	}
 `;

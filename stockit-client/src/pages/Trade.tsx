@@ -1,5 +1,5 @@
 // 거래소 화면
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useVersionContext } from "../App";
 import styled from "@emotion/styled";
 
@@ -9,6 +9,7 @@ import Entry from "../components/Trade/Entry";
 import TradeModal from "../components/Trade/TradeModal";
 import Article from "../components/Trade/Article";
 import Chat from "../components/Trade/Chat";
+import Spinner from "../components/common/Spinner";
 
 // interface
 import { LEVEL } from "../App";
@@ -20,6 +21,7 @@ type TradeProp = {
 	stockPrice: number;
 };
 
+// Component
 const Trade: React.FC<TradeProp> = ({
 	match,
 	stockId,
@@ -52,46 +54,48 @@ const Trade: React.FC<TradeProp> = ({
 	}, [stockId]);
 
 	return (
-		<Container>
-			{/* <div>{isAdvanced && "고급버전"}</div>
+		<Suspense fallback={<Spinner />}>
+			<Container>
+				{/* <div>{isAdvanced && "고급버전"}</div>
 			<div>거래소페이지입니다.</div> */}
-			<Title className="chart__title">
-				<StockName>
-					<span>카카오게임즈</span>
-					<span>53,500</span>
-				</StockName>
-				<TradeButtons>
-					<button title="buy" onClick={onTradeClick}>
-						사기
-					</button>
-					<button title="sell" onClick={onTradeClick}>
-						팔기
-					</button>
-				</TradeButtons>
-			</Title>
-			<Grid>
-				<Chart stockId={123} level={LEVEL.EASY} />
-				<Entry />
-				<Article stockId={123} stockClass={"게임 엔터테인먼트"} />
-				<Chat />
-			</Grid>
-			{buyModalDisplay && (
-				<TradeModal
-					type="buy"
-					hide={setBuyModalDisplay}
-					price={20000}
-					isAdvanced={isAdvanced}
-				/>
-			)}
-			{sellModalDisplay && (
-				<TradeModal
-					type="sell"
-					hide={setSellModalDisplay}
-					price={20000}
-					isAdvanced={isAdvanced}
-				/>
-			)}
-		</Container>
+				<Title className="chart__title">
+					<StockName>
+						<span>카카오게임즈</span>
+						<span>53,500</span>
+					</StockName>
+					<TradeButtons>
+						<button title="buy" onClick={onTradeClick}>
+							사기
+						</button>
+						<button title="sell" onClick={onTradeClick}>
+							팔기
+						</button>
+					</TradeButtons>
+				</Title>
+				<Grid>
+					<Chart stockId={123} level={LEVEL.EASY} />
+					<Entry />
+					<Article stockId={123} stockClass={"게임 엔터테인먼트"} />
+					<Chat />
+				</Grid>
+				{buyModalDisplay && (
+					<TradeModal
+						type="buy"
+						hide={setBuyModalDisplay}
+						price={20000}
+						isAdvanced={isAdvanced}
+					/>
+				)}
+				{sellModalDisplay && (
+					<TradeModal
+						type="sell"
+						hide={setSellModalDisplay}
+						price={20000}
+						isAdvanced={isAdvanced}
+					/>
+				)}
+			</Container>
+		</Suspense>
 	);
 };
 
@@ -145,6 +149,7 @@ const TradeButtons = styled.div`
 		border-radius: 50px;
 		border: none;
 		box-shadow: 1px 1px 1px 1px #e2e2e2;
+		cursor: pointer;
 	}
 `;
 

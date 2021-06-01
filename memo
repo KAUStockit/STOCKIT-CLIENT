@@ -1,2 +1,49 @@
-타입스크립트 개지저분하다
-이거왜쓰는건지 모르겠다
+
+- emotion/styled-components
+SaSS 문법 + JS파일 내에 CSS 작성 => 동적 css작성 수월.
+
+
+- Concurrent React
+https://medium.com/swlh/what-is-react-concurrent-mode-46989b5f15da
+
+렌더링에 시간이 오래걸린다 -> User Experience가 중요한데 렌더링한다고 유저 입력은 안받을 수 없다
+    -> 메인스레드는 중요도가 높은(유저 입력같은) 스케줄만 처리 + 절대 블록하지 않는다
+
+useDeferredValue 훅을 통해서 prop이나 state를 감싸고 감싸진 변수에 종속적인 컴포넌트는 주어진 딜레이만큼 지연 렌더링을 허가받음.
+
+Suspense : 렌더링 완료 이전까지의 placeholder를 담당 (fallback)
+    컴포넌트마다 서스펜스를 붙여버리면 컴포넌트별로 동시성 렌더링을 지원.
+    
+///
+
+
+- Recoil
+https://ui.toast.com/weekly-pick/ko_20200616
+https://recoiljs.org/ko/docs/basic-tutorial/atoms/
+
+atom: 하나의 상태. 컴포넌트가 구독할 수 있는 React state.
+    atom을 변경하면 그것을 구독하고 있는 컴포넌트들이 모두 다시 렌더링된다.
+    export const nameState = atom({ket: 'nameState', default: 'Jane Doe'})
+    디폴트 값을 만들기 위해 함수를 호출할 수도 있다. async 함수 호출도 가능.
+useRecoilState : atom의 값을 구독 + 업데이트. 변수와 setter를 반환
+    useRecoilValue : atom의 getter만 반환
+    useSetRecoilState : atom의 setter만 반환
+
+selector: state에서 파생된 데이터. 다른 atom에 의존하는 동적인 데이터를 만들 수 있게 해준다.
+    이미 존재하는 atom을 기반으로 새로운 atom을 만들어냄(동적으로)
+    const animalState = atom({...})
+    const animalStateFilter = atom({...})
+    const filteredAnimalState = selector({
+        key: 'animalListState',         // 새로운 키 값
+        get: ({get} => {
+            const filter = get(animalFilterState)
+            const animals = get(animalState)
+
+            // 다른 atom들을 기반으로 동적인 atom을 생성 (selector)
+            return animals.filter(animal => animal.type === filter);
+        })
+    })
+
+    // atom처럼 사용가능
+    const animals = useRecoilValue(filteredAnimalState)
+    신기하네..
