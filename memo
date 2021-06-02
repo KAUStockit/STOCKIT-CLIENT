@@ -29,8 +29,10 @@ useRecoilState : atom의 값을 구독 + 업데이트. 변수와 setter를 반�
     useRecoilValue : atom의 getter만 반환
     useSetRecoilState : atom의 setter만 반환
 
-selector: state에서 파생된 데이터. 다른 atom에 의존하는 동적인 데이터를 만들 수 있게 해준다.
+selector: state에서 "파생"된 데이터. 다른 atom에 의존하는 동적인 데이터를 만들 수 있게 해준다.
     이미 존재하는 atom을 기반으로 새로운 atom을 만들어냄(동적으로)
+    "atom으로부터 계산된 atom"
+    
     const animalState = atom({...})
     const animalStateFilter = atom({...})
     const filteredAnimalState = selector({
