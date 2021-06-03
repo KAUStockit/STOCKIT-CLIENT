@@ -2,14 +2,13 @@ import React from "react";
 import { COLOR } from "../../constants/theme";
 import styled from "@emotion/styled";
 import { useVersionContext } from "../../App";
+import { useRecoilValue } from "recoil";
+import { userState } from "../../stores/UserAtom";
 
-// interface
-type HeaderProp = {
-	user: string;
-};
-
-const Header: React.FC<HeaderProp> = ({ user }) => {
+const Header: React.FC = () => {
 	const { isAdvanced, setIsAdvanced }: any = useVersionContext();
+	const user = useRecoilValue(userState);
+	console.log(user);
 
 	const onAdvanceClick = (e: React.MouseEvent) => {
 		e.preventDefault();
@@ -76,14 +75,14 @@ const Header: React.FC<HeaderProp> = ({ user }) => {
 				<a href="/balance">내지갑</a>
 			</div>
 			<HeaderRightBox>
-				{user === "" ? (
+				{user.id === 0 ? (
 					<div>
 						<span onClick={onSignInClick}>로그인</span> |{" "}
 						<span onClick={onSignUpClick}>회원가입</span>
 					</div>
 				) : (
 					<div>
-						<span>{user}</span> | <span>내정보</span>
+						<span>{user.nickname}</span> | <span>내정보</span>
 					</div>
 				)}
 			</HeaderRightBox>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { RecoilRoot } from "recoil";
 
 // components
 import Header from "./components/common/Header";
@@ -32,27 +33,29 @@ export default function App() {
 	}, []);
 
 	return (
-		<VersionContext.Provider value={{ isAdvanced, setIsAdvanced }}>
-			<div className="App" style={{ fontFamily: "Noto Sans KR" }}>
-				<Header user={user} />
-				<BrowserRouter>
-					<Switch>
-						<Route exact path="/" component={Main} />
-						<Route path="/:stockId/trade" component={Trade} />
-						<Route exact path="/balance" component={Balance} />
-						<Route exact path="/mypage" component={MyPage} />
-						<Route
-							exact
-							path="/playground"
-							component={PlayGround}
-						/>
-						<Route exact path="/signin" component={SignIn} />
-						<Route exact path="/signup" component={SignUp} />
-					</Switch>
-				</BrowserRouter>
-				<Footer />
-			</div>
-		</VersionContext.Provider>
+		<RecoilRoot>
+			<VersionContext.Provider value={{ isAdvanced, setIsAdvanced }}>
+				<div className="App" style={{ fontFamily: "Noto Sans KR" }}>
+					<Header />
+					<BrowserRouter>
+						<Switch>
+							<Route exact path="/" component={Main} />
+							<Route path="/:stockId/trade" component={Trade} />
+							<Route exact path="/balance" component={Balance} />
+							<Route exact path="/mypage" component={MyPage} />
+							<Route
+								exact
+								path="/playground"
+								component={PlayGround}
+							/>
+							<Route exact path="/signin" component={SignIn} />
+							<Route exact path="/signup" component={SignUp} />
+						</Switch>
+					</BrowserRouter>
+					<Footer />
+				</div>
+			</VersionContext.Provider>
+		</RecoilRoot>
 	);
 }
 

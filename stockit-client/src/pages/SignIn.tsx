@@ -2,18 +2,28 @@ import React from "react";
 import styled from "@emotion/styled";
 import { validateId, validatePassword } from "../utils/InputValidation";
 import { useHistory } from "react-router";
+import { useSetRecoilState } from "recoil";
 
 // theme
 import { COLOR } from "../constants/theme";
 
 // components
 import InputWithLabel from "../components/common/InputWithLabel";
+import { userState } from "../stores/UserAtom";
 
 function SignIn() {
 	const history = useHistory();
+	const setUser = useSetRecoilState(userState);
 
 	const onLoginClick = (e: React.FormEvent<HTMLButtonElement>) => {
 		console.log("메인 페이지로 이동합니다.");
+		setUser({
+			id: 1,
+			nickname: "imnotmoon",
+			sessionId: "4safg94-fs3",
+			useAdvanced: false,
+			currentStockId: [],
+		});
 		history.push(`/`);
 	};
 
