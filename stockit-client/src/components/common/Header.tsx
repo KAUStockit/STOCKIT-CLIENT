@@ -3,12 +3,18 @@ import { COLOR } from "../../constants/theme";
 import styled from "@emotion/styled";
 import { useVersionContext } from "../../App";
 import { useRecoilValue } from "recoil";
-import { userState } from "../../stores/UserAtom";
+import { userState } from "../../stores/User";
+import { useHistory } from "react-router";
+
+// interface
 
 const Header: React.FC = () => {
 	const { isAdvanced, setIsAdvanced }: any = useVersionContext();
+	const history = useHistory();
+
 	const user = useRecoilValue(userState);
 	console.log(user);
+	console.log(history);
 
 	const onAdvanceClick = (e: React.MouseEvent) => {
 		e.preventDefault();
@@ -18,17 +24,33 @@ const Header: React.FC = () => {
 
 	const onLogoClick = (e: React.MouseEvent) => {
 		e.preventDefault();
-		window.location.href = "/";
+		history.push("/");
+	};
+
+	const onPlayGroundClick = (e: React.MouseEvent) => {
+		e.preventDefault();
+		history.push("/playground");
+	};
+
+	const onTradeClick = (e: React.MouseEvent) => {
+		e.preventDefault();
+		const lastStockId = window.localStorage.getItem("lastStockId");
+		history.push(`/${lastStockId}/trade`);
+	};
+
+	const onBalanceClick = (e: React.MouseEvent) => {
+		e.preventDefault();
+		history.push("/balance");
 	};
 
 	const onSignUpClick = (e: React.MouseEvent) => {
 		e.preventDefault();
-		window.location.href = "/signup";
+		history.push("/signup");
 	};
 
 	const onSignInClick = (e: React.MouseEvent) => {
 		e.preventDefault();
-		window.location.href = "/signin";
+		history.push("/signin");
 	};
 
 	return (
@@ -64,15 +86,15 @@ const Header: React.FC = () => {
 			</Logo>
 
 			<div>
-				<a href="/playground">놀이터</a>
-				<a
-					href={`/${window.localStorage.getItem(
-						"lastStockId"
-					)}/trade`}
-				>
+				<a href="#" onClick={onPlayGroundClick}>
+					놀이터
+				</a>
+				<a href="#" onClick={onTradeClick}>
 					거래소
 				</a>
-				<a href="/balance">내지갑</a>
+				<a href="#" onClick={onBalanceClick}>
+					내지갑
+				</a>
 			</div>
 			<HeaderRightBox>
 				{user.id === 0 ? (

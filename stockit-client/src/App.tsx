@@ -12,6 +12,7 @@ import MyPage from "./pages/MyPage";
 import PlayGround from "./pages/PlayGround";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import NotFound from "./pages/NotFound";
 
 // interface
 export enum LEVEL {
@@ -36,8 +37,8 @@ export default function App() {
 		<RecoilRoot>
 			<VersionContext.Provider value={{ isAdvanced, setIsAdvanced }}>
 				<div className="App" style={{ fontFamily: "Noto Sans KR" }}>
-					<Header />
 					<BrowserRouter>
+						<Header />
 						<Switch>
 							<Route exact path="/" component={Main} />
 							<Route path="/:stockId/trade" component={Trade} />
@@ -50,6 +51,7 @@ export default function App() {
 							/>
 							<Route exact path="/signin" component={SignIn} />
 							<Route exact path="/signup" component={SignUp} />
+							<Route component={NotFound} />
 						</Switch>
 					</BrowserRouter>
 					<Footer />
