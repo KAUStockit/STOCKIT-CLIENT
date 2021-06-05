@@ -11,10 +11,7 @@ import { useHistory } from "react-router";
 const Header: React.FC = () => {
 	const { isAdvanced, setIsAdvanced }: any = useVersionContext();
 	const history = useHistory();
-
 	const user = useRecoilValue(userState);
-	console.log(user);
-	console.log(history);
 
 	const onAdvanceClick = (e: React.MouseEvent) => {
 		e.preventDefault();
@@ -45,12 +42,20 @@ const Header: React.FC = () => {
 
 	const onSignUpClick = (e: React.MouseEvent) => {
 		e.preventDefault();
-		history.push("/signup");
+		if (user.id === 0) {
+			history.push("/signup");
+		} else {
+			history.push("/logout");
+		}
 	};
 
 	const onSignInClick = (e: React.MouseEvent) => {
 		e.preventDefault();
-		history.push("/signin");
+		if (user.id === 0) {
+			history.push("/signin");
+		} else {
+			history.push("/mypage");
+		}
 	};
 
 	return (
@@ -97,16 +102,19 @@ const Header: React.FC = () => {
 				</a>
 			</div>
 			<HeaderRightBox>
-				{user.id === 0 ? (
-					<div>
-						<span onClick={onSignInClick}>로그인</span> |{" "}
-						<span onClick={onSignUpClick}>회원가입</span>
-					</div>
-				) : (
-					<div>
-						<span>{user.nickname}</span> | <span>내정보</span>
-					</div>
-				)}
+				<span>
+					{user.id === 0 ? (
+						<span>
+							<span onClick={onSignInClick}>로그인</span> |{" "}
+							<span onClick={onSignUpClick}>회원가입</span>
+						</span>
+					) : (
+						<span>
+							<span onClick={onSignInClick}>{user.nickname}</span>{" "}
+							| <span>로그아웃</span>
+						</span>
+					)}
+				</span>
 			</HeaderRightBox>
 		</Container>
 	);
@@ -132,6 +140,7 @@ const Container = styled.div`
 		min-width: 300px;
 		height: 100%;
 		display: flex;
+		justify-content: space-around;
 		align-items: center;
 	}
 
@@ -156,7 +165,6 @@ const Logo = styled.div`
 `;
 
 const HeaderRightBox = styled.div`
-	width: 150px;
 	display: flex;
 	align-items: center;
 	height: 60% !important;
@@ -164,8 +172,10 @@ const HeaderRightBox = styled.div`
 	color: white;
 	justify-content: space-around;
 
-	& > div > span {
+	& > span > span {
 		cursor: pointer;
+		padding-left: 10px;
+		padding-right: 10px;
 	}
 `;
 
