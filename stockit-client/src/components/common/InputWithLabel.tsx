@@ -10,23 +10,19 @@ type InputWithLabelProps = {
 	password: boolean;
 	placeholder: string;
 	validation: (text: string) => string;
+	ref: any;
 };
 
-const InputWithLabel: React.FC<InputWithLabelProps> = ({
-	label,
-	password,
-	placeholder,
-	validation,
-}) => {
-	const inputRef = useRef<HTMLInputElement>(null);
-
+const InputWithLabel: React.FC<InputWithLabelProps> = React.forwardRef<
+	HTMLInputElement,
+	InputWithLabelProps
+>(({ label, password, placeholder, validation }, ref) => {
 	// states
 	const [inputValue, setInputValue] = useState<string>("");
 	const [message, setMessage] = useState<string>("");
 
 	const onInputChange = (e: React.FormEvent<HTMLInputElement>) => {
 		setInputValue(e.currentTarget.value);
-		console.log(inputValue);
 	};
 
 	const inputEventHandler = () =>
@@ -35,18 +31,15 @@ const InputWithLabel: React.FC<InputWithLabelProps> = ({
 			setMessage(msg);
 		}, 500);
 
-	useEffect(() => {
-		if (inputRef && inputRef.current) {
-			inputRef.current.addEventListener("blur", inputEventHandler);
+	// useEffect(() => {
+	// 	if (ref && ref.current) {
+	// 		ref.current.addEventListener("blur", inputEventHandler);
 
-			return () => {
-				inputRef.current?.removeEventListener(
-					"blur",
-					inputEventHandler
-				);
-			};
-		}
-	});
+	// 		return () => {
+	// 			ref.current?.removeEventListener("blur", inputEventHandler);
+	// 		};
+	// 	}
+	// });
 
 	return (
 		<Container>
@@ -57,12 +50,12 @@ const InputWithLabel: React.FC<InputWithLabelProps> = ({
 			<input
 				type={password ? "password" : "text"}
 				placeholder={placeholder}
-				ref={inputRef}
+				ref={ref}
 				onChange={onInputChange}
 			/>
 		</Container>
 	);
-};
+});
 
 //* css : @emotion/styled
 const Container = styled.div`

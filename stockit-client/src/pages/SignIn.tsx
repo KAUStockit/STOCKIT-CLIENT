@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "@emotion/styled";
 import { validateId, validatePassword } from "../utils/InputValidation";
 import { useHistory } from "react-router";
@@ -14,6 +14,10 @@ import { userState } from "../stores/User";
 function SignIn() {
 	const history = useHistory();
 	const setUser = useSetRecoilState(userState);
+
+	// function
+	const emailRef = useRef();
+	const pwRef = useRef();
 
 	const onLoginClick = (e: React.FormEvent<HTMLButtonElement>) => {
 		console.log("메인 페이지로 이동합니다.");
@@ -32,16 +36,18 @@ function SignIn() {
 			<h3 style={{ margin: "40px 0 40px 0" }}>로그인</h3>
 			<Form>
 				<InputWithLabel
-					label="아이디"
+					label="이메일"
 					password={false}
-					placeholder="아이디를 입력해주세요."
+					placeholder="이메일을 입력해주세요."
 					validation={validateId}
+					ref={emailRef}
 				></InputWithLabel>
 				<InputWithLabel
 					label="비밀번호"
 					password={true}
 					placeholder="비밀번호를 입력해주세요."
 					validation={validatePassword}
+					ref={pwRef}
 				></InputWithLabel>
 			</Form>
 			<Button onClick={onLoginClick}>확인</Button>

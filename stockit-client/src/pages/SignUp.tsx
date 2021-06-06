@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styled from "@emotion/styled";
 import {
 	validateId,
 	validatePassword,
 	validateRePassword,
 } from "../utils/InputValidation";
+import { useHistory } from "react-router";
+import { useSetRecoilState } from "recoil";
 
 // theme
 import { COLOR } from "../constants/theme";
@@ -12,12 +14,47 @@ import { COLOR } from "../constants/theme";
 // components
 import InputWithLabel from "../components/common/InputWithLabel";
 
+// Testing
+import { UserData } from "../utils/DemoData";
+import { userState } from "../stores/User";
+
 // interface
 type SignUpProps = {};
 
 const SignUp: React.FC<SignUpProps> = () => {
 	// States
-	const [id, setId] = useState<string>("");
+	const idRef = React.useRef<HTMLInputElement>();
+	const pwRef = React.useRef<HTMLInputElement>();
+	const pwRetypeRef = React.useRef<HTMLInputElement>();
+	const [email, setEmail] = useState<string>("");
+	const history = useHistory();
+
+	const setUser = useSetRecoilState(userState);
+
+	// functions
+	const onEmailChange = (e: React.FormEvent<HTMLInputElement>) => {
+		setEmail(e.currentTarget.value);
+	};
+	const clickJoinButton = (e: React.MouseEvent) => {
+		const data = {
+			nickname: idRef.current?.value,
+			password: pwRef.current?.value,
+			email: email,
+		};
+
+		//* 임시 join => 이후에 교체할 예정
+		UserData.join(data.email, data.password!, data.nickname!) &&
+			alert("회원가입이 완료되었습니다.");
+		setUser({
+			id: 1,
+			nickname: data.nickname!,
+			sessionId: "4safg94-fs3",
+			useAdvanced: false,
+			currentStockId: [],
+		});
+		history.push("/");
+		console.log(UserData.getAll());
+	};
 
 	return (
 		<Container>
@@ -28,18 +65,21 @@ const SignUp: React.FC<SignUpProps> = () => {
 					password={false}
 					placeholder="아이디를 입력해주세요."
 					validation={validateId}
+					ref={idRef}
 				></InputWithLabel>
 				<InputWithLabel
 					label="비밀번호"
 					password={true}
 					placeholder="비밀번호를 입력해주세요."
 					validation={validatePassword}
+					ref={pwRef}
 				></InputWithLabel>
 				<InputWithLabel
 					label="비밀번호 확인"
 					password={true}
 					placeholder="비밀번호를 재입력해주세요."
 					validation={validateRePassword}
+					ref={pwRetypeRef}
 				></InputWithLabel>
 				<EmailForm>
 					<p>이메일 인증</p>
@@ -47,12 +87,13 @@ const SignUp: React.FC<SignUpProps> = () => {
 						<input
 							type="text"
 							placeholder="이메일을 입력해주세요"
+							onChange={onEmailChange}
 						/>
 						<button>인증</button>
 					</div>
 				</EmailForm>
 			</Form>
-			<Button>확인</Button>
+			<Button onClick={clickJoinButton}>확인</Button>
 
 			<br />
 			<Bottom>

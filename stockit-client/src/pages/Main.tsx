@@ -7,6 +7,9 @@ import StockList from "../components/Main/StockList";
 import StockCard from "../components/Main/StockCard";
 import { COLOR } from "../constants/theme";
 
+// Pseudo Data
+import { MAINPAGE_RANKLIST, MAINPAGE_PENNY } from "../utils/DemoData";
+
 // interface
 type StockObject = {
 	id: number;
@@ -16,78 +19,9 @@ type StockObject = {
 };
 
 function Main() {
-	const [stockRankList, setStockRankList] = useState([
-		[
-			{ id: 123, name: "대한항공", price: 999, rate: 3 },
-			{ id: 124, name: "카카오게임즈", price: 1050, rate: 13 },
-			{ id: 32, name: "대원미디어", price: 26000, rate: 85.3 },
-			{ id: 44, name: "HMM", price: 56000, rate: 69.4 },
-			{ id: 3, name: "삼성전자", price: 82400, rate: -5 },
-			{ id: 50, name: "SK하이닉스", price: 140000, rate: 0.3 },
-			{ id: 123, name: "대한항공", price: 999, rate: 3 },
-			{ id: 124, name: "카카오게임즈", price: 1050, rate: 13 },
-			{ id: 32, name: "대원미디어", price: 26000, rate: 85.3 },
-			{ id: 44, name: "HMM", price: 56000, rate: 69.4 },
-			{ id: 3, name: "삼성전자", price: 82400, rate: -5 },
-			{ id: 50, name: "SK하이닉스", price: 140000, rate: 0.3 },
-			{ id: 123, name: "대한항공", price: 999, rate: 3 },
-			{ id: 124, name: "카카오게임즈", price: 1050, rate: 13 },
-			{ id: 32, name: "대원미디어", price: 26000, rate: 85.3 },
-			{ id: 44, name: "HMM", price: 56000, rate: 69.4 },
-			{ id: 3, name: "삼성전자", price: 82400, rate: -5 },
-			{ id: 50, name: "SK하이닉스", price: 140000, rate: 0.3 },
-		],
-		[
-			{ id: 123, name: "대한항공", price: 999, rate: 3 },
-			{ id: 124, name: "카카오게임즈", price: 1050, rate: 13 },
-			{ id: 32, name: "대원미디어", price: 26000, rate: 85.3 },
-			{ id: 44, name: "HMM", price: 56000, rate: 69.4 },
-			{ id: 32, name: "대원미디어", price: 26000, rate: 85.3 },
-			{ id: 44, name: "HMM", price: 56000, rate: 69.4 },
-			{ id: 3, name: "삼성전자", price: 82400, rate: -5 },
-			{ id: 50, name: "SK하이닉스", price: 140000, rate: 0.3 },
-			{ id: 123, name: "대한항공", price: 999, rate: 3 },
-			{ id: 124, name: "카카오게임즈", price: 1050, rate: 13 },
-			{ id: 32, name: "대원미디어", price: 26000, rate: 85.3 },
-			{ id: 44, name: "HMM", price: 56000, rate: 69.4 },
-			{ id: 3, name: "삼성전자", price: 82400, rate: -5 },
-			{ id: 50, name: "SK하이닉스", price: 140000, rate: 0.3 },
-			{ id: 3, name: "삼성전자", price: 82400, rate: -5 },
-			{ id: 50, name: "SK하이닉스", price: 140000, rate: 0.3 },
-			{ id: 123, name: "대한항공", price: 999, rate: 3 },
-			{ id: 124, name: "카카오게임즈", price: 1050, rate: 13 },
-		],
-		[
-			{ id: 32, name: "대원미디어", price: 26000, rate: 85.3 },
-			{ id: 44, name: "HMM", price: 56000, rate: 69.4 },
-			{ id: 3, name: "삼성전자", price: 82400, rate: -5 },
-			{ id: 50, name: "SK하이닉스", price: 140000, rate: 0.3 },
-			{ id: 123, name: "대한항공", price: 999, rate: 3 },
-			{ id: 32, name: "대원미디어", price: 26000, rate: 85.3 },
-			{ id: 44, name: "HMM", price: 56000, rate: 69.4 },
-			{ id: 3, name: "삼성전자", price: 82400, rate: -5 },
-			{ id: 50, name: "SK하이닉스", price: 140000, rate: 0.3 },
-			{ id: 123, name: "대한항공", price: 999, rate: 3 },
-			{ id: 124, name: "카카오게임즈", price: 1050, rate: 13 },
-			{ id: 32, name: "대원미디어", price: 26000, rate: 85.3 },
-			{ id: 44, name: "HMM", price: 56000, rate: 69.4 },
-			{ id: 3, name: "삼성전자", price: 82400, rate: -5 },
-			{ id: 50, name: "SK하이닉스", price: 140000, rate: 0.3 },
-			{ id: 123, name: "대한항공", price: 999, rate: 3 },
-			{ id: 124, name: "카카오게임즈", price: 1050, rate: 13 },
-			{ id: 124, name: "카카오게임즈", price: 1050, rate: 13 },
-		],
-	]);
-	const [tenThousandStockList, setTenThousandStockList] = useState<
-		StockObject[]
-	>([
-		{ id: 36, name: "이트론", price: 675, rate: 1.7 },
-		{ id: 11, name: "LG화학", price: 900, rate: 3.7 },
-		{ id: 36, name: "이트론", price: 675, rate: 1.7 },
-		{ id: 11, name: "LG화학", price: 900, rate: 3.7 },
-		{ id: 36, name: "이트론", price: 675, rate: 1.7 },
-		{ id: 11, name: "LG화학", price: 900, rate: 3.7 },
-	]);
+	const [stockRankList, setStockRankList] = useState(MAINPAGE_RANKLIST);
+	const [tenThousandStockList, setTenThousandStockList] =
+		useState<StockObject[]>(MAINPAGE_PENNY);
 
 	const [selectedCard, setSelectedCard] = useState(0);
 	const onCardClick = (e: React.MouseEvent) => {

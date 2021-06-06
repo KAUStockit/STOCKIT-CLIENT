@@ -2,14 +2,14 @@
 
 import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
-import { Line, defaults } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 import { LEVEL } from "../../App";
 import { COLOR } from "../../constants/theme";
 
 // components
 
 // data
-import { chartData } from "./ChartDemo";
+import { CHART_DATA } from "../../utils/DemoData";
 
 // interface
 type ChartProp = {
@@ -58,8 +58,8 @@ const Chart: React.FC<ChartProp> = ({ stockId, level }) => {
 				<div className="linechart">
 					{
 						level === LEVEL.EASY
-							? configureChart(chartData) // 쉬운 버전 차트
-							: configureChart(chartData) // 어려운 버전 차트
+							? configureChart(CHART_DATA) // 쉬운 버전 차트
+							: configureChart(CHART_DATA) // 어려운 버전 차트
 					}
 				</div>
 			</ChartGraph>
