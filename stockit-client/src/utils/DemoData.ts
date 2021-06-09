@@ -178,6 +178,196 @@ export const CHART_DATA = {
 	],
 };
 
+type Stock = {
+	id: number;
+	name: string;
+	price: number;
+	currentPrice: number;
+	quantity: number;
+};
+
+export const myStockData: Stock[] = [
+	{
+		id: 1,
+		name: "카카오게임즈",
+		price: 10000,
+		currentPrice: 14000,
+		quantity: 150,
+	},
+	{
+		id: 1,
+		name: "HMM",
+		price: 10000,
+		currentPrice: 14000,
+		quantity: 150,
+	},
+	{
+		id: 1,
+		name: "대한항공",
+		price: 10000,
+		currentPrice: 14000,
+		quantity: 150,
+	},
+	{
+		id: 1,
+		name: "원익IPS",
+		price: 10000,
+		currentPrice: 14000,
+		quantity: 150,
+	},
+	{
+		id: 1,
+		name: "삼성전자",
+		price: 10000,
+		currentPrice: 14000,
+		quantity: 150,
+	},
+	{
+		id: 1,
+		name: "SK바이오사이언스",
+		price: 10000,
+		currentPrice: 14000,
+		quantity: 150,
+	},
+	{
+		id: 1,
+		name: "한화투자증권우",
+		price: 10000,
+		currentPrice: 14000,
+		quantity: 150,
+	},
+	{
+		id: 1,
+		name: "상보",
+		price: 10000,
+		currentPrice: 14000,
+		quantity: 150,
+	},
+	{
+		id: 1,
+		name: "동국제강",
+		price: 10000,
+		currentPrice: 14000,
+		quantity: 150,
+	},
+	{
+		id: 1,
+		name: "셀트리온",
+		price: 10000,
+		currentPrice: 14000,
+		quantity: 150,
+	},
+	{
+		id: 1,
+		name: "LG",
+		price: 10000,
+		currentPrice: 14000,
+		quantity: 150,
+	},
+	{
+		id: 1,
+		name: "남양유업",
+		price: 10000,
+		currentPrice: 14000,
+		quantity: 150,
+	},
+	{
+		id: 1,
+		name: "카카오",
+		price: 10000,
+		currentPrice: 14000,
+		quantity: 150,
+	},
+	{
+		id: 1,
+		name: "하이브",
+		price: 10000,
+		currentPrice: 14000,
+		quantity: 150,
+	},
+	{
+		id: 1,
+		name: "NE능률",
+		price: 10000,
+		currentPrice: 14000,
+		quantity: 150,
+	},
+	{
+		id: 1,
+		name: "대원미디어",
+		price: 10000,
+		currentPrice: 14000,
+		quantity: 150,
+	},
+	{
+		id: 1,
+		name: "이수앱지스",
+		price: 10000,
+		currentPrice: 14000,
+		quantity: 150,
+	},
+	{
+		id: 1,
+		name: "SK하이닉스",
+		price: 10000,
+		currentPrice: 14000,
+		quantity: 150,
+	},
+	{
+		id: 1,
+		name: "한화에어로스페이스",
+		price: 10000,
+		currentPrice: 14000,
+		quantity: 150,
+	},
+	{
+		id: 1,
+		name: "아시아나항공",
+		price: 10000,
+		currentPrice: 14000,
+		quantity: 150,
+	},
+	{
+		id: 1,
+		name: "만도",
+		price: 10000,
+		currentPrice: 14000,
+		quantity: 150,
+	},
+	{
+		id: 1,
+		name: "신세계",
+		price: 10000,
+		currentPrice: 14000,
+		quantity: 150,
+	},
+	{
+		id: 1,
+		name: "어보브반도체",
+		price: 10000,
+		currentPrice: 14000,
+		quantity: 150,
+	},
+];
+
+export const PIE_CHART_DATA = {
+	labels: ["Red", "Blue", "Yellow"],
+	data: {
+		datasets: [
+			{
+				label: "My First Dataset",
+				data: [300, 50, 100],
+				backgroundColor: [
+					"rgb(255, 99, 132)",
+					"rgb(54, 162, 235)",
+					"rgb(255, 205, 86)",
+				],
+				hoverOffset: 4,
+			},
+		],
+	},
+};
+
 export const UserData = {
 	userList: [
 		{

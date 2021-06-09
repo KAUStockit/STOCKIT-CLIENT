@@ -16,7 +16,7 @@ import InputWithLabel from "../components/common/InputWithLabel";
 
 // Testing
 import { UserData } from "../utils/DemoData";
-import { userState } from "../stores/User";
+import { userState } from "../model/User";
 
 // interface
 type SignUpProps = {};

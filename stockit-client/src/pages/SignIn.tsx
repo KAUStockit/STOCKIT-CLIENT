@@ -9,7 +9,7 @@ import { COLOR } from "../constants/theme";
 
 // components
 import InputWithLabel from "../components/common/InputWithLabel";
-import { userState } from "../stores/User";
+import { userState } from "../model/User";
 
 function SignIn() {
 	const history = useHistory();

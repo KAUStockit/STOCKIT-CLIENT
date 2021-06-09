@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
+import { Doughnut } from "react-chartjs-2";
 import { COLOR } from "../../constants/theme";
 
 // components
 import MyStockList from "./MyStockList";
+
+// pseudo data
+import { myStockData, PIE_CHART_DATA } from "../../utils/DemoData";
 
 // interface
 type BalanceTabProp = {};
@@ -16,14 +20,26 @@ type Stock = {
 	quantity: number;
 };
 
+interface ChartDataInterface {
+	labels: string[];
+	data: {
+		datasets: {
+			label: string;
+			data: number[];
+			backgroundColor: string[];
+			hoverOffset: number;
+		}[];
+	};
+}
+
 const BalanceTab: React.FC<BalanceTabProp> = () => {
-	const [myStocks, setMyStocks] = useState<Stock[]>(data);
+	const [myStocks, setMyStocks] = useState<Stock[]>(myStockData);
 	const [currentPage, setCurrentPage] = useState<number>(1);
 
 	// 페이지 수
 	let totalPages = (() => {
 		let tmp = [];
-		for (let i = 0; i < data.length / 5; i++) {
+		for (let i = 0; i < myStocks.length / 5; i++) {
 			tmp.push(i + 1);
 		}
 		return tmp;
@@ -51,8 +67,33 @@ const BalanceTab: React.FC<BalanceTabProp> = () => {
 	return (
 		<Container>
 			<div>
-				<PieChart>자본구성 파이차트</PieChart>
-				<Total>자산 상세 내용</Total>
+				{configureChart(PIE_CHART_DATA)}
+				<Total>
+					<div>
+						<div className="info_gray">보유금액</div>
+						<span className="info_black">2,000,000</span>
+					</div>
+					<div>
+						<div className="info_gray">총 매수금액</div>
+						<span className="info_black">2,000,000</span>
+					</div>
+					<div>
+						<div className="info_gray">총 평가금액</div>
+						<span className="info_black">2,000,000</span>
+					</div>
+					<div>
+						<div className="info_gray">총 보유자산</div>
+						<span className="info_black">2,000,000,000</span>
+					</div>
+					<div>
+						<div className="info_gray">총 평가손익</div>
+						<span className="info_black">+2,000,000,000</span>
+					</div>
+					<div>
+						<div className="info_gray">총 평가 수익률</div>
+						<span className="info_percent">+200%</span>
+					</div>
+				</Total>
 			</div>
 			<div>
 				<p>보유 주식 목록</p>
@@ -105,6 +146,20 @@ const BalanceTab: React.FC<BalanceTabProp> = () => {
 	);
 };
 
+const configureChart = (chartData: ChartDataInterface) => {
+	return (
+		<DoughnutChart>
+			<div>
+				<Doughnut
+					type="doughnut"
+					data={chartData.data}
+					options={{ responsive: true, maintainAspectRatio: true }}
+				></Doughnut>
+			</div>
+		</DoughnutChart>
+	);
+};
+
 //* css : @emotion/styled
 const Container = styled.div`
 	border: 1px solid ${COLOR.BOX_BORDER};
@@ -147,12 +202,40 @@ const Container = styled.div`
 	}
 `;
 
-const PieChart = styled.div`
-	width: 50%;
+const DoughnutChart = styled.div`
+	width: 40%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	border-right: 1px solid ${COLOR.BOX_BORDER};
+	margin: 10px 10px 10px 10px;
+	padding: 0 30px 0 10px;
+
+	& > div:nth-of-type(1) {
+		width: 100%;
+	}
 `;
 
 const Total = styled.div`
-	width: 50%;
+	width: 60%;
+	display: grid;
+	padding-left: 30px;
+	padding-right: 30px;
+	grid-template-columns: 1fr 1fr;
+	grid-column-gap: 30px;
+	grid-row-gap: 30px;
+
+	& > div > div.info_gray {
+		color: #848484;
+		margin-bottom: 5px;
+	}
+	& > div > span.info_black {
+		color: "black";
+	}
+	& > div > span.info_percent {
+		color: ${COLOR.BLUE};
+	}
 `;
 
 const StockBalance = styled.div`
@@ -179,166 +262,3 @@ const Pages = styled.div`
 export default BalanceTab;
 
 // pseudo data
-const data: Stock[] = [
-	{
-		id: 1,
-		name: "카카오게임즈",
-		price: 10000,
-		currentPrice: 14000,
-		quantity: 150,
-	},
-	{
-		id: 1,
-		name: "HMM",
-		price: 10000,
-		currentPrice: 14000,
-		quantity: 150,
-	},
-	{
-		id: 1,
-		name: "대한항공",
-		price: 10000,
-		currentPrice: 14000,
-		quantity: 150,
-	},
-	{
-		id: 1,
-		name: "원익IPS",
-		price: 10000,
-		currentPrice: 14000,
-		quantity: 150,
-	},
-	{
-		id: 1,
-		name: "삼성전자",
-		price: 10000,
-		currentPrice: 14000,
-		quantity: 150,
-	},
-	{
-		id: 1,
-		name: "SK바이오사이언스",
-		price: 10000,
-		currentPrice: 14000,
-		quantity: 150,
-	},
-	{
-		id: 1,
-		name: "한화투자증권우",
-		price: 10000,
-		currentPrice: 14000,
-		quantity: 150,
-	},
-	{
-		id: 1,
-		name: "상보",
-		price: 10000,
-		currentPrice: 14000,
-		quantity: 150,
-	},
-	{
-		id: 1,
-		name: "동국제강",
-		price: 10000,
-		currentPrice: 14000,
-		quantity: 150,
-	},
-	{
-		id: 1,
-		name: "셀트리온",
-		price: 10000,
-		currentPrice: 14000,
-		quantity: 150,
-	},
-	{
-		id: 1,
-		name: "LG",
-		price: 10000,
-		currentPrice: 14000,
-		quantity: 150,
-	},
-	{
-		id: 1,
-		name: "남양유업",
-		price: 10000,
-		currentPrice: 14000,
-		quantity: 150,
-	},
-	{
-		id: 1,
-		name: "카카오",
-		price: 10000,
-		currentPrice: 14000,
-		quantity: 150,
-	},
-	{
-		id: 1,
-		name: "하이브",
-		price: 10000,
-		currentPrice: 14000,
-		quantity: 150,
-	},
-	{
-		id: 1,
-		name: "NE능률",
-		price: 10000,
-		currentPrice: 14000,
-		quantity: 150,
-	},
-	{
-		id: 1,
-		name: "대원미디어",
-		price: 10000,
-		currentPrice: 14000,
-		quantity: 150,
-	},
-	{
-		id: 1,
-		name: "이수앱지스",
-		price: 10000,
-		currentPrice: 14000,
-		quantity: 150,
-	},
-	{
-		id: 1,
-		name: "SK하이닉스",
-		price: 10000,
-		currentPrice: 14000,
-		quantity: 150,
-	},
-	{
-		id: 1,
-		name: "한화에어로스페이스",
-		price: 10000,
-		currentPrice: 14000,
-		quantity: 150,
-	},
-	{
-		id: 1,
-		name: "아시아나항공",
-		price: 10000,
-		currentPrice: 14000,
-		quantity: 150,
-	},
-	{
-		id: 1,
-		name: "만도",
-		price: 10000,
-		currentPrice: 14000,
-		quantity: 150,
-	},
-	{
-		id: 1,
-		name: "신세계",
-		price: 10000,
-		currentPrice: 14000,
-		quantity: 150,
-	},
-	{
-		id: 1,
-		name: "어보브반도체",
-		price: 10000,
-		currentPrice: 14000,
-		quantity: 150,
-	},
-];

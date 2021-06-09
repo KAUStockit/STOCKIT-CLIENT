@@ -3,7 +3,7 @@ import { COLOR } from "../../constants/theme";
 import styled from "@emotion/styled";
 import { useVersionContext } from "../../App";
 import { useRecoilValue } from "recoil";
-import { userState } from "../../stores/User";
+import { userState } from "../../model/User";
 import { useHistory } from "react-router";
 
 // interface
