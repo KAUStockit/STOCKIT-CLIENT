@@ -14,12 +14,6 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import NotFound from "./pages/NotFound";
 
-// interface
-export enum LEVEL {
-	EASY = "easy",
-	HARD = "hard",
-}
-
 export default function App() {
 	const [user, setUser] = useState("");
 

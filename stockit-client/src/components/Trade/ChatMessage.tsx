@@ -1,7 +1,7 @@
 import React from "react";
 
 // interface
-import { ChatMessageObject } from "./Chat";
+import { ChatMessageObject } from "../../interfaces/TradeInterface";
 
 const ChatMessage: React.FC<ChatMessageObject> = ({
 	from,

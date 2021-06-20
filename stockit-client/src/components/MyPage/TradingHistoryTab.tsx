@@ -2,7 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 
 // interface
-type TradingHistoryTabProp = {};
+import { TradingHistoryTabProp } from "../../interfaces/MyPageInterface";
 
 const TradingHistoryTab: React.FC<TradingHistoryTabProp> = () => {
 	return <Container>거래내역</Container>;

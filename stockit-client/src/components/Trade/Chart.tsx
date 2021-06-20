@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { Line } from "react-chartjs-2";
-import { LEVEL } from "../../App";
+import { LEVEL } from "../../interfaces/MainInterface";
 import { COLOR } from "../../constants/theme";
 
 // components
@@ -12,18 +12,7 @@ import { COLOR } from "../../constants/theme";
 import { CHART_DATA } from "../../utils/DemoData";
 
 // interface
-type ChartProp = {
-	stockId: number;
-	level: LEVEL;
-	id: string;
-};
-
-interface ChartDataInterface {
-	id: number;
-	name: string;
-	filter: string;
-	data: Array<{ seq: number; label: string; price: number }>;
-}
+import { ChartProp, ChartDataInterface } from "../../interfaces/TradeInterface";
 
 const filters = ["1일", "1주", "1개월", "3개월", "1년", "3년"];
 
@@ -153,4 +142,4 @@ const Picker = styled.div`
 	}
 `;
 
-export default Chart;
+export default React.memo(Chart);

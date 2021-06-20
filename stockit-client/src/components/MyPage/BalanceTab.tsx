@@ -1,46 +1,20 @@
 import React, { useState } from "react";
-import { Doughnut } from "react-chartjs-2";
 
 // components
 import MyStockList from "./MyStockList";
+import Doughnutchart from "./DoghnutChart";
 
 // pseudo data
 import { myStockData, PIE_CHART_DATA } from "../../utils/DemoData";
 
 // theme
-import {
-	Container,
-	Total,
-	StockBalance,
-	Pages,
-	DoughnutChart,
-} from "./BalanceTabStyle";
+import { Container, Total, StockBalance, Pages } from "./BalanceTabStyle";
 
 // interface
-type BalanceTabProp = {};
+import { BalanceTabProp, MyStock } from "../../interfaces/TradeInterface";
 
-type Stock = {
-	id: number;
-	name: string;
-	price: number;
-	currentPrice: number;
-	quantity: number;
-};
-
-interface ChartDataInterface {
-	labels: string[];
-	data: {
-		datasets: {
-			label: string;
-			data: number[];
-			backgroundColor: string[];
-			hoverOffset: number;
-		}[];
-	};
-}
-
-const BalanceTab: React.FC<BalanceTabProp> = () => {
-	const [myStocks, setMyStocks] = useState<Stock[]>(myStockData);
+const BalanceTab: React.FC<BalanceTabProp> = ({ myStock }) => {
+	const [myStocks, setMyStocks] = useState<MyStock[]>(myStockData);
 	const [currentPage, setCurrentPage] = useState<number>(1);
 
 	// 페이지 수
@@ -74,7 +48,7 @@ const BalanceTab: React.FC<BalanceTabProp> = () => {
 	return (
 		<Container>
 			<div>
-				{configureChart(PIE_CHART_DATA)}
+				<Doughnutchart chartData={PIE_CHART_DATA} />
 				<Total>
 					<div>
 						<div className="info_gray">보유금액</div>
@@ -150,20 +124,6 @@ const BalanceTab: React.FC<BalanceTabProp> = () => {
 				</Pages>
 			</StockBalance>
 		</Container>
-	);
-};
-
-const configureChart = (chartData: ChartDataInterface) => {
-	return (
-		<DoughnutChart>
-			<div>
-				<Doughnut
-					type="doughnut"
-					data={chartData.data}
-					options={{ responsive: true, maintainAspectRatio: true }}
-				></Doughnut>
-			</div>
-		</DoughnutChart>
 	);
 };
 

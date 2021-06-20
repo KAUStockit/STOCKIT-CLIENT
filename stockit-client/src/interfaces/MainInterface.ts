@@ -17,3 +17,8 @@ export type StockCardProp = {
 	rate: number;
 	id: number;
 };
+
+export enum LEVEL {
+	EASY = "easy",
+	HARD = "hard",
+}

@@ -6,12 +6,7 @@ import ChatMessage from "./ChatMessage";
 import { COLOR } from "../../constants/theme";
 
 // interface
-export type ChatMessageObject = {
-	// 주고받는 메시지의 타입
-	from: string; // 보낸사람이 내 아이디랑 같으면 오른쪽정렬, 아니면 왼쪽정렬
-	text: string;
-	timestamp: Date;
-};
+import { ChatMessageObject } from "../../interfaces/TradeInterface";
 
 function Chat() {
 	const [currentUser, setCurrentUser] = useState(1); // 채팅방 현재 유저수

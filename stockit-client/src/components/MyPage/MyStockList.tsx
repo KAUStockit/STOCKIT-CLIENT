@@ -3,13 +3,7 @@ import styled from "@emotion/styled";
 import { COLOR } from "../../constants/theme";
 
 // interface
-type MyStockListProp = {
-	icon?: string;
-	name: string;
-	quantity: number;
-	price: number;
-	evaluation: number;
-};
+import { MyStockListProp } from "../../interfaces/MyPageInterface";
 
 const MyStockList: React.FC<MyStockListProp> = ({
 	name,
@@ -20,19 +14,25 @@ const MyStockList: React.FC<MyStockListProp> = ({
 }) => {
 	return (
 		<Container>
-			<div>icon</div>
-			<div>{name}</div>
+			<div>
+				<img src="" alt="" />
+				{name}
+			</div>
 			<div>{quantity}</div>
 			<div>{price}</div>
 			<div>{evaluation}</div>
+			<div>
+				{((evaluation - price * quantity) / (price * quantity)) * 100}%
+			</div>
 		</Container>
 	);
 };
 
 //* css : @emotion/styled
 const Container = styled.div`
-	display: flex;
-	justify-content: space-around;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	justify-items: center;
 	align-items: center;
 	height: 50px;
 	border: 1px solid ${COLOR.BOX_BORDER};

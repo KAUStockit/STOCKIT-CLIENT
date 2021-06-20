@@ -158,6 +158,7 @@ const HeaderRightBox = styled.div`
 	align-items: center;
 	height: 60% !important;
 	background: ${COLOR.GRAPH_BLUE};
+	border-radius: 7px;
 	color: white;
 	justify-content: space-around;
 

@@ -1,6 +1,5 @@
 // 거래소 화면
 import React, { useState, useEffect, Suspense } from "react";
-import { useVersionContext } from "../App";
 import styled from "@emotion/styled";
 
 // components
@@ -12,7 +11,7 @@ import Chat from "../components/Trade/Chat";
 import Spinner from "../components/common/Spinner";
 
 // interface
-import { LEVEL } from "../App";
+import { LEVEL } from "../interfaces/MainInterface";
 import { COLOR } from "../constants/theme";
 import { TradeProp } from "../interfaces/TradeInterface";
 

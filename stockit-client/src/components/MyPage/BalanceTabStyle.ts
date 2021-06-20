@@ -3,8 +3,6 @@ import { COLOR } from "../../constants/theme";
 
 //* css : @emotion/styled
 export const Container = styled.div`
-	border: 1px solid ${COLOR.BOX_BORDER};
-
 	& > div:nth-of-type(1) {
 		width: 100%;
 		display: flex;
@@ -27,12 +25,13 @@ export const Container = styled.div`
 	}
 
 	& > div:nth-of-type(3) {
-		width: 100%;
+		width: 96%;
+		padding: 0 2%;
 		display: flex;
 		align-items: center;
 		justify-content: space-evenly;
 		background-color: ${COLOR.DIVIDER};
-		height: 30px;
+		height: 40px;
 		font-size: 14px;
 
 		& > p {
@@ -43,7 +42,7 @@ export const Container = styled.div`
 	}
 `;
 
-export const DoughnutChart = styled.div`
+export const Chart = styled.div`
 	width: 40%;
 	display: flex;
 	justify-content: center;

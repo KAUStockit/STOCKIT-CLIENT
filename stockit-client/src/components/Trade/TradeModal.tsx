@@ -6,12 +6,7 @@ import { COLOR } from "../../constants/theme";
 import { Range } from "react-range";
 
 // interface
-type TradeModalProp = {
-	type: string;
-	hide: any;
-	price: number;
-	name: string;
-};
+import { TradeModalProp } from "../../interfaces/TradeInterface";
 
 const TradeModal: React.FC<TradeModalProp> = ({ type, hide, price, name }) => {
 	const [isDone, setIsDone] = useState(false);

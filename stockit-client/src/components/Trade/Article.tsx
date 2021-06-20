@@ -2,11 +2,8 @@ import styled from "@emotion/styled";
 import React, { useState } from "react";
 import { COLOR } from "../../constants/theme";
 
-// type
-type ArticleProp = {
-	stockId: number;
-	stockClass: string; // 종목의 분류 (ex. 카카오게임즈 : 게임/엔터테인먼트)
-};
+// interface
+import { ArticleProp } from "../../interfaces/TradeInterface";
 
 const Article: React.FC<ArticleProp> = (stockId, stockClass) => {
 	// 0이면 종목정보, 1이면 관련기사
