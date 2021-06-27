@@ -83,6 +83,7 @@ const Trade: React.FC<TradeProp> = ({
 						type="buy"
 						hide={setBuyModalDisplay}
 						price={20000}
+						name="카카오게임즈"
 						isAdvanced={isAdvanced}
 					/>
 				)}
@@ -91,6 +92,7 @@ const Trade: React.FC<TradeProp> = ({
 						type="sell"
 						hide={setSellModalDisplay}
 						price={20000}
+						name="카카오게임즈"
 						isAdvanced={isAdvanced}
 					/>
 				)}

@@ -21,6 +21,8 @@ function SignIn() {
 
 	const onLoginClick = (e: React.FormEvent<HTMLButtonElement>) => {
 		console.log("메인 페이지로 이동합니다.");
+
+		localStorage.setItem("session", "4safg94-fs3");
 		setUser({
 			id: 1,
 			nickname: "imnotmoon",

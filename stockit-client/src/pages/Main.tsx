@@ -1,5 +1,5 @@
 // 메인 화면 컴포넌트
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 
 // components
@@ -25,9 +25,13 @@ function Main() {
 
 	const [selectedCard, setSelectedCard] = useState(0);
 	const onCardClick = (e: React.MouseEvent) => {
-		let tmp = String(e.currentTarget.id);
-		setSelectedCard((selectedCard) => Number(tmp));
+		let cardId = e.currentTarget.id;
+		setSelectedCard(() => Number(cardId));
 	};
+
+	useEffect(() => {
+		!localStorage.getItem("session") ?? localStorage.setItem("session", "");
+	}, []);
 
 	return (
 		<Content>
@@ -37,6 +41,14 @@ function Main() {
 				</h3>
 				<MainCards>
 					<MainCard onClick={onCardClick} id="0">
+						<Circle color={"#4076EF"}>
+							<img
+								src="/img/card-first.png"
+								alt=""
+								width="100px"
+								height="100px"
+							/>
+						</Circle>
 						<p>인기순 탑100</p>
 					</MainCard>
 					<MainCard
@@ -44,6 +56,14 @@ function Main() {
 						style={{ backgroundColor: "#53E8C0" }}
 						id="1"
 					>
+						<Circle color={"#3BD1A9"}>
+							<img
+								src="/img/card-second.png"
+								alt=""
+								width="100px"
+								height="100px"
+							/>
+						</Circle>
 						<p>시총순 탑100</p>
 					</MainCard>
 					<MainCard
@@ -51,6 +71,14 @@ function Main() {
 						style={{ backgroundColor: "#6C45EF" }}
 						id="2"
 					>
+						<Circle color={"#5229D8"}>
+							<img
+								src="/img/card-third.png"
+								alt=""
+								width="100px"
+								height="100px"
+							/>
+						</Circle>
 						<p>수익률 탑100</p>
 					</MainCard>
 				</MainCards>
@@ -108,8 +136,8 @@ const MainCard = styled.div`
 		color: white;
 		display: block;
 		position: relative;
-		right: -60%;
-		bottom: -60%;
+		right: -50%;
+		bottom: -30%;
 		font-weight: 800;
 		font-size: 20px;
 	}
@@ -148,6 +176,24 @@ const MainBottom = styled.div`
 
 	& > div > div {
 		margin-right: 20px;
+	}
+`;
+
+const Circle = styled.div<{ color: string }>`
+	background: ${(props) => props.color};
+	width: 50px;
+	height: 50px;
+	border-radius: 40px;
+	margin-left: 10px;
+	margin-top: 10px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	& > img {
+		width: 30px;
+		height: 30px;
 	}
 `;
 

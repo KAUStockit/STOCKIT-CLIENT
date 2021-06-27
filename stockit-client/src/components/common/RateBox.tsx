@@ -12,26 +12,26 @@ const RateBox: React.FC<RateBoxProp> = ({ rate }) => {
 
 //* css : @emotion
 const Upper = styled.div`
-	background: ${COLOR.GRAPH_RED};
+	background: rgba(253, 104, 104, 0.15);
 	width: 6.5vh;
 	height: 3.5vh;
-	color: red;
+	color: #fd6868;
 	border-radius: 5px;
 	font-weight: 400;
-	font-size: 14px;
+	font-size: 12px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 `;
 
 const Lower = styled.div`
-	background: ${COLOR.GRAPH_BLUE};
+	background: rgba(71, 149, 255, 0.15);
 	width: 6.5vh;
 	height: 3.5vh;
-	color: blue;
+	color: #4895ff;
 	border-radius: 5px;
 	font-weight: 400;
-	font-size: 15px;
+	font-size: 12px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
