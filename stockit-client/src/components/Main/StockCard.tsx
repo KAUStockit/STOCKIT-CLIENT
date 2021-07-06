@@ -1,18 +1,23 @@
 import React from "react";
 import styled from "@emotion/styled";
+import { useHistory } from "react-router";
 
 // components
 import RateBox from "../common/RateBox";
 
 // interface
-type StockCardProp = {
-	name: string;
-	rate: number;
-};
+import { StockCardProp } from "../../interfaces/MainInterface";
 
-const StockCard: React.FC<StockCardProp> = ({ name, rate }) => {
+const StockCard: React.FC<StockCardProp> = ({ name, rate, id }) => {
+	const history = useHistory();
+
+	// functions
+	const onClick = () => {
+		history.push(`./${id}/trade`);
+	};
+
 	return (
-		<Card>
+		<Card onClick={onClick}>
 			<p>{name}</p>
 			<RateBox rate={rate} />
 		</Card>

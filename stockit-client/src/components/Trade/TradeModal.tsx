@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { COLOR } from "../../constants/theme";
-import { ChangeEvent } from "react";
 import { Range } from "react-range";
 
 // interface
@@ -12,16 +11,9 @@ type TradeModalProp = {
 	hide: any;
 	price: number;
 	name: string;
-	isAdvanced: boolean;
 };
 
-const TradeModal: React.FC<TradeModalProp> = ({
-	type,
-	hide,
-	price,
-	name,
-	isAdvanced,
-}) => {
+const TradeModal: React.FC<TradeModalProp> = ({ type, hide, price, name }) => {
 	const [isDone, setIsDone] = useState(false);
 	const [quantity, setQuantity] = useState([50]);
 
@@ -36,6 +28,7 @@ const TradeModal: React.FC<TradeModalProp> = ({
 	};
 
 	const configureDoneUI = () => {
+		console.log(buyOrSell);
 		return (
 			<DoneModalFrame>
 				<svg
@@ -72,7 +65,10 @@ const TradeModal: React.FC<TradeModalProp> = ({
 				</svg>
 				<br />
 				<p>{name}</p>
-				<p>총 {quantity}주를 매수하셨습니다.</p>
+				<p>
+					총 {quantity}주를 {buyOrSell() === "사기" ? "구매" : "판매"}
+					하셨습니다.
+				</p>
 				<Button onClick={onClose}>확인</Button>
 			</DoneModalFrame>
 		);
@@ -121,7 +117,14 @@ const TradeModal: React.FC<TradeModalProp> = ({
 						<input
 							type="text"
 							placeholder="1주"
-							value={quantity[0]}
+							value={`${quantity[0]}주`}
+							style={{
+								textAlign: "right",
+								height: "30px",
+								width: "50px",
+								border: "none",
+								fontSize: "17px",
+							}}
 							onChange={(e) => {
 								setQuantity([+e.currentTarget.value]);
 							}}
@@ -141,10 +144,6 @@ const TradeModal: React.FC<TradeModalProp> = ({
 			)}
 		</Modal>
 	);
-};
-
-const RangeTrack = () => {
-	return;
 };
 
 //* css : @emotion/styled
@@ -275,4 +274,5 @@ const Button = styled.button`
 	color: white;
 	font-weight: 500;
 `;
+
 export default TradeModal;

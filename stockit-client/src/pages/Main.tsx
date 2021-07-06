@@ -11,25 +11,24 @@ import { COLOR } from "../constants/theme";
 import { MAINPAGE_RANKLIST, MAINPAGE_PENNY } from "../utils/DemoData";
 
 // interface
-type StockObject = {
-	id: number;
-	name: string;
-	price: number;
-	rate: number;
-};
+import { StockObject } from "../interfaces/MainInterface";
 
 function Main() {
-	const [stockRankList, setStockRankList] = useState(MAINPAGE_RANKLIST);
+	// states
+	const [stockRankList, setStockRankList] = useState(MAINPAGE_RANKLIST); // setter는 통신시 설정
 	const [tenThousandStockList, setTenThousandStockList] =
-		useState<StockObject[]>(MAINPAGE_PENNY);
+		useState<StockObject[]>(MAINPAGE_PENNY); // setter는 통신시 설정
+	const [selectedCard, setSelectedCard] = useState(0); // 인기순 / 시총순 / 수익률 순서
 
-	const [selectedCard, setSelectedCard] = useState(0);
+	// functions
 	const onCardClick = (e: React.MouseEvent) => {
 		let cardId = e.currentTarget.id;
 		setSelectedCard(() => Number(cardId));
 	};
 
+	// side effects
 	useEffect(() => {
+		// user session
 		!localStorage.getItem("session") ?? localStorage.setItem("session", "");
 	}, []);
 
@@ -39,6 +38,7 @@ function Main() {
 				<h3>
 					Stockit<b style={{ color: COLOR.BLUE }}> TOP100</b>
 				</h3>
+				{/* Cards start */}
 				<MainCards>
 					<MainCard onClick={onCardClick} id="0">
 						<Circle color={"#4076EF"}>
@@ -82,6 +82,9 @@ function Main() {
 						<p>수익률 탑100</p>
 					</MainCard>
 				</MainCards>
+				{/* Cards done */}
+
+				{/* Rank Start */}
 				<MainRank>
 					<div>
 						{stockRankList[selectedCard].map((stock, idx) => (
@@ -95,12 +98,15 @@ function Main() {
 						))}
 					</div>
 				</MainRank>
+				{/* Rank done */}
+
 				<MainBottom>
 					<h3>10000원으로 살 수 있는 주식</h3>
 					<div>
 						{tenThousandStockList.map((stock, idx) => (
 							<StockCard
 								key={idx}
+								id={stock.id}
 								name={stock.name}
 								rate={stock.rate}
 							/>

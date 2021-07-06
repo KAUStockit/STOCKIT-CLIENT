@@ -21,7 +21,6 @@ export enum LEVEL {
 }
 
 export default function App() {
-	const [isAdvanced, setIsAdvanced] = useState(false);
 	const [user, setUser] = useState("");
 
 	// didRendered
@@ -35,28 +34,26 @@ export default function App() {
 
 	return (
 		<RecoilRoot>
-			<VersionContext.Provider value={{ isAdvanced, setIsAdvanced }}>
-				<div className="App" style={{ fontFamily: "Noto Sans KR" }}>
-					<BrowserRouter>
-						<Header />
-						<Switch>
-							<Route exact path="/" component={Main} />
-							<Route path="/:stockId/trade" component={Trade} />
-							<Route exact path="/balance" component={Balance} />
-							<Route exact path="/mypage" component={MyPage} />
-							<Route
-								exact
-								path="/playground"
-								component={PlayGround}
-							/>
-							<Route exact path="/signin" component={SignIn} />
-							<Route exact path="/signup" component={SignUp} />
-							<Route component={NotFound} />
-						</Switch>
-					</BrowserRouter>
-					<Footer />
-				</div>
-			</VersionContext.Provider>
+			<div className="App" style={{ fontFamily: "Noto Sans KR" }}>
+				<BrowserRouter>
+					<Header />
+					<Switch>
+						<Route exact path="/" component={Main} />
+						<Route path="/:stockId/trade" component={Trade} />
+						<Route exact path="/balance" component={Balance} />
+						<Route exact path="/mypage" component={MyPage} />
+						<Route
+							exact
+							path="/playground"
+							component={PlayGround}
+						/>
+						<Route exact path="/signin" component={SignIn} />
+						<Route exact path="/signup" component={SignUp} />
+						<Route component={NotFound} />
+					</Switch>
+				</BrowserRouter>
+				<Footer />
+			</div>
 		</RecoilRoot>
 	);
 }
@@ -66,7 +63,8 @@ type VersionContextType = {
 	setIsAdvanced: (v: boolean) => void;
 };
 
-export const VersionContext =
-	React.createContext<VersionContextType | undefined>(undefined);
+export const VersionContext = React.createContext<
+	VersionContextType | undefined
+>(undefined);
 
 export const useVersionContext = () => useContext(VersionContext);

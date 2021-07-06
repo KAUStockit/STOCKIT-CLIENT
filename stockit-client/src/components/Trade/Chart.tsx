@@ -1,6 +1,6 @@
 // 거래소 화면 좌측에 위치한 차트 컴포넌트
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { Line } from "react-chartjs-2";
 import { LEVEL } from "../../App";
@@ -15,6 +15,7 @@ import { CHART_DATA } from "../../utils/DemoData";
 type ChartProp = {
 	stockId: number;
 	level: LEVEL;
+	id: string;
 };
 
 interface ChartDataInterface {
@@ -30,6 +31,7 @@ const Chart: React.FC<ChartProp> = ({ stockId, level }) => {
 	// states
 	const [filter, setFilter] = useState("1일");
 
+	// functions
 	const onFilterClick = (e: React.MouseEvent) => {
 		setFilter(e.currentTarget.innerHTML);
 	};
@@ -56,18 +58,14 @@ const Chart: React.FC<ChartProp> = ({ stockId, level }) => {
 					))}
 				</Picker>
 				<div className="linechart">
-					{
-						level === LEVEL.EASY
-							? configureChart(CHART_DATA) // 쉬운 버전 차트
-							: configureChart(CHART_DATA) // 어려운 버전 차트
-					}
+					{configureChart(CHART_DATA, level)}
 				</div>
 			</ChartGraph>
 		</div>
 	);
 };
 
-const configureChart = (chartData: ChartDataInterface) => {
+const configureChart = (chartData: ChartDataInterface, level: LEVEL) => {
 	const data = {
 		labels: chartData.data.map((item) => {
 			return item.label;

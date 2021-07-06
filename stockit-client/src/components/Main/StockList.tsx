@@ -7,12 +7,7 @@ import { useHistory } from "react-router";
 import RateBox from "../common/RateBox";
 
 // interface
-type StockListProps = {
-	idx: number;
-	id: number;
-	name: string;
-	rate: number;
-};
+import { StockListProps } from "../../interfaces/MainInterface";
 
 const StockList: React.FC<StockListProps> = ({ idx, id, name, rate }) => {
 	const history = useHistory();
@@ -31,7 +26,6 @@ const StockList: React.FC<StockListProps> = ({ idx, id, name, rate }) => {
 };
 
 //* css : @emotion/styled
-
 const List = styled.div`
 	display: flex;
 	justify-content: flex-start;

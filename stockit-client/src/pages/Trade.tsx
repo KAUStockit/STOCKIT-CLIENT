@@ -14,12 +14,7 @@ import Spinner from "../components/common/Spinner";
 // interface
 import { LEVEL } from "../App";
 import { COLOR } from "../constants/theme";
-type TradeProp = {
-	match?: any;
-	stockId: number;
-	stockName: string;
-	stockPrice: number;
-};
+import { TradeProp } from "../interfaces/TradeInterface";
 
 // Component
 const Trade: React.FC<TradeProp> = ({
@@ -28,8 +23,6 @@ const Trade: React.FC<TradeProp> = ({
 	stockName,
 	stockPrice,
 }) => {
-	const { isAdvanced, setIsAdvanced }: any = useVersionContext();
-
 	const [sellModalDisplay, setSellModalDisplay] = useState(false);
 	const [buyModalDisplay, setBuyModalDisplay] = useState(false);
 
@@ -56,8 +49,7 @@ const Trade: React.FC<TradeProp> = ({
 	return (
 		<Suspense fallback={<Spinner />}>
 			<Container>
-				{/* <div>{isAdvanced && "고급버전"}</div>
-			<div>거래소페이지입니다.</div> */}
+				{/* Title start */}
 				<Title className="chart__title">
 					<StockName>
 						<span>카카오게임즈</span>
@@ -72,8 +64,10 @@ const Trade: React.FC<TradeProp> = ({
 						</button>
 					</TradeButtons>
 				</Title>
+				{/* Title done */}
+
 				<Grid>
-					<Chart stockId={123} level={LEVEL.EASY} />
+					<Chart stockId={123} level={LEVEL.EASY} id="chart" />
 					<Entry />
 					<Article stockId={123} stockClass={"게임 엔터테인먼트"} />
 					<Chat />
@@ -84,7 +78,6 @@ const Trade: React.FC<TradeProp> = ({
 						hide={setBuyModalDisplay}
 						price={20000}
 						name="카카오게임즈"
-						isAdvanced={isAdvanced}
 					/>
 				)}
 				{sellModalDisplay && (
@@ -93,7 +86,6 @@ const Trade: React.FC<TradeProp> = ({
 						hide={setSellModalDisplay}
 						price={20000}
 						name="카카오게임즈"
-						isAdvanced={isAdvanced}
 					/>
 				)}
 			</Container>
@@ -109,7 +101,7 @@ const Container = styled.div`
 
 const Grid = styled.div`
 	display: grid;
-	grid-template-columns: 2fr 1fr;
+	grid-template-columns: 1fr 350px;
 	column-gap: 30px;
 	row-gap: 30px;
 `;
@@ -117,13 +109,18 @@ const Grid = styled.div`
 const Title = styled.div`
 	display: flex;
 	justify-content: space-between;
+	width: calc(100% - 380px);
 	align-items: center;
-	width: 65%;
+	margin: 10px 0px;
+	height: 50px;
+	width: ${document.getElementById("chart")?.style.width};
+
+	& > div:nth-of-type(2) {
+		justify-self: end;
+	}
 `;
 
 const StockName = styled.div`
-	height: 50px;
-	margin-top: 20px;
 	display: flex;
 	justify-content: flex-start;
 	align-items: baseline;

@@ -1,7 +1,6 @@
 import React from "react";
 import { COLOR } from "../../constants/theme";
 import styled from "@emotion/styled";
-import { useVersionContext } from "../../App";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../model/User";
 import { useHistory } from "react-router";
@@ -9,15 +8,8 @@ import { useHistory } from "react-router";
 // interface
 
 const Header: React.FC = () => {
-	const { isAdvanced, setIsAdvanced }: any = useVersionContext();
 	const history = useHistory();
 	const user = useRecoilValue(userState);
-
-	const onAdvanceClick = (e: React.MouseEvent) => {
-		e.preventDefault();
-		console.log("고급버전 전환");
-		setIsAdvanced(!isAdvanced);
-	};
 
 	const onLogoClick = (e: React.MouseEvent) => {
 		e.preventDefault();
@@ -85,9 +77,6 @@ const Header: React.FC = () => {
 						</tspan>
 					</text>
 				</svg>
-				<a href="" onClick={onAdvanceClick}>
-					{isAdvanced ? "쉬운버전으로" : "고급버전으로"}
-				</a>
 			</Logo>
 
 			<div>
