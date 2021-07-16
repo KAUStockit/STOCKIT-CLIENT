@@ -25,7 +25,7 @@ export const SOCKET = {
 
 export const REST_API_LOG = {
 	logIn: async (data: { email: string; password: string }) => {
-		const result = await axios.post("/api/members/login", data);
+		const result = await axios.post("/api/members/login", data, { headers: {"Content-Type": "application/json"}});
 		return result.data;
 	},
 	signUp: async (data: { name: string; password: string; email: string; nickname: string }) => {
@@ -41,3 +41,12 @@ export const REST_API_LOG = {
 		return result;
 	},
 };
+
+export const ADMIN = {
+	newStock : async (data : { stockName : string, price: number}) => {
+		console.log(data);
+		const result = await axios.post('/api/stocks/new', data);
+		console.log(result);
+		return result;
+	}
+}
