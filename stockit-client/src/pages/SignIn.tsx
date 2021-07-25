@@ -25,6 +25,7 @@ function SignIn() {
 		localStorage.setItem("session", "4safg94-fs3");
 		setUser({
 			id: 1,
+			name: "",
 			nickname: "imnotmoon",
 			sessionId: "4safg94-fs3",
 			useAdvanced: false,

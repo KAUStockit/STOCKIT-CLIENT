@@ -1,8 +1,8 @@
 import axios from "axios";
 import io, { Socket } from "socket.io-client";
 
-const IP_ADDRESS = "";
-const PORT = "";
+const IP_ADDRESS = "http://localhost";
+const PORT = "8080";
 var socket: Socket;
 
 const SHA256 = (text: string) => {
@@ -28,52 +28,27 @@ export const SOCKET = {
 	},
 };
 
-export const REST = {
-	logIn: (data: { id: string; password: string }) => {
+export const REST_API_LOG = {
+	logIn: async (data: { id: string; password: string }) => {
 		let config = {};
-		axios
-			.post(
-				`${IP_ADDRESS}:${PORT}`,
-				{ ...data, password: SHA256(data.password) },
-				config
-			)
-			.then((res) => {
-				console.log(res);
-				// 로그인 데이터 관련해서 UserContext 세팅해야 함!
-				return true;
-			})
-			.catch((err) => {
-				console.log(err);
-				return false;
-			});
+		const result = axios.post(
+			`${IP_ADDRESS}:${PORT}`,
+			{ ...data, password: SHA256(data.password) },
+			config
+		);
+		console.log(result);
 	},
-	signUp: (data: { id: string; password: string; email: string }) => {
-		let config = {};
-		axios
-			.post(
-				`${IP_ADDRESS}:${PORT}`,
-				{ ...data, password: SHA256(data.password) },
-				config
-			)
-			.then((res) => {
-				console.log(res);
-				return true;
-			})
-			.catch((err) => {
-				console.log(err);
-				return false;
-			});
+	signUp: async (data: {
+		name: string | undefined;
+		password: string | undefined;
+		email: string | undefined;
+		nickname: string | undefined;
+	}) => {
+		const result = await axios.post("/api/members/new", data);
+		return result.data;
 	},
-	checkValidEmailAddress: (email: string) => {
-		axios
-			.post(`${IP_ADDRESS}:${PORT}`, { email })
-			.then((res) => {
-				console.log(res);
-				return true;
-			})
-			.catch((err) => {
-				console.log(err);
-				return false;
-			});
+	checkValidEmailAddress: async (email: string) => {
+		const result = await axios.post(`${IP_ADDRESS}:${PORT}`, { email });
+		console.log(result);
 	},
 };

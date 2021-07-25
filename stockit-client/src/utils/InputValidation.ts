@@ -1,3 +1,9 @@
+// input Name validation
+export const validateName = (name: string) => {
+	if (name.length === 0) return "이름을 입력해주세요";
+	return "";
+};
+
 // input ID validation
 export const validateId = (id: string) => {
 	// db의 아이디 목록과 대조해서 같은 아이디가 있으면

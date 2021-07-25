@@ -211,7 +211,7 @@ const ModalFrame = styled.div`
 		padding-bottom: 20px;
 		border-bottom: 1px solid ${COLOR.BOX_BORDER};
 	}
-
+	
 	& > p:nth-of-type(2) {
 		padding: 3% 0 3% 0;
 		color: ${COLOR.BLUE};

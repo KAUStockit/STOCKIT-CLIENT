@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 
 // theme
@@ -27,8 +27,8 @@ const InputWithLabel: React.FC<InputWithLabelProps> = React.forwardRef<
 
 	const inputEventHandler = () =>
 		setTimeout(() => {
-			let msg = validation(inputValue);
-			setMessage(msg);
+			let msg = validation ? validation(inputValue) : "";
+			setMessage(msg!);
 		}, 500);
 
 	// useEffect(() => {

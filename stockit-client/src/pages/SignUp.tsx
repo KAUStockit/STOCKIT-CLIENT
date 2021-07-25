@@ -1,12 +1,17 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import {
+	validateName,
 	validateId,
+	validateEmail,
 	validatePassword,
 	validateRePassword,
 } from "../utils/InputValidation";
 import { useHistory } from "react-router";
 import { useSetRecoilState } from "recoil";
+
+// Networking
+import { REST_API_LOG } from "../utils/Networking";
 
 // theme
 import { COLOR } from "../constants/theme";
@@ -15,7 +20,6 @@ import { COLOR } from "../constants/theme";
 import InputWithLabel from "../components/common/InputWithLabel";
 
 // Testing
-import { UserData } from "../utils/DemoData";
 import { userState } from "../model/User";
 
 // interface
@@ -23,6 +27,7 @@ type SignUpProps = {};
 
 const SignUp: React.FC<SignUpProps> = () => {
 	// States
+	const nameRef = React.useRef<HTMLInputElement>();
 	const idRef = React.useRef<HTMLInputElement>();
 	const pwRef = React.useRef<HTMLInputElement>();
 	const pwRetypeRef = React.useRef<HTMLInputElement>();
@@ -35,25 +40,26 @@ const SignUp: React.FC<SignUpProps> = () => {
 	const onEmailChange = (e: React.FormEvent<HTMLInputElement>) => {
 		setEmail(e.currentTarget.value);
 	};
-	const clickJoinButton = (e: React.MouseEvent) => {
+	const clickJoinButton = async (e: React.MouseEvent) => {
 		const data = {
+			name: nameRef.current?.value,
 			nickname: idRef.current?.value,
 			password: pwRef.current?.value,
 			email: email,
 		};
 
-		//* 임시 join => 이후에 교체할 예정
-		UserData.join(data.email, data.password!, data.nickname!) &&
-			alert("회원가입이 완료되었습니다.");
+		//* join : POST - /api/members/new *//
+		const userId = await REST_API_LOG.signUp(data);
+		alert(`회원가입이 완료되었습니다, userId : ${userId}`);
 		setUser({
-			id: 1,
+			id: userId,
+			name: data.name!,
 			nickname: data.nickname!,
-			sessionId: "4safg94-fs3",
+			sessionId: userId,
 			useAdvanced: false,
 			currentStockId: [],
 		});
 		history.push("/");
-		console.log(UserData.getAll());
 	};
 
 	return (
@@ -61,9 +67,16 @@ const SignUp: React.FC<SignUpProps> = () => {
 			<h3 style={{ margin: "40px 0 40px 0" }}>회원가입</h3>
 			<Form>
 				<InputWithLabel
-					label="아이디"
+					label="이름"
 					password={false}
-					placeholder="아이디를 입력해주세요."
+					placeholder="이름을 입력해주세요."
+					validation={validateName}
+					ref={nameRef}
+				/>
+				<InputWithLabel
+					label="닉네임"
+					password={false}
+					placeholder="닉네임을 입력해주세요."
 					validation={validateId}
 					ref={idRef}
 				></InputWithLabel>

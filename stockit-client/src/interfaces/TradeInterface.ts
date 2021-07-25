@@ -11,18 +11,6 @@ export interface BalanceTabProp {
 	myStock: MyStock[];
 }
 
-export interface MyStock {
-	id: number;
-	name: string;
-	price: number;
-	currentPrice: number;
-	quantity: number;
-}
-
-export interface ArticleProp {
-	stockId: number;
-	stockClass: string; // 종목의 분류 (ex. 카카오게임즈 : 게임/엔터테인먼트)
-}
 export interface ChartProp {
 	stockId: number;
 	level: LEVEL;
@@ -48,4 +36,17 @@ export interface TradeModalProp {
 	hide: any;
 	price: number;
 	name: string;
+}
+
+export interface ArticleProp {
+	stockId: number;
+	stockClass: string; // 종목의 분류 (ex. 카카오게임즈 : 게임/엔터테인먼트)
+}
+
+export interface MyStock {
+	id: number;
+	name: string;
+	price: number;
+	currentPrice: number;
+	quantity: number;
 }
