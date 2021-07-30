@@ -1,22 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 
 // theme
 import { COLOR } from "../../constants/theme";
+
+import { REST_API_LOG } from "../../utils/Networking";
 
 // interface
 type InputWithLabelProps = {
 	label: string;
 	password: boolean;
 	placeholder: string;
-	validation: (text: string) => string;
 	ref: any;
 };
 
-const InputWithLabel: React.FC<InputWithLabelProps> = React.forwardRef<
-	HTMLInputElement,
-	InputWithLabelProps
->(({ label, password, placeholder, validation }, ref) => {
+const InputWithLabel: React.FC<InputWithLabelProps> = React.forwardRef(({ label, password, placeholder }, ref: any) => {
 	// states
 	const [inputValue, setInputValue] = useState<string>("");
 	const [message, setMessage] = useState<string>("");
@@ -25,21 +23,15 @@ const InputWithLabel: React.FC<InputWithLabelProps> = React.forwardRef<
 		setInputValue(e.currentTarget.value);
 	};
 
-	const inputEventHandler = () =>
-		setTimeout(() => {
-			let msg = validation ? validation(inputValue) : "";
-			setMessage(msg!);
-		}, 500);
-
-	// useEffect(() => {
-	// 	if (ref && ref.current) {
-	// 		ref.current.addEventListener("blur", inputEventHandler);
-
-	// 		return () => {
-	// 			ref.current?.removeEventListener("blur", inputEventHandler);
-	// 		};
-	// 	}
-	// });
+	const validateNickName = async (e: React.FormEvent<HTMLInputElement>) => {
+		if (e.currentTarget.value === "") {
+			setMessage("");
+			return;
+		}
+		const result: any = await REST_API_LOG.checkValidNickName(e.currentTarget.value);
+		console.log(result);
+		setMessage(result.data);
+	};
 
 	return (
 		<Container>
@@ -52,6 +44,8 @@ const InputWithLabel: React.FC<InputWithLabelProps> = React.forwardRef<
 				placeholder={placeholder}
 				ref={ref}
 				onChange={onInputChange}
+				value={inputValue}
+				onBlur={label === "닉네임" ? validateNickName : () => {}}
 			/>
 		</Container>
 	);

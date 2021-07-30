@@ -1,11 +1,8 @@
 import React, { useRef } from "react";
-import styled from "@emotion/styled";
-import { validateId, validatePassword } from "../utils/InputValidation";
+//* css : @emotion/styled
+import { Container, Form, Button, Bottom } from "./SignInStyle";
 import { useHistory } from "react-router";
 import { useSetRecoilState } from "recoil";
-
-// theme
-import { COLOR } from "../constants/theme";
 
 // components
 import InputWithLabel from "../components/common/InputWithLabel";
@@ -42,14 +39,12 @@ function SignIn() {
 					label="이메일"
 					password={false}
 					placeholder="이메일을 입력해주세요."
-					validation={validateId}
 					ref={emailRef}
 				></InputWithLabel>
 				<InputWithLabel
 					label="비밀번호"
 					password={true}
 					placeholder="비밀번호를 입력해주세요."
-					validation={validatePassword}
 					ref={pwRef}
 				></InputWithLabel>
 			</Form>
@@ -64,62 +59,4 @@ function SignIn() {
 	);
 }
 
-//* css : @emotion/styled
-const Container = styled.div`
-	margin: 0 10% 0 10%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-`;
-
-const Form = styled.div`
-	min-width: 40vh;
-	max-width: 60vh;
-`;
-
-const Button = styled.button`
-	margin-top: 40px;
-	color: white;
-	min-width: 40vh;
-	max-width: 60vh;
-	height: 50px;
-	background-color: ${COLOR.GRAPH_BLUE};
-	outline: none;
-	border: none;
-	border-radius: 5px;
-	font-size: 14px;
-	font-weight: 600;
-
-	&:active {
-		background-color: ${COLOR.BLUE};
-	}
-`;
-
-const Bottom = styled.div`
-	min-width: 40vh;
-	max-width: 60vh;
-
-	& > p {
-		display: block;
-		left: 5px;
-		font-size: 14px;
-		padding-bottom: 5px;
-		border-bottom: 1px solid ${COLOR.INPUT_BORDER};
-	}
-	& > button {
-		min-width: 40vh;
-		max-width: 60vh;
-		outline: none;
-		border: none;
-		border-radius: 5px;
-		font-size: 14px;
-		font-weight: 600;
-		height: 50px;
-		background-color: #fae523;
-	}
-
-	& > button:active {
-		background-color: #ffd700;
-	}
-`;
 export default SignIn;

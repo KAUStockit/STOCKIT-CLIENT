@@ -99,21 +99,17 @@ const BalanceTab: React.FC<BalanceTabProp> = ({ myStock }) => {
 							/>
 						);
 					}
+					return <div key={idx}></div>;
 				})}
 				<Pages>
 					<div onClick={onPrevClick}>{"<"}</div>
 					<div>
 						{totalPages.map((item, idx) => {
-							console.log(item);
 							return (
 								<p
 									key={idx}
 									onClick={onPageClick}
-									style={
-										item === currentPage
-											? { color: "black" }
-											: { color: "grey" }
-									}
+									style={item === currentPage ? { color: "black" } : { color: "grey" }}
 								>
 									{item}
 								</p>
