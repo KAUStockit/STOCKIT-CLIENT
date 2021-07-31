@@ -43,15 +43,18 @@ const SignUp: React.FC<SignUpProps> = () => {
 	};
 	const clickJoinButton = async (e: React.MouseEvent) => {
 		const data = {
-			name: nameRef.current?.value,
-			nickname: idRef.current?.value,
-			password: pwRef.current?.value,
+			name: nameRef.current!.value,
+			nickname: idRef.current!.value,
+			password: pwRef.current!.value,
 			email: email,
 		};
 
 		//* join : POST - /api/members/new *//
 		const userId = await REST_API_LOG.signUp(data);
 		alert(`회원가입이 완료되었습니다, userId : ${userId}`);
+
+		//! 임시로 세션 대용
+		localStorage.setItem("session", "4safg94-fs3");
 		setUser({
 			id: userId,
 			name: data.name!,

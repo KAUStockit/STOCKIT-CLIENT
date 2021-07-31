@@ -30,7 +30,7 @@ const InputWithLabel: React.FC<InputWithLabelProps> = React.forwardRef(({ label,
 		}
 		const result: any = await REST_API_LOG.checkValidNickName(e.currentTarget.value);
 		console.log(result);
-		setMessage(result.data);
+		// setMessage(result.data);
 	};
 
 	return (

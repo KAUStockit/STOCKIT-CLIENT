@@ -3,6 +3,7 @@ import React, { useRef } from "react";
 import { Container, Form, Button, Bottom } from "./SignInStyle";
 import { useHistory } from "react-router";
 import { useSetRecoilState } from "recoil";
+import { REST_API_LOG } from "../utils/Networking";
 
 // components
 import InputWithLabel from "../components/common/InputWithLabel";
@@ -13,17 +14,25 @@ function SignIn() {
 	const setUser = useSetRecoilState(userState);
 
 	// function
-	const emailRef = useRef();
-	const pwRef = useRef();
+	const emailRef = useRef<HTMLInputElement>();
+	const pwRef = useRef<HTMLInputElement>();
 
-	const onLoginClick = (e: React.FormEvent<HTMLButtonElement>) => {
-		console.log("메인 페이지로 이동합니다.");
+	const onLoginClick = async (e: React.FormEvent<HTMLButtonElement>) => {
+		const loginData = {
+			email: emailRef.current!.value,
+			password: pwRef.current!.value,
+		};
 
+		//* login : POST - /api/members/login *//
+		const result = await REST_API_LOG.logIn(loginData);
+		console.log(result);
+
+		//! 임시로 세션 대용
 		localStorage.setItem("session", "4safg94-fs3");
 		setUser({
 			id: 1,
 			name: "",
-			nickname: "imnotmoon",
+			nickname: "imnotmoon", // result에서 받아온걸로 바꿔야함
 			sessionId: "4safg94-fs3",
 			useAdvanced: false,
 			currentStockId: [],

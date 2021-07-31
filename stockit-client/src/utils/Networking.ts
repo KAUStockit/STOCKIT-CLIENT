@@ -29,22 +29,17 @@ export const SOCKET = {
 };
 
 export const REST_API_LOG = {
-	logIn: async (data: { id: string; password: string }) => {
-		let config = {};
-		const result = axios.post(`${IP_ADDRESS}:${PORT}`, { ...data, password: SHA256(data.password) }, config);
+	logIn: async (data: { email: string; password: string }) => {
+		const result = axios.post("/api/member/login", { ...data, password: SHA256(data.password) });
 		console.log(result);
 	},
-	signUp: async (data: {
-		name: string | undefined;
-		password: string | undefined;
-		email: string | undefined;
-		nickname: string | undefined;
-	}) => {
-		const result = await axios.post("/api/members/new", data);
+	signUp: async (data: { name: string; password: string; email: string; nickname: string }) => {
+		const result = await axios.post("/api/members/new", { ...data, password: SHA256(data.password) });
 		return result.data;
 	},
 	checkValidNickName: async (nickname: string) => {
 		const result = await axios.post("/api/members/validate/nickname", { nickname });
+		console.log(result);
 		return result;
 	},
 	checkValidEmailAddress: async (email: string) => {
