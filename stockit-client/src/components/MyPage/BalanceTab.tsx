@@ -28,7 +28,7 @@ const BalanceTab: React.FC<BalanceTabProp> = ({ myStock }) => {
 
 	// 페이지 이전 버튼 클릭
 	const onPrevClick = () => {
-		if (currentPage < myStocks.length / 5) {
+		if (currentPage > 1) {
 			setCurrentPage((currentPage) => currentPage - 1);
 		}
 	};
@@ -40,7 +40,7 @@ const BalanceTab: React.FC<BalanceTabProp> = ({ myStock }) => {
 
 	// 페이지 다음 버튼 클릭
 	const onNextClick = () => {
-		if (currentPage > 1) {
+		if (currentPage < totalPages.length) {
 			setCurrentPage((currentPage) => currentPage + 1);
 		}
 	};

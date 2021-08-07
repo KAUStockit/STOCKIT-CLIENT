@@ -30,10 +30,12 @@ export const MainCard = styled.div`
 `;
 export const MainRank = styled.div`
 	margin-top: 30px;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
 
 	& > div {
 		display: grid;
-		grid-template-columns: 1fr 1fr 1fr;
+		grid-template-columns: 1fr;
 		column-gap: 20px;
 
 		& > div {

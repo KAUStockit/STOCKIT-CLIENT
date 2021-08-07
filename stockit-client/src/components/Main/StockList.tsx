@@ -19,6 +19,7 @@ const StockList: React.FC<StockListProps> = ({ idx, id, name, rate }) => {
 	return (
 		<List onClick={onclick}>
 			<p>{idx}위</p>
+			<img src="/img/kakaogames.png" alt="" />
 			<p>{name}</p>
 			<RateBox rate={rate} />
 		</List>
@@ -38,7 +39,13 @@ const List = styled.div`
 	font-size: 15px;
 
 	& > p:nth-of-type(1) {
-		width: 20%;
+		width: 15%;
+	}
+
+	& > img {
+		width: 30px;
+		height: 30px;
+		margin-right: 10px;
 	}
 
 	& > p:nth-of-type(2) {

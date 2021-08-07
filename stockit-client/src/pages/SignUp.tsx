@@ -37,11 +37,30 @@ const SignUp: React.FC<SignUpProps> = () => {
 			setEmailValidateMsg("");
 			return;
 		}
-		const { data } = await REST_API_LOG.checkValidEmailAddress(email);
-		console.log(data);
-		setEmailValidateMsg(data);
+		try {
+			const { data } = await REST_API_LOG.checkValidEmailAddress(email);
+			setEmailValidateMsg(data);
+		} catch (err) {
+			setEmailValidateMsg("이미 사용중인 메일주소입니다.");
+		}
 	};
 	const clickJoinButton = async (e: React.MouseEvent) => {
+		if (
+			Array.from(document.getElementsByClassName("validation")).find((dom) => {
+				if (dom.innerHTML.includes("이미 사용중인")) {
+					alert("닉네임 혹은 이메일을 다시 확인해주세요");
+					return true;
+				}
+				return false;
+			})
+		) {
+			return;
+		}
+
+		if (pwRef.current!.value !== pwRetypeRef.current!.value) {
+			alert("비밀번호가 서로 다릅니다");
+			return;
+		}
 		const data = {
 			name: nameRef.current!.value,
 			nickname: idRef.current!.value,
@@ -92,7 +111,7 @@ const SignUp: React.FC<SignUpProps> = () => {
 				<EmailForm>
 					<div>
 						<p>이메일 인증</p>
-						<p>{emailValidateMsg}</p>
+						<p id="validation">{emailValidateMsg}</p>
 					</div>
 					<div>
 						<input

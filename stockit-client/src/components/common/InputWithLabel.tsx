@@ -28,16 +28,19 @@ const InputWithLabel: React.FC<InputWithLabelProps> = React.forwardRef(({ label,
 			setMessage("");
 			return;
 		}
-		const result: any = await REST_API_LOG.checkValidNickName(e.currentTarget.value);
-		console.log(result);
-		// setMessage(result.data);
+		try {
+			const result: any = await REST_API_LOG.checkValidNickName(e.currentTarget.value);
+			setMessage(result.data);
+		} catch (e) {
+			setMessage("이미 사용중인 닉네임입니다.");
+		}
 	};
 
 	return (
 		<Container>
 			<div>
 				<p>{label}</p>
-				<p>{message}</p>
+				<p className="validation">{message}</p>
 			</div>
 			<input
 				type={password ? "password" : "text"}

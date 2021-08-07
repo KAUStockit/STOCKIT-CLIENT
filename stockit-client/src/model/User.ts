@@ -9,6 +9,7 @@ export const userState = atom({
 		sessionId: "",
 		useAdvanced: false,
 		currentStockId: [],
+		// 관심종목: [],
 	},
 });
 

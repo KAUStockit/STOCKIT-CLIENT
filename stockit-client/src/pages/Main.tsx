@@ -63,8 +63,18 @@ function Main() {
 				{/* Rank Start */}
 				<MainRank>
 					<div>
-						{stockRankList[selectedCard].map((stock, idx) => (
+						{stockRankList[selectedCard].slice(0, 6).map((stock, idx) => (
 							<StockList key={idx} idx={idx + 1} id={stock.id} name={stock.name} rate={stock.rate} />
+						))}
+					</div>
+					<div>
+						{stockRankList[selectedCard].slice(6, 12).map((stock, idx) => (
+							<StockList key={idx} idx={idx + 7} id={stock.id} name={stock.name} rate={stock.rate} />
+						))}
+					</div>
+					<div>
+						{stockRankList[selectedCard].slice(12).map((stock, idx) => (
+							<StockList key={idx} idx={idx + 13} id={stock.id} name={stock.name} rate={stock.rate} />
 						))}
 					</div>
 				</MainRank>

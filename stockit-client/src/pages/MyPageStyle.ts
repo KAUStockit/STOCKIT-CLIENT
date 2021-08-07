@@ -6,10 +6,14 @@ export const Container = styled.div`
 	margin: 40px 10% 0 10%;
 	display: grid;
 	grid-template-columns: 2fr 1fr;
+	min-height: 500px;
 `;
+
 export const LeftMenu = styled.div`
 	margin-right: 20px;
 	box-shadow: 1px 1px 5px ${COLOR.BOX_BORDER};
+	display: flex;
+	flex-direction: column;
 
 	& > div:nth-of-type(1) {
 		height: 40px;
@@ -26,5 +30,10 @@ export const LeftMenu = styled.div`
 			align-items: center;
 			cursor: pointer;
 		}
+	}
+
+	& > div:nth-of-type(2) {
+		overflow: visible;
+		height: auto;
 	}
 `;

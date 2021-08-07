@@ -20,10 +20,7 @@ export default function App() {
 	// didRendered
 	// 제일 최근에 봤던 주식 정보가 있으면
 	useEffect(() => {
-		window.localStorage.setItem(
-			"lastStockId",
-			window.localStorage.getItem("lastStockId") || "1"
-		);
+		window.localStorage.setItem("lastStockId", window.localStorage.getItem("lastStockId") || "1");
 	}, []);
 
 	return (
@@ -34,13 +31,9 @@ export default function App() {
 					<Switch>
 						<Route exact path="/" component={Main} />
 						<Route path="/:stockId/trade" component={Trade} />
-						<Route exact path="/balance" component={Balance} />
-						<Route exact path="/mypage" component={MyPage} />
-						<Route
-							exact
-							path="/playground"
-							component={PlayGround}
-						/>
+						<Route exact path="/balance" component={MyPage} />
+						<Route exact path="/mypage" component={Balance} />
+						<Route exact path="/playground" component={PlayGround} />
 						<Route exact path="/signin" component={SignIn} />
 						<Route exact path="/signup" component={SignUp} />
 						<Route component={NotFound} />
@@ -57,8 +50,6 @@ type VersionContextType = {
 	setIsAdvanced: (v: boolean) => void;
 };
 
-export const VersionContext = React.createContext<
-	VersionContextType | undefined
->(undefined);
+export const VersionContext = React.createContext<VersionContextType | undefined>(undefined);
 
 export const useVersionContext = () => useContext(VersionContext);

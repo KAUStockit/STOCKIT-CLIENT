@@ -30,20 +30,22 @@ export const SOCKET = {
 
 export const REST_API_LOG = {
 	logIn: async (data: { email: string; password: string }) => {
-		const result = axios.post("/api/member/login", { ...data, password: SHA256(data.password) });
-		console.log(result);
-	},
-	signUp: async (data: { name: string; password: string; email: string; nickname: string }) => {
-		const result = await axios.post("/api/members/new", { ...data, password: SHA256(data.password) });
-		return result.data;
-	},
-	checkValidNickName: async (nickname: string) => {
-		const result = await axios.post("/api/members/validate/nickname", { nickname });
+		console.log(data);
+		const result = await axios.post("/api/members/login", data);
 		console.log(result);
 		return result;
 	},
+	signUp: async (data: { name: string; password: string; email: string; nickname: string }) => {
+		console.log(data);
+		const result = await axios.post("/api/members/new", data);
+		return result.data;
+	},
+	checkValidNickName: async (nickname: string) => {
+		const result = await axios.post("/api/members/login/validate/nickname", { nickname });
+		return result;
+	},
 	checkValidEmailAddress: async (email: string) => {
-		const result = await axios.post("/api/members/validate/email", { email });
+		const result = await axios.post("/api/members/login/validate/email", { email });
 		return result;
 	},
 };

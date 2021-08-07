@@ -1,8 +1,8 @@
 // 거래소 화면 우측에 있는 검색, 관심, 미체결 현황 확인을 위한 컴포넌트
 
-import styled from "@emotion/styled";
 import React, { useState } from "react";
 import { COLOR } from "../../constants/theme";
+import { EntryComponent, Filter, SearchBox, ListFilter, EntryItems } from "./EntryStyle";
 
 const filters = ["목록", "관심", "대기"];
 
@@ -49,18 +49,8 @@ const Entry: React.FC = () => {
 						<div>...</div>
 					</ListFilter>
 					<EntryItems>
-						{createEntryItem(
-							"카카오게임즈",
-							"53,500",
-							"3,874,110 백만",
-							true
-						)}
-						{createEntryItem(
-							"카카오게임즈",
-							"53,500",
-							"3,874,110 백만",
-							false
-						)}
+						{createEntryItem("카카오게임즈", "53,500", "3,874,110 백만", true)}
+						{createEntryItem("카카오게임즈", "53,500", "3,874,110 백만", false)}
 					</EntryItems>
 				</div>
 			</div>
@@ -68,12 +58,7 @@ const Entry: React.FC = () => {
 	);
 };
 
-const createEntryItem = (
-	name: string,
-	price: string,
-	flow: string,
-	isChecked: boolean
-) => {
+const createEntryItem = (name: string, price: string, flow: string, isChecked: boolean) => {
 	return (
 		<div>
 			<div>{name}</div>
@@ -87,12 +72,7 @@ const createEntryItem = (
 const createStar = (checked: boolean) => {
 	if (checked) {
 		return (
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				width="18"
-				height="17"
-				viewBox="0 0 18 17"
-			>
+			<svg xmlns="http://www.w3.org/2000/svg" width="18" height="17" viewBox="0 0 18 17">
 				<path
 					id="패스_134"
 					data-name="패스 134"
@@ -104,12 +84,7 @@ const createStar = (checked: boolean) => {
 		);
 	} else {
 		return (
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				width="18"
-				height="17"
-				viewBox="0 0 18 17"
-			>
+			<svg xmlns="http://www.w3.org/2000/svg" width="18" height="17" viewBox="0 0 18 17">
 				<path
 					id="패스_133"
 					data-name="패스 133"
@@ -121,75 +96,5 @@ const createStar = (checked: boolean) => {
 		);
 	}
 };
-
-const EntryComponent = styled.div`
-	box-shadow: 1px 1px 2px 2px #e2e2e2;
-	min-width: 35vh;
-`;
-
-const Filter = styled.div`
-	display: flex;
-	justify-content: flex-start;
-	width: 100%;
-	border-bottom: 1px solid #dedede;
-
-	& > div {
-		height: 35px;
-		width: 50px;
-		text-align: center;
-		line-height: 30px;
-		color: #4d4d4d;
-		font-size: 14px;
-		border-right: 1px solid #dedede;
-		cursor: pointer;
-	}
-
-	& > div:nth-of-type(4) {
-		display: flex;
-		justify-content: space-between;
-		width: 205px;
-	}
-`;
-
-const SearchBox = styled.div`
-	& > input {
-		height: 95%;
-		border: none;
-	}
-
-	& > div:nth-of-type(1) {
-		width: 50px;
-	}
-`;
-
-const ListFilter = styled.div`
-	display: grid;
-	height: 35px;
-	grid-template-columns: 3fr 2fr 5fr 1fr;
-
-	& > div {
-		height: 100%;
-		width: 100%;
-		text-align: center;
-		line-height: 35px;
-		font-size: 13px;
-		border-bottom: 1px solid ${COLOR.INPUT_BORDER};
-	}
-`;
-
-const EntryItems = styled.div`
-	& > div {
-		display: grid;
-		justify-items: center;
-		align-items: center;
-		grid-template-columns: 3fr 2fr 5fr 1fr;
-		height: 40px;
-		border-bottom: 1px solid ${COLOR.INPUT_BORDER};
-
-		& > div {
-			font-size: 13px;
-		}
-	}
-`;
 
 export default Entry;

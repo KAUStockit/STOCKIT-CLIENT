@@ -15,7 +15,7 @@ import { LEVEL } from "../interfaces/MainInterface";
 import { TradeProp } from "../interfaces/TradeInterface";
 
 // Component
-const Trade: React.FC<TradeProp> = ({ match, stockId, stockName, stockPrice }) => {
+const Trade: React.FC<TradeProp> = ({ match, stockId }) => {
 	const [sellModalDisplay, setSellModalDisplay] = useState(false);
 	const [buyModalDisplay, setBuyModalDisplay] = useState(false);
 
@@ -45,6 +45,7 @@ const Trade: React.FC<TradeProp> = ({ match, stockId, stockName, stockPrice }) =
 				{/* Title start */}
 				<Title className="chart__title">
 					<StockName>
+						<img src="/img/kakaogames.png" alt="" />
 						<span>카카오게임즈</span>
 						<span>53,500</span>
 					</StockName>
@@ -62,7 +63,7 @@ const Trade: React.FC<TradeProp> = ({ match, stockId, stockName, stockPrice }) =
 				<Grid>
 					<Chart stockId={123} level={LEVEL.EASY} id="chart" />
 					<Entry />
-					<Article stockId={123} stockClass={"게임 엔터테인먼트"} />
+					<Article stockId={123} />
 					<Chat />
 				</Grid>
 				{buyModalDisplay && (

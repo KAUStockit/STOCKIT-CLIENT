@@ -3,8 +3,6 @@ import { LEVEL } from "./MainInterface";
 export interface TradeProp {
 	match?: any;
 	stockId: number;
-	stockName: string;
-	stockPrice: number;
 }
 
 export interface BalanceTabProp {
@@ -40,7 +38,6 @@ export interface TradeModalProp {
 
 export interface ArticleProp {
 	stockId: number;
-	stockClass: string; // 종목의 분류 (ex. 카카오게임즈 : 게임/엔터테인먼트)
 }
 
 export interface MyStock {

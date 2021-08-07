@@ -6,8 +6,6 @@ import { Line } from "react-chartjs-2";
 import { LEVEL } from "../../interfaces/MainInterface";
 import { COLOR } from "../../constants/theme";
 
-// components
-
 // data
 import { CHART_DATA } from "../../utils/DemoData";
 
@@ -46,9 +44,7 @@ const Chart: React.FC<ChartProp> = ({ stockId, level }) => {
 						</div>
 					))}
 				</Picker>
-				<div className="linechart">
-					{configureChart(CHART_DATA, level)}
-				</div>
+				<div className="linechart">{configureChart(CHART_DATA, level)}</div>
 			</ChartGraph>
 		</div>
 	);
@@ -69,24 +65,26 @@ const configureChart = (chartData: ChartDataInterface, level: LEVEL) => {
 				pointBackgroundColor: "rgba(0, 0, 0, 0)",
 				pointBorderColor: "rgba(0, 0, 0, 0)",
 				tension: 0.2,
-				fill: "start",
+				fill: true,
 				backgroundColor: "rgba(72, 149, 255, 0.15)",
 			},
 		],
 	};
 
 	const options = {
+		responsive: true,
+		maintainAspectRatio: false,
 		animation: {
 			easing: "easeInOutBack",
 		},
 		scales: {
 			y: {
 				gridLines: {
-					display: false,
+					display: true,
 				},
 				ticks: {
-					beginAtZero: true,
 					display: true,
+					stepSize: 1000,
 				},
 			},
 
@@ -107,15 +105,7 @@ const configureChart = (chartData: ChartDataInterface, level: LEVEL) => {
 		},
 	};
 
-	return (
-		<Line
-			data={data}
-			// width={300}
-			// height={200}
-			options={options}
-			type="line"
-		/>
-	);
+	return <Line data={data} options={options} type="line" id="hihi" style={{ height: "360px" }} />;
 };
 
 //* css : @emotion/styled

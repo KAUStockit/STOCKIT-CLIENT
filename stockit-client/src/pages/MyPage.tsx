@@ -11,6 +11,7 @@ import { myStockData } from "../utils/DemoData";
 
 // interface
 import { MyPageProp } from "../interfaces/MyPageInterface";
+import { COLOR } from "../constants/theme";
 
 const MyPage: React.FC<MyPageProp> = () => {
 	const [currentTab, setCurrentTab] = useState<string>("보유주식");
@@ -28,8 +29,18 @@ const MyPage: React.FC<MyPageProp> = () => {
 		<Container>
 			<LeftMenu>
 				<div>
-					<div onClick={onTabClicked}>보유주식</div>
-					<div onClick={onTabClicked}>거래내역</div>
+					<div
+						onClick={onTabClicked}
+						style={currentTab === "보유주식" ? { background: COLOR.BLUE, color: "white" } : {}}
+					>
+						보유주식
+					</div>
+					<div
+						onClick={onTabClicked}
+						style={currentTab === "거래내역" ? { background: COLOR.BLUE, color: "white" } : {}}
+					>
+						거래내역
+					</div>
 				</div>
 				<div>{currentTab === "보유주식" ? <BalanceTab myStock={myStock} /> : <TradingHistoryTab />}</div>
 			</LeftMenu>

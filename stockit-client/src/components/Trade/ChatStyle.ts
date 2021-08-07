@@ -23,6 +23,7 @@ export const Title = styled.div`
 `;
 export const ChatContent = styled.div`
 	min-height: 100px;
+	height: 65%;
 `;
 export const ChatInput = styled.div`
 	height: 60px;
@@ -38,6 +39,12 @@ export const ChatInput = styled.div`
 		border: 1px solid #e2e2e2;
 		border-radius: 5px;
 		margin-left: 15px;
+		padding-left: 15px;
+		font-size: 15px;
+
+		&:focus {
+			outline: none;
+		}
 	}
 
 	& > button {
@@ -47,7 +54,10 @@ export const ChatInput = styled.div`
 		border: none;
 		color: white;
 		margin-right: 15px;
-
 		border-radius: 5px;
+
+		&:active {
+			background-color: ${COLOR.GRAPH_BLUE};
+		}
 	}
 `;
