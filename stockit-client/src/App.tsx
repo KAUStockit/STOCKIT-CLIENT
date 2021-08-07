@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { RecoilRoot } from "recoil";
+import { CookiesProvider } from "react-cookie";
 
 // components
 import Header from "./components/common/Header";
@@ -24,24 +25,26 @@ export default function App() {
 	}, []);
 
 	return (
-		<RecoilRoot>
-			<div className="App" style={{ fontFamily: "Noto Sans KR" }}>
-				<BrowserRouter>
-					<Header />
-					<Switch>
-						<Route exact path="/" component={Main} />
-						<Route path="/:stockId/trade" component={Trade} />
-						<Route exact path="/balance" component={MyPage} />
-						<Route exact path="/mypage" component={Balance} />
-						<Route exact path="/playground" component={PlayGround} />
-						<Route exact path="/signin" component={SignIn} />
-						<Route exact path="/signup" component={SignUp} />
-						<Route component={NotFound} />
-					</Switch>
-				</BrowserRouter>
-				<Footer />
-			</div>
-		</RecoilRoot>
+		<CookiesProvider>
+			<RecoilRoot>
+				<div className="App" style={{ fontFamily: "Noto Sans KR" }}>
+					<BrowserRouter>
+						<Header />
+						<Switch>
+							<Route exact path="/" component={Main} />
+							<Route path="/:stockId/trade" component={Trade} />
+							<Route exact path="/balance" component={MyPage} />
+							<Route exact path="/mypage" component={Balance} />
+							<Route exact path="/playground" component={PlayGround} />
+							<Route exact path="/signin" component={SignIn} />
+							<Route exact path="/signup" component={SignUp} />
+							<Route component={NotFound} />
+						</Switch>
+					</BrowserRouter>
+					<Footer />
+				</div>
+			</RecoilRoot>
+		</CookiesProvider>
 	);
 }
 

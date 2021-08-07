@@ -5,11 +5,6 @@ const IP_ADDRESS = "http://localhost";
 const PORT = "8080";
 var socket: Socket;
 
-const SHA256 = (text: string) => {
-	// 비밀번호 보내기 전에 암호화
-	return text;
-};
-
 export const SOCKET = {
 	initialize: () => {
 		socket = io(`${IP_ADDRESS}:${PORT}`);
@@ -30,9 +25,7 @@ export const SOCKET = {
 
 export const REST_API_LOG = {
 	logIn: async (data: { email: string; password: string }) => {
-		console.log(data);
 		const result = await axios.post("/api/members/login", data);
-		console.log(result);
 		return result;
 	},
 	signUp: async (data: { name: string; password: string; email: string; nickname: string }) => {

@@ -1,14 +1,20 @@
-import React from "react";
-import { useRecoilValue } from "recoil";
-import { userState } from "../../model/User";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import { Container, Logo, HeaderRightBox } from "./HeaderStyle";
+import { getCookie, removeCookie } from "../../utils/Cookie";
 
 // interface
 
 const Header: React.FC = () => {
 	const history = useHistory();
-	const user = useRecoilValue(userState);
+	const [user, setUser] = useState("");
+
+	useEffect(() => {
+		if (cookie) setUser(cookie);
+	});
+
+	const cookie = getCookie("user");
+	console.log(cookie);
 
 	const onLogoClick = (e: React.MouseEvent) => {
 		e.preventDefault();
@@ -33,7 +39,7 @@ const Header: React.FC = () => {
 
 	const onSignUpClick = (e: React.MouseEvent) => {
 		e.preventDefault();
-		if (user.id === 0) {
+		if (user.length === 0) {
 			history.push("/signup");
 		} else {
 			history.push("/logout");
@@ -42,11 +48,16 @@ const Header: React.FC = () => {
 
 	const onSignInClick = (e: React.MouseEvent) => {
 		e.preventDefault();
-		if (user.id === 0) {
+		if (user.length === 0) {
 			history.push("/signin");
 		} else {
 			history.push("/mypage");
 		}
+	};
+
+	const onLogout = () => {
+		removeCookie("user");
+		window.location.reload();
 	};
 
 	return (
@@ -91,13 +102,14 @@ const Header: React.FC = () => {
 			</div>
 			<HeaderRightBox>
 				<span>
-					{user.id === 0 ? (
+					{user.length === 0 ? (
 						<span>
 							<span onClick={onSignInClick}>로그인</span> | <span onClick={onSignUpClick}>회원가입</span>
 						</span>
 					) : (
 						<span>
-							<span onClick={onSignInClick}>{user.nickname}</span> | <span>로그아웃</span>
+							<span onClick={onSignInClick}>{cookie.slice(0, 10)}</span> |{" "}
+							<span onClick={onLogout}>로그아웃</span>
 						</span>
 					)}
 				</span>

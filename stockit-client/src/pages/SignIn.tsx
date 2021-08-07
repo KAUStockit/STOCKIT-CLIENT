@@ -1,17 +1,16 @@
 import React, { useRef } from "react";
+import { useHistory } from "react-router";
+import { REST_API_LOG } from "../utils/Networking";
+import { getCookie, setCookie } from "../utils/Cookie";
+
 //* css : @emotion/styled
 import { Container, Form, Button, Bottom } from "./SignInStyle";
-import { useHistory } from "react-router";
-import { useSetRecoilState } from "recoil";
-import { REST_API_LOG } from "../utils/Networking";
 
 // components
 import InputWithLabel from "../components/common/InputWithLabel";
-import { userState } from "../model/User";
 
 function SignIn() {
 	const history = useHistory();
-	const setUser = useSetRecoilState(userState);
 
 	// function
 	const emailRef = useRef<HTMLInputElement>();
@@ -24,20 +23,18 @@ function SignIn() {
 		};
 
 		//* login : POST - /api/members/login *//
-		const result = await REST_API_LOG.logIn(loginData);
-		console.log(result);
-
-		//! 임시로 세션 대용
-		localStorage.setItem("session", "4safg94-fs3");
-		setUser({
-			id: 1,
-			name: "",
-			nickname: "imnotmoon", // result에서 받아온걸로 바꿔야함
-			sessionId: "4safg94-fs3",
-			useAdvanced: false,
-			currentStockId: [],
-		});
-		history.push(`/`);
+		try {
+			const result = await REST_API_LOG.logIn(loginData);
+			const now = new Date();
+			const cookieExpires = new Date();
+			cookieExpires.setMinutes(now.getMinutes() + 30);
+			setCookie("user", result.data, { path: "/", expires: cookieExpires });
+			history.push(`/`);
+			window.location.reload();
+		} catch (err) {
+			alert("로그인에 실패했습니다.");
+			return;
+		}
 	};
 
 	return (
