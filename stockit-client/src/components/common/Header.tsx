@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import { Container, Logo, HeaderRightBox } from "./HeaderStyle";
 import { getCookie, removeCookie } from "../../utils/Cookie";
+import { userState } from "../../model/User";
+import { useSetRecoilState } from "recoil";
+
 
 // interface
 
@@ -9,9 +12,14 @@ const Header: React.FC = () => {
 	const history = useHistory();
 	const [user, setUser] = useState("");
 	const cookie = getCookie("user");
+	const setUserRecoilState = useSetRecoilState(userState);
 
 	useEffect(() => {
-		if (cookie) setUser(cookie.nickname);
+		// 새로고침 눌러서 초기화된경우 -> 쿠키에 저장된 값이 있으면 쿠키의 값을 토대로 state 재설정
+		if (cookie) {
+			setUser(cookie.nickname);
+			setUserRecoilState(cookie);
+		}
 	}, [cookie]);
 
 	const onLogoClick = (e: React.MouseEvent) => {
