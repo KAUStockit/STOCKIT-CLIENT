@@ -69,8 +69,9 @@ const SignUp: React.FC<SignUpProps> = () => {
 		};
 
 		//* join : POST - /api/members/new *//
-		const userId = await REST_API_LOG.signUp(data);
-		if(userId > 0) {
+		const result = await REST_API_LOG.signUp(data);
+		console.log(result);
+		if(result.data > 0) {
 			alert(`회원가입이 완료되었습니다. 가입한 이메일로 로그인을 진행해주세요.`);
 		} else {
 			alert("회원가입에 실패했습니다.")

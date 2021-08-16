@@ -29,7 +29,6 @@ export const REST_API_LOG = {
 		return result.data;
 	},
 	signUp: async (data: { name: string; password: string; email: string; nickname: string }) => {
-		console.log(data);
 		const result = await axios.post("/api/members/new", data);
 		return result.data;
 	},
