@@ -26,7 +26,7 @@ export interface ChatMessageObject {
 	// 주고받는 메시지의 타입
 	from: string; // 보낸사람이 내 아이디랑 같으면 오른쪽정렬, 아니면 왼쪽정렬
 	text: string;
-	timestamp: Date;
+	timestamp: any;
 }
 
 export interface TradeModalProp {

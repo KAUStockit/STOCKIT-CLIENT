@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import socketIOClient from "socket.io-client";
 import { ChatComponent, Title, ChatContent, ChatInput } from "./ChatStyle";
 
 // components
@@ -7,10 +8,22 @@ import ChatMessage from "./ChatMessage";
 // interface
 import { ChatMessageObject } from "../../interfaces/TradeInterface";
 
+// socket endpoint
+// const SOCKET_ENDPOINT = '';
+// const socket = socketIOClient(SOCKET_ENDPOINT);
+
 function Chat() {
 	const [currentUser, setCurrentUser] = useState(1); // 채팅방 현재 유저수
 	const [messages, setMessages] = useState<ChatMessageObject[]>([]); // 채팅 내용
 	const [currentMessage, setCurrentMessage] = useState<string>(""); // 내가 입력하는 채팅 내용
+
+	// useEffect(() => {
+	// 	socket.on("connect", () => { console.log("connection established"); });
+	// 	const now = new Date();
+	// 	socket.on("message", () => {
+	// 		setMessages(messages => [...messages, { from: '', text: '', timestamp: now}]);
+	// 	});
+	// }, [])
 
 	const onInputChange = (e: any) => {
 		setCurrentMessage(e.currentTarget.value);
@@ -19,7 +32,11 @@ function Chat() {
 	const onSendClick = (e: any) => {
 		// 채팅 내용을 서버로 보내는 코드
 		console.log(currentMessage);
+		// socket.emit('message', {from: '', message: currentMessage} );
+		setCurrentMessage('');
 	};
+
+	
 
 	return (
 		<ChatComponent>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import { CookiesProvider } from "react-cookie";
@@ -16,6 +16,7 @@ import SignUp from "./pages/SignUp";
 import NotFound from "./pages/NotFound";
 
 export default function App() {
+	
 	// didRendered
 	// 제일 최근에 봤던 주식 정보가 있으면
 	useEffect(() => {
@@ -45,12 +46,3 @@ export default function App() {
 		</CookiesProvider>
 	);
 }
-
-type VersionContextType = {
-	isAdvanced: boolean;
-	setIsAdvanced: (v: boolean) => void;
-};
-
-export const VersionContext = React.createContext<VersionContextType | undefined>(undefined);
-
-export const useVersionContext = () => useContext(VersionContext);

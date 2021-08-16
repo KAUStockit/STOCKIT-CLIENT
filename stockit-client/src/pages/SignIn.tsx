@@ -34,13 +34,13 @@ function SignIn() {
 		//* login : POST - /api/members/login *//
 		try {
 			const result : signInResultInterface = await REST_API_LOG.logIn(loginData);
-			console.log(result.data);
 			const now = new Date();
 			const cookieExpires = new Date();
 			cookieExpires.setMinutes(now.getMinutes() + 30);
 			setCookie("user", result.data, { path: "/", expires: cookieExpires });
 			setUser(() => result.data);
 			history.push(`/`);
+			window.location.reload();
 		} catch (err) {
 			alert("로그인에 실패했습니다.");
 			return;
