@@ -70,18 +70,12 @@ const SignUp: React.FC<SignUpProps> = () => {
 
 		//* join : POST - /api/members/new *//
 		const userId = await REST_API_LOG.signUp(data);
-		alert(`회원가입이 완료되었습니다, userId : ${userId}`);
-
-		//! 임시로 세션 대용
-		localStorage.setItem("session", "4safg94-fs3");
-		setUser({
-			id: userId,
-			name: data.name!,
-			nickname: data.nickname!,
-			sessionId: userId,
-			useAdvanced: false,
-			currentStockId: [],
-		});
+		if(userId > 0) {
+			alert(`회원가입이 완료되었습니다. 가입한 이메일로 로그인을 진행해주세요.`);
+		} else {
+			alert("회원가입에 실패했습니다.")
+		}
+		
 		history.push("/");
 	};
 

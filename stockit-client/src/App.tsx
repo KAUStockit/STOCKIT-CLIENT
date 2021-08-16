@@ -16,8 +16,6 @@ import SignUp from "./pages/SignUp";
 import NotFound from "./pages/NotFound";
 
 export default function App() {
-	const [user, setUser] = useState("");
-
 	// didRendered
 	// 제일 최근에 봤던 주식 정보가 있으면
 	useEffect(() => {

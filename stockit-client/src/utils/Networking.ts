@@ -26,7 +26,7 @@ export const SOCKET = {
 export const REST_API_LOG = {
 	logIn: async (data: { email: string; password: string }) => {
 		const result = await axios.post("/api/members/login", data);
-		return result;
+		return result.data;
 	},
 	signUp: async (data: { name: string; password: string; email: string; nickname: string }) => {
 		console.log(data);

@@ -1,21 +1,38 @@
 import { atom, selector } from "recoil";
 
-export const userState = atom({
+export interface UserInterface {
+    memberIdx : number,
+    balance: number,
+    beforeBalance: number,
+    createdTime: any,
+    earningRate: number,
+    email : string,
+    name: string,
+    nickname: string,
+    role: string,
+    token: string
+}
+
+
+export const userState = atom<UserInterface>({
 	key: "userState",
 	default: {
-		id: 0,
-		name: "",
-		nickname: "",
-		sessionId: "",
-		useAdvanced: false,
-		currentStockId: [],
-		// 관심종목: [],
-	},
+		memberIdx: 0,
+		balance: 0,
+		beforeBalance: 0,
+		createdTime: "",
+		earningRate: 0,
+		nickname: '',
+		email: '',
+		name: '',
+		role: '',
+		token: ''
+	}
 });
 
-export const userCurrentStockIdState = selector({
-	key: "userCurrentStockIdState",
-	get: ({ get }) => {
-		return get(userState).currentStockId;
-	},
-});
+// export const userCurrentStockIdState = selector({
+// 	key: "userCurrentStockIdState",
+// 	get: ({ get }) => {
+// 		return get(userState).currentStockId;
+// 	},
+// });

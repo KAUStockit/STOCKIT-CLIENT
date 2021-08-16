@@ -8,13 +8,11 @@ import { getCookie, removeCookie } from "../../utils/Cookie";
 const Header: React.FC = () => {
 	const history = useHistory();
 	const [user, setUser] = useState("");
+	const cookie = getCookie("user");
 
 	useEffect(() => {
-		if (cookie) setUser(cookie);
-	});
-
-	const cookie = getCookie("user");
-	console.log(cookie);
+		if (cookie) setUser(cookie.nickname);
+	}, [cookie]);
 
 	const onLogoClick = (e: React.MouseEvent) => {
 		e.preventDefault();
@@ -108,7 +106,7 @@ const Header: React.FC = () => {
 						</span>
 					) : (
 						<span>
-							<span onClick={onSignInClick}>{cookie.slice(0, 10)}</span> |{" "}
+							<span onClick={onSignInClick}>{user}</span> |{" "}
 							<span onClick={onLogout}>로그아웃</span>
 						</span>
 					)}
