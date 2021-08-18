@@ -7,10 +7,11 @@ function Footer() {
 
 	const stockNameRef = useRef<any>();
 	const priceRef = useRef<any>();
-	const token = getCookie("user").token;
+	const token = getCookie("user")?.token;
 
 	const onClickSendButton = async () => {
 		if(priceRef.current.value.match(/\D/gi)) return;
+		if(!token) return;
 		const result = await ADMIN.newStock({
 			stockName : stockNameRef.current.value,
 			price: +(priceRef.current.value)

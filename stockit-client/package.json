@@ -23,9 +23,10 @@
 		"react-router-dom": "^5.2.0",
 		"react-scripts": "4.0.3",
 		"react-slick": "^0.28.1",
+		"react-stomp": "^5.1.0",
 		"recoil": "^0.3.1",
-		"socket.io": "^4.1.2",
-		"socket.io-client": "^4.1.2",
+		"sockjs": "^0.3.21",
+		"sockjs-client": "^1.5.1",
 		"typescript": "^4.2.4",
 		"web-vitals": "^1.1.1"
 	},
@@ -55,7 +56,10 @@
 	},
 	"devDependencies": {
 		"@types/react-router-dom": "^5.1.7",
+		"@types/sockjs-client": "^1.5.1",
+		"@types/stompjs": "^2.3.5",
 		"axios": "^0.21.1",
-		"http-proxy-middleware": "^0.19.1"
+		"http-proxy-middleware": "^0.19.1",
+		"stompjs": "^2.3.3"
 	}
 }

@@ -39,7 +39,6 @@ const Trade: React.FC<TradeProp> = ({ match, stockId }) => {
 	};
 
 	useEffect(() => {
-		console.log(stockId);
 		window.localStorage.setItem("lastStockId", String(stockId));
 		// stockId로 주식정보 받아오기
 		// 받아온 정보대로 데이터 업데이트

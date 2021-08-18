@@ -1,11 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
+import { getCookie } from "../../utils/Cookie";
+
+// Networking
+import { REST_STOCK } from "../../utils/Networking";
 
 // interface
 import { TradingHistoryTabProp } from "../../interfaces/MyPageInterface";
 
 const TradingHistoryTab: React.FC<TradingHistoryTabProp> = () => {
 	const [cnt, setCnt] = useState(3);
+	const user = getCookie('user');
+
+	useEffect(() => {
+		if(user) {
+			(async () => {
+				const result = await REST_STOCK.myOrders(user.token, user.memberIdx);
+			})();
+		}
+	})
 
 	return (
 		<Container height={cnt}>
