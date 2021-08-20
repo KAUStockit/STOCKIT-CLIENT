@@ -26,13 +26,12 @@ function Chat() {
 		stompClient.connect({}, () => {
 			stompClient.subscribe('/send', console.log);
 			console.log({'user' : user?.nickname ?? "닉네임", 'message' : 'hihi'})
-			stompClient.send('/receive', JSON.stringify({'user' : user?.nickname ?? "닉네임", 'message' : 'hihi'}));
 		})
 		// const now = new Date();
 		// socket.on("message", () => {
 		// 	setMessages(messages => [...messages, { from: '', text: '', timestamp: now}]);
 		// });
-	}, [])
+	}, []);
 
 	const onInputChange = (e: any) => {
 		setCurrentMessage(e.currentTarget.value);
@@ -40,8 +39,8 @@ function Chat() {
 
 	const onSendClick = (e: any) => {
 		// 채팅 내용을 서버로 보내는 코드
-		console.log(currentMessage);
-		// socket.emit('message', {from: '', message: currentMessage} );
+		console.log({'user' : user?.nickname ?? "닉네임", 'message' : 'hihi'})
+		stompClient.send('/receive', JSON.stringify({'user' : user?.nickname ?? "닉네임", 'message' : 'hihi'}));
 		setCurrentMessage('');
 	};
 

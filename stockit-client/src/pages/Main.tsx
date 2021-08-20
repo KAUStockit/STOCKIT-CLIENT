@@ -1,5 +1,7 @@
 // 메인 화면 컴포넌트
 import React, { useState, useEffect } from "react";
+import { REST_STOCK } from "../utils/Networking";
+import { getCookie } from "../utils/Cookie";
 import { Content, MainCards, MainCard, Circle, MainRank, MainBottom } from "./MainStyle";
 
 // components
@@ -29,6 +31,15 @@ function Main() {
 	useEffect(() => {
 		// user session
 		!localStorage.getItem("session") ?? localStorage.setItem("session", "");
+		(async () => {
+			const result = await REST_STOCK.all(getCookie('user').token);
+			if(result.status !== 200) return;
+			const stockRank = result.data.map((st : {stockCode: number, stockName: string, price: number, stockCreatedDate : string, active: boolean}) => {
+				return {id: st.stockCode, name: st.stockName, price: st.price, rate: 20.21};
+			});
+			setStockRankList([stockRank, stockRank, stockRank]);
+		})();
+		console.log(stockRankList);
 	}, []);
 
 	return (

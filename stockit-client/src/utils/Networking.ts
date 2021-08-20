@@ -31,6 +31,10 @@ export const REST_STOCK = {
 		const result = await axios.get(`/api/members/${memberIdx}/orders`, { headers: {"Authorization" : `Bearer ${token}`}});
 		console.log(result);
 		return result;
+	},
+	all : async (token: string) => {
+		const result = await axios.get('/api/stocks/', { headers: {"Authorization" : `Bearer ${token}`}});
+		return result;
 	}
 }
 
