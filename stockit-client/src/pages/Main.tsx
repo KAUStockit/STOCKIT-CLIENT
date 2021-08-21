@@ -32,10 +32,10 @@ function Main() {
 		// user session
 		!localStorage.getItem("session") ?? localStorage.setItem("session", "");
 		(async () => {
-			const result = await REST_STOCK.all(getCookie('user').token);
+			const result = await REST_STOCK.all(getCookie('user')?.token);
 			if(result.status !== 200) return;
 			const stockRank = result.data.map((st : {stockCode: number, stockName: string, price: number, stockCreatedDate : string, active: boolean}) => {
-				return {id: st.stockCode, name: st.stockName, price: st.price, rate: 20.21};
+				return {id: st.stockCode, name: st.stockName, price: st.price, rate: -20.21};
 			});
 			setStockRankList([stockRank, stockRank, stockRank]);
 		})();

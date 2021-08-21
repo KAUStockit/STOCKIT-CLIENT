@@ -44,8 +44,6 @@ function Chat() {
 		setCurrentMessage('');
 	};
 
-	
-
 	return (
 		<ChatComponent>
 			<Title>
