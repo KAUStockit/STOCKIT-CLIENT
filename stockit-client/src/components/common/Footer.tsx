@@ -1,19 +1,25 @@
 import React, { useRef } from "react";
 import styled from "@emotion/styled";
 import { ADMIN } from "../../utils/Networking";
+import { getCookie } from "../../utils/Cookie";
 
 function Footer() {
 
 	const stockNameRef = useRef<any>();
 	const priceRef = useRef<any>();
+	const token = getCookie("user").token;
 
 	const onClickSendButton = async () => {
 		if(priceRef.current.value.match(/\D/gi)) return;
 		const result = await ADMIN.newStock({
 			stockName : stockNameRef.current.value,
 			price: +(priceRef.current.value)
-		});
-		console.log(result);
+		}, token);
+		if(result.status === 200) {
+			alert(`종목이 추가되었습니다.`)
+		} else {
+			alert('종목 추가에 실패했습니다.');
+		}
 	}
 
 	return <FooterComponent>

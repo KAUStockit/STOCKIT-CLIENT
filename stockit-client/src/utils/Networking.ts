@@ -42,11 +42,16 @@ export const REST_API_LOG = {
 	},
 };
 
+export const REST_STOCK = {
+	order : async (token: string, memberIdx : number, stockCode: number, data: {stockOrderPrice: number, stockOrderCount: number}) => {
+		const result = await axios.post(`api/orders/${memberIdx}/${stockCode}/new`, data, { headers: {"Authorization" : `Bearer ${token}`}});
+		return result;
+	}
+}
+
 export const ADMIN = {
-	newStock : async (data : { stockName : string, price: number}) => {
-		console.log(data);
-		const result = await axios.post('/api/stocks/new', data);
-		console.log(result);
+	newStock : async (data : { stockName : string, price: number}, token: string) => {
+		const result = await axios.post('/api/stocks/new', data, { headers: {"Authorization" : `Bearer ${token}`}});
 		return result;
 	}
 }

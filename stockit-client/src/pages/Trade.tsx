@@ -9,6 +9,8 @@ import TradeModal from "../components/Trade/TradeModal";
 import Article from "../components/Trade/Article";
 import Chat from "../components/Trade/Chat";
 import Spinner from "../components/common/Spinner";
+import { useRecoilValue } from "recoil";
+import { userState } from '../model/User';
 
 // interface
 import { LEVEL } from "../interfaces/MainInterface";
@@ -18,13 +20,17 @@ import { TradeProp } from "../interfaces/TradeInterface";
 const Trade: React.FC<TradeProp> = ({ match, stockId }) => {
 	const [sellModalDisplay, setSellModalDisplay] = useState(false);
 	const [buyModalDisplay, setBuyModalDisplay] = useState(false);
+	const user = useRecoilValue(userState);
 
 	if (match) {
 		stockId = match.params.stockId;
 	}
 
 	const onTradeClick = (e: React.MouseEvent) => {
-		console.log(e.currentTarget.textContent);
+		if(user.memberIdx === 0) {
+			alert('로그인 후 이용해주세요');
+			return;
+		}
 		if (e.currentTarget.textContent === "사기") {
 			setBuyModalDisplay(true);
 		} else if (e.currentTarget.textContent === "팔기") {

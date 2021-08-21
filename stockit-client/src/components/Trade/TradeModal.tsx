@@ -3,6 +3,10 @@
 import React, { useState } from "react";
 import { COLOR } from "../../constants/theme";
 import { Range } from "react-range";
+import { REST_STOCK } from '../../utils/Networking';
+import { useRecoilValue } from "recoil";
+import { userState } from "../../model/User";
+import { getCookie } from "../../utils/Cookie";
 
 // interface
 import { TradeModalProp } from "../../interfaces/TradeInterface";
@@ -11,6 +15,8 @@ import { DoneModalFrame, Button, Modal, ModalFrame } from "./TradeModalStyle";
 const TradeModal: React.FC<TradeModalProp> = ({ type, hide, price, name }) => {
 	const [isDone, setIsDone] = useState(false);
 	const [quantity, setQuantity] = useState([50]);
+	const user = useRecoilValue(userState);
+	const token = getCookie('user').token;
 
 	const onClose = () => {
 		hide(false);
@@ -18,12 +24,14 @@ const TradeModal: React.FC<TradeModalProp> = ({ type, hide, price, name }) => {
 
 	const buyOrSell = () => (type === "buy" ? "사기" : "팔기");
 
-	const onDoneClick = () => {
+	const onDoneClick = async () => {
+		console.log(token, user.memberIdx);
+		const result = await REST_STOCK.order(token, user.memberIdx, 1, {stockOrderPrice: 30000, stockOrderCount: 10})
+		console.log(result);
 		setIsDone(true);
 	};
 
 	const configureDoneUI = () => {
-		console.log(buyOrSell);
 		return (
 			<DoneModalFrame>
 				<svg xmlns="http://www.w3.org/2000/svg" width="62" height="62" viewBox="0 0 62 62">
@@ -44,8 +52,8 @@ const TradeModal: React.FC<TradeModalProp> = ({ type, hide, price, name }) => {
 							transform="translate(-13106.562 11781.897)"
 							fill="none"
 							stroke="#fff"
-							stroke-linecap="square"
-							stroke-width="4"
+							// stroke-linecap="square"
+							// stroke-width="4"
 						/>
 					</g>
 				</svg>
