@@ -11,7 +11,7 @@ import ChatMessage from "./ChatMessage";
 import { ChatMessageObject } from "../../interfaces/TradeInterface";
 
 // socket endpoint
-const SOCKET_ENDPOINT = 'http://localhost:8080';
+const SOCKET_ENDPOINT = 'http://3.37.250.12:8080';
 const socket = new SockJS(SOCKET_ENDPOINT);
 let stompClient : Stomp.Client = Stomp.over(socket);
 stompClient.debug = () => {};
