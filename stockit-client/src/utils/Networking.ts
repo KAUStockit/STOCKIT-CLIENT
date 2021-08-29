@@ -39,13 +39,13 @@ export const REST_STOCK = {
 		return result;
 	},
 	myOrders: async (token: string, memberIdx: number) => {
-		const result = await axios.get(`${IP_ADDRESS}:${PORT}/api/members/${memberIdx}/orders`);
+		const result = await axios.get(`${IP_ADDRESS}:${PORT}/api/members/${memberIdx}/orders`, {
+			headers: { Authorization: `Bearer ${token}` },
+		});
 		return result;
 	},
 	all: async (token: string) => {
-		const result = await axios.get(`${IP_ADDRESS}:${PORT}/api/stocks/list`, {
-			headers: { Authorization: `Bearer ${token}`, withCredentials: true },
-		});
+		const result = await axios.get(`${IP_ADDRESS}:${PORT}/api/stocks/list`);
 		return result;
 	},
 };
