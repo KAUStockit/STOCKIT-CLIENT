@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { COLOR } from "../../constants/theme";
 import { Range } from "react-range";
-import { REST_STOCK } from '../../utils/Networking';
+import { REST_STOCK } from "../../utils/Networking";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../model/User";
 import { getCookie } from "../../utils/Cookie";
@@ -16,7 +16,7 @@ const TradeModal: React.FC<TradeModalProp> = ({ type, hide, price, name }) => {
 	const [isDone, setIsDone] = useState(false);
 	const [quantity, setQuantity] = useState([50]);
 	const user = useRecoilValue(userState);
-	const token = getCookie('user').token;
+	const token = getCookie("user").token;
 
 	const onClose = () => {
 		hide(false);
@@ -25,8 +25,11 @@ const TradeModal: React.FC<TradeModalProp> = ({ type, hide, price, name }) => {
 	const buyOrSell = () => (type === "buy" ? "사기" : "팔기");
 
 	const onDoneClick = async () => {
-		const result = await REST_STOCK.order(token, user.memberIdx, 1, {stockOrderPrice: 30000, stockOrderCount: 10})
-		console.log(result);
+		const result = await REST_STOCK.order(token, user.memberIdx, 1, {
+			stockOrderPrice: 10000,
+			stockOrderCount: quantity[0],
+		});
+		console.log(result.data);
 		setIsDone(true);
 	};
 
