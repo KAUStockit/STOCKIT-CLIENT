@@ -73,7 +73,7 @@ const Header: React.FC = () => {
 	};
 
 	const onLeaveMyWallet = (e: React.MouseEvent) => {
-		document.getElementById("tooltip")!.style.display = "none";
+		// document.getElementById("tooltip")!.style.display = "none";
 	};
 
 	return (
