@@ -4,7 +4,7 @@
 // 	app.use(
 // 		["/api"],
 // 		proxy({
-// 			target: "http://3.37.250.12:8080",
+// 			target: "http://3.37.250.12:8080/",
 // 			changeOrigin: true,
 // 		})
 // 	);

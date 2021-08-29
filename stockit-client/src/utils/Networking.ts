@@ -15,11 +15,13 @@ export const REST_API_LOG = {
 		return result.data;
 	},
 	checkValidNickName: async (nickname: string) => {
-		const result = await axios.post(`${IP_ADDRESS}:${PORT}/api/members/login/validate/nickname`, { nickname });
+		const result = await axios.get(
+			`${IP_ADDRESS}:${PORT}/api/members/login/validate/nickname?nickname=${nickname}`
+		);
 		return result;
 	},
 	checkValidEmailAddress: async (email: string) => {
-		const result = await axios.post(`${IP_ADDRESS}:${PORT}/api/members/login/validate/email`, { email });
+		const result = await axios.get(`${IP_ADDRESS}:${PORT}/api/members/login/validate/email?email=${email}`);
 		return result;
 	},
 };
@@ -31,7 +33,6 @@ export const REST_STOCK = {
 		stockCode: number,
 		data: { stockOrderPrice: number; stockOrderCount: number }
 	) => {
-		console.log(data);
 		const result = await axios.post(`${IP_ADDRESS}:${PORT}/api/orders/${memberIdx}/${stockCode}/new`, data, {
 			headers: { Authorization: `Bearer ${token}` },
 		});
@@ -41,11 +42,10 @@ export const REST_STOCK = {
 		const result = await axios.get(`${IP_ADDRESS}:${PORT}/api/members/${memberIdx}/orders`, {
 			headers: { Authorization: `Bearer ${token}` },
 		});
-		console.log(result);
 		return result;
 	},
 	all: async (token: string) => {
-		const result = await axios.get(`${IP_ADDRESS}:${PORT}/api/stocks/`, {
+		const result = await axios.get(`${IP_ADDRESS}:${PORT}/api/stocks/list`, {
 			headers: { Authorization: `Bearer ${token}`, withCredentials: true },
 		});
 		return result;

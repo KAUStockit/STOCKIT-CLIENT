@@ -5,8 +5,8 @@ import { getCookie, removeCookie } from "../../utils/Cookie";
 import { userState } from "../../model/User";
 import { useSetRecoilState } from "recoil";
 
-
-// interface
+// Components
+import ToolTip from "./ToolTip";
 
 const Header: React.FC = () => {
 	const history = useHistory();
@@ -66,6 +66,16 @@ const Header: React.FC = () => {
 		window.location.reload();
 	};
 
+	const onHoverMyWallet = (e: React.MouseEvent) => {
+		document.getElementById("tooltip")!.style.display = "block";
+		document.getElementById("tooltip")!.style.top = `${e.pageY}px`;
+		document.getElementById("tooltip")!.style.left = `${e.pageX}px`;
+	};
+
+	const onLeaveMyWallet = (e: React.MouseEvent) => {
+		document.getElementById("tooltip")!.style.display = "none";
+	};
+
 	return (
 		<Container>
 			<Logo>
@@ -95,7 +105,7 @@ const Header: React.FC = () => {
 				</svg>
 			</Logo>
 
-			<div>
+			<div onMouseMove={onHoverMyWallet} onMouseLeave={onLeaveMyWallet}>
 				<a href="#" onClick={onPlayGroundClick}>
 					놀이터
 				</a>
@@ -114,12 +124,12 @@ const Header: React.FC = () => {
 						</span>
 					) : (
 						<span>
-							<span onClick={onSignInClick}>{user}</span> |{" "}
-							<span onClick={onLogout}>로그아웃</span>
+							<span onClick={onSignInClick}>{user}</span> | <span onClick={onLogout}>로그아웃</span>
 						</span>
 					)}
 				</span>
 			</HeaderRightBox>
+			<ToolTip content={"asdfasdfasd"} />
 		</Container>
 	);
 };
