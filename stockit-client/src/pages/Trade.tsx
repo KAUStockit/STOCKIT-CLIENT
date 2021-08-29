@@ -1,6 +1,7 @@
 // 거래소 화면
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect, Suspense, useRef } from "react";
 import { Container, Title, StockName, TradeButtons, Grid } from "./TradeStyle";
+import { getCookie } from "../utils/Cookie";
 
 // components
 import Chart from "../components/Trade/Chart";
@@ -18,11 +19,21 @@ import { TradeProp } from "../interfaces/TradeInterface";
 
 // Component
 import ToolTip from "../components/common/ToolTip";
+import { REST_STOCK } from "../utils/Networking";
 
 const Trade: React.FC<TradeProp> = ({ match, stockId }) => {
 	const [sellModalDisplay, setSellModalDisplay] = useState(false);
 	const [buyModalDisplay, setBuyModalDisplay] = useState(false);
+
+	const [stockName, setStockName] = useState<string>("");
+	const [stockCurrentPrice, setStockCurrentPrice] = useState<number>(0);
+
+	const cookie = getCookie("user");
 	const user = useRecoilValue(userState);
+
+	// ref
+	const stockNameRef = useRef<any>();
+	const stockCurrentPriceRef = useRef<any>();
 
 	if (match) {
 		stockId = match.params.stockId;
@@ -55,8 +66,18 @@ const Trade: React.FC<TradeProp> = ({ match, stockId }) => {
 	useEffect(() => {
 		window.localStorage.setItem("lastStockId", String(stockId));
 		// stockId로 주식정보 받아오기
+		(async () => {
+			const result = await REST_STOCK.getStock(cookie.token, stockId);
+			if (!result.data) return;
+			console.log(result.data);
+			setStockName(result.data.stockName);
+			setStockCurrentPrice(result.data.price);
+		})();
+
 		// 받아온 정보대로 데이터 업데이트
-	}, [stockId]);
+	}, []);
+
+	const displayCurrency = (amount: number) => amount.toLocaleString("ko-KR");
 
 	return (
 		<Suspense fallback={<Spinner />}>
@@ -65,8 +86,8 @@ const Trade: React.FC<TradeProp> = ({ match, stockId }) => {
 				<Title className="chart__title">
 					<StockName>
 						<img src="/img/kakaogames.png" alt="" />
-						<span>카카오게임즈</span>
-						<span>53,500</span>
+						<span ref={stockNameRef}>{stockName}</span>
+						<span ref={stockCurrentPriceRef}>{displayCurrency(stockCurrentPrice)}</span>
 					</StockName>
 					<TradeButtons onMouseLeave={onMouseLeave}>
 						<button title="buy" onClick={onTradeClick} onMouseMove={onMouseMoveTradeButtons}>
@@ -80,16 +101,14 @@ const Trade: React.FC<TradeProp> = ({ match, stockId }) => {
 				{/* Title done */}
 
 				<Grid>
-					<Chart stockId={123} level={LEVEL.EASY} id="chart" />
+					<Chart stockId={stockId} level={LEVEL.EASY} id="chart" />
 					<Entry />
-					<Article stockId={123} />
+					<Article stockId={stockId} />
 					<Chat />
 				</Grid>
-				{buyModalDisplay && (
-					<TradeModal type="buy" hide={setBuyModalDisplay} price={20000} name="카카오게임즈" />
-				)}
+				{buyModalDisplay && <TradeModal type="buy" hide={setBuyModalDisplay} price={20000} name={stockName} />}
 				{sellModalDisplay && (
-					<TradeModal type="sell" hide={setSellModalDisplay} price={20000} name="카카오게임즈" />
+					<TradeModal type="sell" hide={setSellModalDisplay} price={20000} name={stockName} />
 				)}
 			</Container>
 			<ToolTip content="hihi" />
