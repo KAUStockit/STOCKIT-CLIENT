@@ -45,19 +45,20 @@ export const REST_STOCK = {
 		return result;
 	},
 	all: async (token: string) => {
-		const result = await axios.get(`${IP_PORT}/api/stocks/list`);
+		const result = await axios.get(`${IP_PORT}/api/stocks/info/list`);
 		return result;
 	},
-	getStock: async (token: string, stockCode: number) => {
-		const result = await axios.get(`${IP_PORT}/api/stocks/${stockCode}`, {
-			headers: { Authorization: `Bearer ${token}` },
-		});
+	getStock: async (stockCode: number) => {
+		const result = await axios.get(`${IP_PORT}/api/stocks/info/${stockCode}`);
 		return result;
 	},
 };
 
 export const ADMIN = {
-	newStock: async (data: { stockName: string; price: number }, token: string) => {
+	newStock: async (
+		data: { stockName: string; price: number; category: string; description: string },
+		token: string
+	) => {
 		const result = await axios.post(`${IP_PORT}/api/stocks/new`, data, {
 			headers: { Authorization: `Bearer ${token}` },
 		});

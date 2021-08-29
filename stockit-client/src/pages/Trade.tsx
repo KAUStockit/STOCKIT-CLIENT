@@ -1,7 +1,6 @@
 // 거래소 화면
 import React, { useState, useEffect, Suspense, useRef } from "react";
 import { Container, Title, StockName, TradeButtons, Grid } from "./TradeStyle";
-import { getCookie } from "../utils/Cookie";
 
 // components
 import Chart from "../components/Trade/Chart";
@@ -28,7 +27,6 @@ const Trade: React.FC<TradeProp> = ({ match, stockId }) => {
 	const [stockName, setStockName] = useState<string>("");
 	const [stockCurrentPrice, setStockCurrentPrice] = useState<number>(0);
 
-	const cookie = getCookie("user");
 	const user = useRecoilValue(userState);
 
 	// ref
@@ -67,7 +65,7 @@ const Trade: React.FC<TradeProp> = ({ match, stockId }) => {
 		window.localStorage.setItem("lastStockId", String(stockId));
 		// stockId로 주식정보 받아오기
 		(async () => {
-			const result = await REST_STOCK.getStock(cookie.token, stockId);
+			const result = await REST_STOCK.getStock(stockId);
 			if (!result.data) return;
 			console.log(result.data);
 			setStockName(result.data.stockName);
