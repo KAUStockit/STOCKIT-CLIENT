@@ -10,14 +10,16 @@ const ToolTip: React.FC<ToolTipProp> = ({ content }) => {
 };
 
 // position: 마우스 따라가도록 처리해야함
-const Container = styled.div`
-	width: 200px;
+const Container = styled.span`
+	padding: 3px 10px;
 	height: auto;
 	border: none;
 	border-radius: 20px;
 	background: rgba(0, 0, 0, 0.3);
 	display: none;
 	position: fixed;
+	font-size: 14px;
+	z-index: 999;
 `;
 
 export default ToolTip;

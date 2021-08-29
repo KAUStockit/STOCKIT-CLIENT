@@ -10,13 +10,15 @@ import Article from "../components/Trade/Article";
 import Chat from "../components/Trade/Chat";
 import Spinner from "../components/common/Spinner";
 import { useRecoilValue } from "recoil";
-import { userState } from '../model/User';
+import { userState } from "../model/User";
 
 // interface
 import { LEVEL } from "../interfaces/MainInterface";
 import { TradeProp } from "../interfaces/TradeInterface";
 
 // Component
+import ToolTip from "../components/common/ToolTip";
+
 const Trade: React.FC<TradeProp> = ({ match, stockId }) => {
 	const [sellModalDisplay, setSellModalDisplay] = useState(false);
 	const [buyModalDisplay, setBuyModalDisplay] = useState(false);
@@ -27,8 +29,8 @@ const Trade: React.FC<TradeProp> = ({ match, stockId }) => {
 	}
 
 	const onTradeClick = (e: React.MouseEvent) => {
-		if(user.memberIdx === 0) {
-			alert('로그인 후 이용해주세요');
+		if (user.memberIdx === 0) {
+			alert("로그인 후 이용해주세요");
 			return;
 		}
 		if (e.currentTarget.textContent === "사기") {
@@ -36,6 +38,18 @@ const Trade: React.FC<TradeProp> = ({ match, stockId }) => {
 		} else if (e.currentTarget.textContent === "팔기") {
 			setSellModalDisplay(true);
 		}
+	};
+
+	const onMouseMoveTradeButtons = (e: React.MouseEvent) => {
+		const tooltip = document.getElementById("tooltip");
+		tooltip!.style.display = "block";
+		tooltip!.style.top = `${e.pageY}px`;
+		tooltip!.style.left = `${e.pageX}px`;
+		tooltip!.innerText = e.currentTarget.innerHTML;
+	};
+
+	const onMouseLeave = (e: React.MouseEvent) => {
+		document.getElementById("tooltip")!.style.display = "none";
 	};
 
 	useEffect(() => {
@@ -54,11 +68,11 @@ const Trade: React.FC<TradeProp> = ({ match, stockId }) => {
 						<span>카카오게임즈</span>
 						<span>53,500</span>
 					</StockName>
-					<TradeButtons>
-						<button title="buy" onClick={onTradeClick}>
+					<TradeButtons onMouseLeave={onMouseLeave}>
+						<button title="buy" onClick={onTradeClick} onMouseMove={onMouseMoveTradeButtons}>
 							사기
 						</button>
-						<button title="sell" onClick={onTradeClick}>
+						<button title="sell" onClick={onTradeClick} onMouseMove={onMouseMoveTradeButtons}>
 							팔기
 						</button>
 					</TradeButtons>
@@ -78,6 +92,7 @@ const Trade: React.FC<TradeProp> = ({ match, stockId }) => {
 					<TradeModal type="sell" hide={setSellModalDisplay} price={20000} name="카카오게임즈" />
 				)}
 			</Container>
+			<ToolTip content="hihi" />
 		</Suspense>
 	);
 };

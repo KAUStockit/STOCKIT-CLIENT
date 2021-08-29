@@ -8,6 +8,7 @@ import { Content, MainCards, MainCard, Circle, MainRank, MainBottom } from "./Ma
 import StockList from "../components/Main/StockList";
 import StockCard from "../components/Main/StockCard";
 import { COLOR } from "../constants/theme";
+import ToolTip from "../components/common/ToolTip";
 
 // Pseudo Data
 import { MAINPAGE_RANKLIST, MAINPAGE_PENNY } from "../utils/DemoData";
@@ -27,16 +28,37 @@ function Main() {
 		setSelectedCard(() => Number(cardId));
 	};
 
+	// event handlers
+	const onMouseMoveMainCards = (e: React.MouseEvent) => {
+		const tooltip = document.getElementById("tooltip");
+		tooltip!.style.display = "block";
+		tooltip!.style.top = `${e.pageY}px`;
+		tooltip!.style.left = `${e.pageX}px`;
+		tooltip!.innerText = e.currentTarget.getElementsByTagName("p")[0].innerText;
+	};
+
+	const onMouseLeave = (e: React.MouseEvent) => {
+		document.getElementById("tooltip")!.style.display = "none";
+	};
+
 	// side effects
 	useEffect(() => {
 		// user session
 		!localStorage.getItem("session") ?? localStorage.setItem("session", "");
 		(async () => {
-			const result = await REST_STOCK.all(getCookie('user')?.token);
-			if(result.status !== 200) return;
-			const stockRank = result.data.map((st : {stockCode: number, stockName: string, price: number, stockCreatedDate : string, active: boolean}) => {
-				return {id: st.stockCode, name: st.stockName, price: st.price, rate: -20.21};
-			});
+			const result = await REST_STOCK.all(getCookie("user")?.token);
+			if (result.status !== 200) return;
+			const stockRank = result.data.map(
+				(st: {
+					stockCode: number;
+					stockName: string;
+					price: number;
+					stockCreatedDate: string;
+					active: boolean;
+				}) => {
+					return { id: st.stockCode, name: st.stockName, price: st.price, rate: -20.21 };
+				}
+			);
 			setStockRankList([stockRank, stockRank, stockRank]);
 		})();
 		console.log(stockRankList);
@@ -49,20 +71,30 @@ function Main() {
 					Stockit<b style={{ color: COLOR.BLUE }}> TOP100</b>
 				</h3>
 				{/* Cards start */}
-				<MainCards>
-					<MainCard onClick={onCardClick} id="0">
+				<MainCards onMouseLeave={onMouseLeave}>
+					<MainCard onClick={onCardClick} id="0" onMouseMove={onMouseMoveMainCards}>
 						<Circle color={"#4076EF"}>
 							<img src="/img/card-first.png" alt="" width="100px" height="100px" />
 						</Circle>
 						<p>인기순 탑100</p>
 					</MainCard>
-					<MainCard onClick={onCardClick} style={{ backgroundColor: "#53E8C0" }} id="1">
+					<MainCard
+						onClick={onCardClick}
+						style={{ backgroundColor: "#53E8C0" }}
+						id="1"
+						onMouseMove={onMouseMoveMainCards}
+					>
 						<Circle color={"#3BD1A9"}>
 							<img src="/img/card-second.png" alt="" width="100px" height="100px" />
 						</Circle>
 						<p>시총순 탑100</p>
 					</MainCard>
-					<MainCard onClick={onCardClick} style={{ backgroundColor: "#6C45EF" }} id="2">
+					<MainCard
+						onClick={onCardClick}
+						style={{ backgroundColor: "#6C45EF" }}
+						id="2"
+						onMouseMove={onMouseMoveMainCards}
+					>
 						<Circle color={"#5229D8"}>
 							<img src="/img/card-third.png" alt="" width="100px" height="100px" />
 						</Circle>
@@ -100,6 +132,7 @@ function Main() {
 					</div>
 				</MainBottom>
 			</div>
+			<ToolTip content="hihi" />
 		</Content>
 	);
 }

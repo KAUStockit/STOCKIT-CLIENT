@@ -66,14 +66,16 @@ const Header: React.FC = () => {
 		window.location.reload();
 	};
 
-	const onHoverMyWallet = (e: React.MouseEvent) => {
-		document.getElementById("tooltip")!.style.display = "block";
-		document.getElementById("tooltip")!.style.top = `${e.pageY}px`;
-		document.getElementById("tooltip")!.style.left = `${e.pageX}px`;
+	const onMouseMoveMyWallet = (e: React.MouseEvent) => {
+		const tooltip = document.getElementById("tooltip");
+		tooltip!.style.top = `${e.pageY}px`;
+		tooltip!.style.left = `${e.pageX}px`;
+		tooltip!.style.display = "block";
+		tooltip!.innerText = e.currentTarget.innerHTML;
 	};
 
 	const onLeaveMyWallet = (e: React.MouseEvent) => {
-		// document.getElementById("tooltip")!.style.display = "none";
+		document.getElementById("tooltip")!.style.display = "none";
 	};
 
 	return (
@@ -105,14 +107,14 @@ const Header: React.FC = () => {
 				</svg>
 			</Logo>
 
-			<div onMouseMove={onHoverMyWallet} onMouseLeave={onLeaveMyWallet}>
-				<a href="#" onClick={onPlayGroundClick}>
+			<div onMouseLeave={onLeaveMyWallet}>
+				<a href="#" onClick={onPlayGroundClick} onMouseMove={onMouseMoveMyWallet}>
 					놀이터
 				</a>
-				<a href="#" onClick={onTradeClick}>
+				<a href="#" onClick={onTradeClick} onMouseMove={onMouseMoveMyWallet}>
 					거래소
 				</a>
-				<a href="#" onClick={onBalanceClick}>
+				<a href="#" onClick={onBalanceClick} onMouseMove={onMouseMoveMyWallet}>
 					내지갑
 				</a>
 			</div>
