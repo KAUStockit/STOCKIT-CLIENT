@@ -17,13 +17,15 @@ export const MainCard = styled.div`
 	background-color: ${COLOR.GRAPH_BLUE};
 	border-radius: 10px;
 	margin-right: 20px;
+	position: relative;
 
 	& > p {
+		margin: 0;
 		color: white;
 		display: block;
-		position: relative;
-		right: -50%;
-		bottom: -30%;
+		position: absolute;
+		right: 10%;
+		bottom: 10%;
 		font-weight: 800;
 		font-size: 20px;
 	}
