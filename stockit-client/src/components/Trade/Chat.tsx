@@ -1,8 +1,5 @@
-import React, { useState, useEffect } from "react";
-import SockJS from 'sockjs-client';
-import Stomp from 'stompjs';
+import React, { useState } from "react";
 import { ChatComponent, Title, ChatContent, ChatInput } from "./ChatStyle";
-import { getCookie } from "../../utils/Cookie";
 
 // components
 import ChatMessage from "./ChatMessage";
@@ -11,27 +8,10 @@ import ChatMessage from "./ChatMessage";
 import { ChatMessageObject } from "../../interfaces/TradeInterface";
 
 // socket endpoint
-const SOCKET_ENDPOINT = 'http://3.37.250.12:8080';
-const socket = new SockJS(SOCKET_ENDPOINT);
-let stompClient : Stomp.Client = Stomp.over(socket);
-stompClient.debug = () => {};
-
 function Chat() {
 	const [currentUser, setCurrentUser] = useState(1); // 채팅방 현재 유저수
 	const [messages, setMessages] = useState<ChatMessageObject[]>([]); // 채팅 내용
 	const [currentMessage, setCurrentMessage] = useState<string>(""); // 내가 입력하는 채팅 내용
-	const user = getCookie('user');
-
-	useEffect(() => {
-		stompClient.connect({}, () => {
-			stompClient.subscribe('/send', console.log);
-			console.log({'user' : user?.nickname ?? "닉네임", 'message' : 'hihi'})
-		})
-		// const now = new Date();
-		// socket.on("message", () => {
-		// 	setMessages(messages => [...messages, { from: '', text: '', timestamp: now}]);
-		// });
-	}, []);
 
 	const onInputChange = (e: any) => {
 		setCurrentMessage(e.currentTarget.value);
@@ -39,9 +19,6 @@ function Chat() {
 
 	const onSendClick = (e: any) => {
 		// 채팅 내용을 서버로 보내는 코드
-		console.log({'user' : user?.nickname ?? "닉네임", 'message' : 'hihi'})
-		stompClient.send('/receive', JSON.stringify({'user' : user?.nickname ?? "닉네임", 'message' : 'hihi'}));
-		setCurrentMessage('');
 	};
 
 	return (

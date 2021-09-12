@@ -29,6 +29,8 @@ export const LeftMenu = styled.div`
 			display: flex;
 			align-items: center;
 			cursor: pointer;
+			color: #acacac;
+			font-size: 14px;
 		}
 	}
 

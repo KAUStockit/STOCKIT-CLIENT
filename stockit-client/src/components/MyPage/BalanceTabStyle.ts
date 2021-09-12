@@ -97,4 +97,14 @@ export const Pages = styled.div`
 			padding: 0 3px 0 5px;
 		}
 	}
+
+	& > .page-button {
+		width: 20px;
+		height: 20px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border: 1px solid #e2e2e2;
+		margin: 0px 5px;
+	}
 `;

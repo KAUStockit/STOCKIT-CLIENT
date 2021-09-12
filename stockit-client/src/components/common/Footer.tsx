@@ -14,6 +14,7 @@ function Footer() {
 	const onClickSendButton = async () => {
 		if (priceRef.current.value.match(/\D/gi)) return;
 		if (!token) return;
+		console.log("hihi");
 		const result = await ADMIN.newStock(
 			{
 				stockName: stockNameRef.current.value,

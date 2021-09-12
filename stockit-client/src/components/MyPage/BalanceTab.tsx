@@ -102,7 +102,9 @@ const BalanceTab: React.FC<BalanceTabProp> = ({ myStock }) => {
 					return <div key={idx}></div>;
 				})}
 				<Pages>
-					<div onClick={onPrevClick}>{"<"}</div>
+					<div onClick={onPrevClick} className="page-button">
+						<img src="/assets/pageLeftArrow.png" alt="" />
+					</div>
 					<div>
 						{totalPages.map((item, idx) => {
 							return (
@@ -116,7 +118,9 @@ const BalanceTab: React.FC<BalanceTabProp> = ({ myStock }) => {
 							);
 						})}
 					</div>
-					<div onClick={onNextClick}>{">"}</div>
+					<div onClick={onNextClick} className="page-button">
+						<img src="/assets/pageRightArrow.png" alt="" />
+					</div>
 				</Pages>
 			</StockBalance>
 		</Container>
