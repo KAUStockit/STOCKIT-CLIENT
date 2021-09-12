@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { COLOR } from "../../constants/theme";
 
 // interface
-import { RankingProp, RankingItemProp } from "../../interfaces/MyPageInterface";
+import { RankingProp, RankingItemProp } from "../../interfaces/BalanceInterface";
 
 const Ranking: React.FC<RankingProp> = ({ name, rank }) => {
 	return (
@@ -19,14 +19,7 @@ const Ranking: React.FC<RankingProp> = ({ name, rank }) => {
 			</CurrentRanking>
 			<RankTable>
 				{rankingData.map((item, idx) => {
-					return (
-						<RankingItem
-							key={idx}
-							rank={item.rank}
-							name={item.name}
-							value={item.value}
-						/>
-					);
+					return <RankingItem key={idx} rank={item.rank} name={item.name} value={item.value} />;
 				})}
 			</RankTable>
 		</Container>

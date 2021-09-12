@@ -30,7 +30,7 @@ export const Container = styled.div`
 		display: flex;
 		align-items: center;
 		justify-content: space-evenly;
-		background-color: ${COLOR.DIVIDER};
+		background-color: rgba(226, 226, 226, 0.3);
 		height: 40px;
 		font-size: 14px;
 

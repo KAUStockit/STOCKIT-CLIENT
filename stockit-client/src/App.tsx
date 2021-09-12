@@ -8,15 +8,13 @@ import Header from "./components/common/Header";
 import Footer from "./components/common/Footer";
 import Main from "./pages/Main";
 import Trade from "./pages/Trade";
-import Balance from "./pages/Balance";
-import MyPage from "./pages/MyPage";
+import MyPage from "./pages/Balance";
 import PlayGround from "./pages/PlayGround";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import NotFound from "./pages/NotFound";
 
 export default function App() {
-	
 	// didRendered
 	// 제일 최근에 봤던 주식 정보가 있으면
 	useEffect(() => {
@@ -33,7 +31,6 @@ export default function App() {
 							<Route exact path="/" component={Main} />
 							<Route path="/:stockId/trade" component={Trade} />
 							<Route exact path="/balance" component={MyPage} />
-							<Route exact path="/mypage" component={Balance} />
 							<Route exact path="/playground" component={PlayGround} />
 							<Route exact path="/signin" component={SignIn} />
 							<Route exact path="/signup" component={SignUp} />

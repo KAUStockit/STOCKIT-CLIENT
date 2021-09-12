@@ -1,18 +1,10 @@
 export const MAINPAGE_RANKLIST = [
-	[
-		{ id: 123, name: "대한항공", price: 999, rate: 3 },
-	],
-	[
-		{ id: 124, name: "카카오게임즈", price: 1050, rate: 13 },
-	],
-	[
-		{ id: 32, name: "대원미디어", price: 26000, rate: 85.3 },
-	],
+	[{ id: 123, name: "대한항공", price: 999, rate: 3 }],
+	[{ id: 124, name: "카카오게임즈", price: 1050, rate: 13 }],
+	[{ id: 32, name: "대원미디어", price: 26000, rate: 85.3 }],
 ];
 
 export const MAINPAGE_PENNY = [
-	{ id: 36, name: "이트론", price: 675, rate: 1.7 },
-	{ id: 11, name: "LG화학", price: 900, rate: 3.7 },
 	{ id: 36, name: "이트론", price: 675, rate: 1.7 },
 	{ id: 11, name: "LG화학", price: 900, rate: 3.7 },
 	{ id: 36, name: "이트론", price: 675, rate: 1.7 },

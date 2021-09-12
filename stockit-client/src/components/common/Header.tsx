@@ -126,7 +126,7 @@ const Header: React.FC = () => {
 						</span>
 					) : (
 						<span>
-							<span onClick={onSignInClick}>{user}</span> | <span onClick={onLogout}>로그아웃</span>
+							<span>{user}</span> | <span onClick={onLogout}>로그아웃</span>
 						</span>
 					)}
 				</span>

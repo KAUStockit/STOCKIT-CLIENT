@@ -2,16 +2,12 @@ import React, { useState } from "react";
 //* css : @emotion/styled
 import { Container, Form, Button, EmailForm, Bottom } from "./SignUpStyle";
 import { useHistory } from "react-router";
-import { useSetRecoilState } from "recoil";
 
 // Networking
 import { REST_API_LOG } from "../utils/Networking";
 
 // components
 import InputWithLabel from "../components/common/InputWithLabel";
-
-// Testing
-import { userState } from "../model/User";
 
 // interface
 type SignUpProps = {};
@@ -26,8 +22,6 @@ const SignUp: React.FC<SignUpProps> = () => {
 	const [emailValidateMsg, setEmailValidateMsg] = useState<string>("");
 	const history = useHistory();
 
-	const setUser = useSetRecoilState(userState);
-
 	// functions
 	const onEmailChange = (e: React.FormEvent<HTMLInputElement>) => {
 		setEmail(e.currentTarget.value);
@@ -39,6 +33,7 @@ const SignUp: React.FC<SignUpProps> = () => {
 		}
 		try {
 			const { data } = await REST_API_LOG.checkValidEmailAddress(email);
+			pwRetypeRef.current!.classList.remove("error-input");
 			setEmailValidateMsg(data);
 		} catch (err) {
 			setEmailValidateMsg("이미 사용중인 메일주소입니다.");
@@ -71,12 +66,12 @@ const SignUp: React.FC<SignUpProps> = () => {
 		//* join : POST - /api/members/new *//
 		const result = await REST_API_LOG.signUp(data);
 		console.log(result);
-		if(result.data > 0) {
+		if (result.data > 0) {
 			alert(`회원가입이 완료되었습니다. 가입한 이메일로 로그인을 진행해주세요.`);
 		} else {
-			alert("회원가입에 실패했습니다.")
+			alert("회원가입에 실패했습니다.");
 		}
-		
+
 		history.push("/");
 	};
 

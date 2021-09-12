@@ -17,7 +17,7 @@ export const Table = styled.div`
 	flex-direction: column;
 `;
 export const TableHeader = styled.div`
-	background: #e2e2e2;
+	background: rgba(226, 226, 226, 0.3);
 	width: 90%;
 	padding-left: 5%;
 	padding-right: 5%;

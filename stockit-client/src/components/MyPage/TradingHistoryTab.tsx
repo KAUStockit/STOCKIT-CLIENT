@@ -6,7 +6,7 @@ import { getCookie } from "../../utils/Cookie";
 import { REST_STOCK } from "../../utils/Networking";
 
 // interface
-import { TradingHistoryTabProp } from "../../interfaces/MyPageInterface";
+import { TradingHistoryTabProp } from "../../interfaces/BalanceInterface";
 
 const TradingHistoryTab: React.FC<TradingHistoryTabProp> = () => {
 	const [cnt, setCnt] = useState(3);

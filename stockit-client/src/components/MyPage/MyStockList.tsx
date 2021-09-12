@@ -3,15 +3,9 @@ import styled from "@emotion/styled";
 import { COLOR } from "../../constants/theme";
 
 // interface
-import { MyStockListProp } from "../../interfaces/MyPageInterface";
+import { MyStockListProp } from "../../interfaces/BalanceInterface";
 
-const MyStockList: React.FC<MyStockListProp> = ({
-	name,
-	quantity,
-	price,
-	evaluation,
-	icon,
-}) => {
+const MyStockList: React.FC<MyStockListProp> = ({ name, quantity, price, evaluation, icon }) => {
 	return (
 		<Container>
 			<div>
@@ -21,9 +15,7 @@ const MyStockList: React.FC<MyStockListProp> = ({
 			<div>{quantity}</div>
 			<div>{price}</div>
 			<div>{evaluation}</div>
-			<div>
-				{((evaluation - price * quantity) / (price * quantity)) * 100}%
-			</div>
+			<div>{((evaluation - price * quantity) / (price * quantity)) * 100}%</div>
 		</Container>
 	);
 };

@@ -59,11 +59,12 @@ export const MainBottom = styled.div`
 	& > div {
 		display: flex;
 		justify-content: flex-start;
-		overflow-x: auto;
+		width: 68vw;
 	}
 
 	& > div > div {
 		margin-right: 20px;
+		width: 20vw;
 	}
 `;
 export const Circle = styled.div<{ color: string }>`

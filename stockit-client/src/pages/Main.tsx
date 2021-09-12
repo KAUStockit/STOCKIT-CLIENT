@@ -63,7 +63,6 @@ function Main() {
 				.slice(3, 21);
 			setStockRankList([stockRank, stockRank, stockRank]);
 		})();
-		console.log(stockRankList);
 	}, []);
 
 	return (

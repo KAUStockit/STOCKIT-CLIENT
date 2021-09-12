@@ -67,7 +67,6 @@ const Trade: React.FC<TradeProp> = ({ match, stockId }) => {
 		(async () => {
 			const result = await REST_STOCK.getStock(stockId);
 			if (!result.data) return;
-			console.log(result.data);
 			setStockName(result.data.stockName);
 			setStockCurrentPrice(result.data.price);
 		})();
