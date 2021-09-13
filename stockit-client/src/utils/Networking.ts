@@ -36,7 +36,6 @@ export const REST_STOCK = {
 		stockCode: number,
 		data: { stockOrderPrice: number; stockOrderCount: number; orderType: string }
 	) => {
-		console.log(data);
 		const result = await axios.post(`${IP_PORT}/api/orders/${memberIdx}/${stockCode}/new`, data, {
 			headers: { Authorization: `Bearer ${token}` },
 		});
