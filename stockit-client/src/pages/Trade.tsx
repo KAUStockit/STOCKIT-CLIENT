@@ -65,10 +65,11 @@ const Trade: React.FC<TradeProp> = ({ match, stockId }) => {
 		window.localStorage.setItem("lastStockId", String(stockId));
 		// stockId로 주식정보 받아오기
 		(async () => {
-			const result = await REST_STOCK.getStock(stockId);
-			if (!result.data) return;
-			setStockName(result.data.stockName);
-			setStockCurrentPrice(result.data.price);
+			const { data } = await REST_STOCK.getStock(stockId);
+			console.log(data);
+			if (!data.data) return;
+			setStockName(data.data.stockName);
+			setStockCurrentPrice(data.data.price);
 		})();
 
 		// 받아온 정보대로 데이터 업데이트
@@ -103,9 +104,11 @@ const Trade: React.FC<TradeProp> = ({ match, stockId }) => {
 					<Article stockId={stockId} />
 					<Chat />
 				</Grid>
-				{buyModalDisplay && <TradeModal type="buy" hide={setBuyModalDisplay} price={20000} name={stockName} />}
+				{buyModalDisplay && (
+					<TradeModal type="buy" hide={setBuyModalDisplay} price={stockCurrentPrice} name={stockName} />
+				)}
 				{sellModalDisplay && (
-					<TradeModal type="sell" hide={setSellModalDisplay} price={20000} name={stockName} />
+					<TradeModal type="sell" hide={setSellModalDisplay} price={stockCurrentPrice} name={stockName} />
 				)}
 			</Container>
 			<ToolTip content="hihi" />

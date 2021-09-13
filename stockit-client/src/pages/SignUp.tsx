@@ -34,7 +34,7 @@ const SignUp: React.FC<SignUpProps> = () => {
 		try {
 			const { data } = await REST_API_LOG.checkValidEmailAddress(email);
 			pwRetypeRef.current!.classList.remove("error-input");
-			setEmailValidateMsg(data);
+			setEmailValidateMsg(data.message);
 		} catch (err) {
 			setEmailValidateMsg("이미 사용중인 메일주소입니다.");
 		}

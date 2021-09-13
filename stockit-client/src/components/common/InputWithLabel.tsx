@@ -30,7 +30,7 @@ const InputWithLabel: React.FC<InputWithLabelProps> = React.forwardRef(({ label,
 		}
 		try {
 			const result: any = await REST_API_LOG.checkValidNickName(e.currentTarget.value);
-			setMessage(result.data);
+			setMessage(result.data.message);
 		} catch (e) {
 			setMessage("이미 사용중인 닉네임입니다.");
 		}

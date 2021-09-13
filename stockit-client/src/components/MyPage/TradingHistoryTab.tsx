@@ -16,7 +16,7 @@ const TradingHistoryTab: React.FC<TradingHistoryTabProp> = () => {
 		if (user) {
 			(async () => {
 				const result = await REST_STOCK.myOrders(user.token, user.memberIdx);
-				console.log(result.data);
+				console.log(result);
 			})();
 		}
 	});

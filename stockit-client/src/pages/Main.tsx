@@ -48,8 +48,7 @@ function Main() {
 		(async () => {
 			const result = await REST_STOCK.all(getCookie("user")?.token);
 			if (result.status !== 200) return;
-			console.log(result);
-			const stockRank = result.data
+			const stockRank = result.data.data
 				.map(
 					(st: {
 						stockCode: number;
