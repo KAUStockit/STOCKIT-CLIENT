@@ -7,12 +7,13 @@ import { REST_STOCK } from "../../utils/Networking";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../model/User";
 import { getCookie } from "../../utils/Cookie";
+import { currency } from "../../utils/utils";
 
 // interface
 import { TradeModalProp } from "../../interfaces/TradeInterface";
 import { DoneModalFrame, Button, Modal, ModalFrame } from "./TradeModalStyle";
 
-const TradeModal: React.FC<TradeModalProp> = ({ type, hide, price, name }) => {
+const TradeModal: React.FC<TradeModalProp> = ({ type, hide, price, name, id }) => {
 	const [isDone, setIsDone] = useState(false);
 	const [quantity, setQuantity] = useState([50]);
 	const user = useRecoilValue(userState);
@@ -25,12 +26,11 @@ const TradeModal: React.FC<TradeModalProp> = ({ type, hide, price, name }) => {
 	const buyOrSell = () => (type === "buy" ? "사기" : "팔기");
 
 	const onDoneClick = async () => {
-		const result = await REST_STOCK.order(token, user.memberIdx, 1, {
+		const result = await REST_STOCK.order(token, user.memberIdx, id, {
 			stockOrderPrice: price,
 			stockOrderCount: quantity[0],
 			orderType: buyOrSell(),
 		});
-		console.log(result.data);
 		setIsDone(true);
 	};
 
@@ -76,7 +76,7 @@ const TradeModal: React.FC<TradeModalProp> = ({ type, hide, price, name }) => {
 			{!isDone ? (
 				<ModalFrame id="modal">
 					<p>{buyOrSell()}</p>
-					<p>{price * quantity[0]}원</p>
+					<p>{currency(price * quantity[0])}원</p>
 					<div>
 						<p>주문수량</p>
 						<Range

@@ -10,7 +10,6 @@ export const REST_API_LOG = {
 		const result = await axios.post(`${IP_PORT}/api/members/login`, data, {
 			headers: { "Content-Type": "application/json" },
 		});
-		console.log(result.data);
 		return result.data;
 	},
 	signUp: async (data: { name: string; password: string; email: string; nickname: string }) => {
@@ -19,12 +18,10 @@ export const REST_API_LOG = {
 	},
 	checkValidNickName: async (nickname: string) => {
 		const result = await axios.get(`${IP_PORT}/api/members/login/validate/nickname?nickname=${nickname}`);
-		console.log(result);
 		return result;
 	},
 	checkValidEmailAddress: async (email: string) => {
 		const result = await axios.get(`${IP_PORT}/api/members/login/validate/email?email=${email}`);
-		console.log(result);
 		return result;
 	},
 };
@@ -36,7 +33,8 @@ export const REST_STOCK = {
 		stockCode: number,
 		data: { stockOrderPrice: number; stockOrderCount: number; orderType: string }
 	) => {
-		const result = await axios.post(`${IP_PORT}/api/orders/${memberIdx}/${stockCode}/new`, data, {
+		const convertedData = { ...data, orderType: data.orderType === "사기" ? "Buy" : "Sell" };
+		const result = await axios.post(`${IP_PORT}/api/orders/${memberIdx}/${stockCode}/new`, convertedData, {
 			headers: { Authorization: `Bearer ${token}` },
 		});
 		return result;
@@ -57,7 +55,6 @@ export const REST_STOCK = {
 	},
 	getRank: async (token: string) => {
 		const result = await axios.get(`${IP_PORT}/api/members/rank_list`);
-		console.log(result);
 		return result;
 	},
 };

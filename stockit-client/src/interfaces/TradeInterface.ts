@@ -34,6 +34,7 @@ export interface TradeModalProp {
 	hide: any;
 	price: number;
 	name: string;
+	id: number;
 }
 
 export interface ArticleProp {
