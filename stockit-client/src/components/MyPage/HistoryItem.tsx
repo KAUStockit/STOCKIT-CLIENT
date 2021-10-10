@@ -25,12 +25,12 @@ const HistoryItem: React.FC<HistoryItemProps> = ({
 	};
 
 	return (
-		<Row buySell={type === "사기" ? "매수" : "매도"}>
+		<Row buySell={type}>
 			<div>
 				<img src="" alt="" />
 				<span>{stock.stockName}</span>
 			</div>
-			<div>{type === "사기" ? "구매" : "판매"}</div>
+			<div>{type === "Buy" ? "구매" : "판매"}</div>
 			<div>{currency(stockOrderPrice)}</div>
 			<div>{stockOrderCount}개</div>
 			<div>{convertDateFormat(stockOrderedDate)}</div>
@@ -54,7 +54,7 @@ export const Row = styled.div<{ buySell: string }>`
 	}
 
 	& > div:nth-of-type(2) {
-		color: ${(props) => (props.buySell === "매도" ? "blue" : "red")};
+		color: ${(props) => (props.buySell === "Sell" ? "blue" : "red")};
 	}
 `;
 

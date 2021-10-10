@@ -1,15 +1,26 @@
+import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 
-import React from "react";
 import usePagenation from "../../hooks/usePagenation";
 import { MyStock } from "../../interfaces/TradeInterface";
 import MyStockList from "./MyStockList";
+import { REST_STOCK } from "../../utils/Networking";
+import { getCookie } from "../../utils/Cookie";
 
-interface BalanceTabPagesInterface {
-	myStocks: Array<MyStock>;
-}
+const BalanceTabPages = () => {
+	const [myStocks, setMyStocks] = useState<MyStock[]>([]);
+	const user = getCookie("user");
 
-const BalanceTabPages: React.FC<BalanceTabPagesInterface> = ({ myStocks }) => {
+	useEffect(() => {
+		REST_STOCK.myStocks(user.token, user.id)
+			.then((result) => {
+				if (!result) throw new Error("fetching stock list failed");
+				const stocks = result.data?.data;
+				setMyStocks(stocks);
+			})
+			.catch(console.log);
+	}, []);
+
 	const { currentPage, totalPages, onPrevClick, onPageClick, onNextClick } = usePagenation(myStocks);
 	return (
 		<>

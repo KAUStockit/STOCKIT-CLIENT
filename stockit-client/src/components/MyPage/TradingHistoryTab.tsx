@@ -20,6 +20,7 @@ const TradingHistoryTab: React.FC<TradingHistoryTabProp> = () => {
 		const result = await REST_STOCK.myOrders(user.token, user.id);
 		const orders: Array<OrderInterface> = result.data?.data;
 		if (!orders) return;
+		console.log(orders);
 		setHistories(orders);
 	};
 

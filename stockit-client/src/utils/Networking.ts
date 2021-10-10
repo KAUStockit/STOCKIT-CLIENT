@@ -45,6 +45,14 @@ export const REST_STOCK = {
 		});
 		return result;
 	},
+	myStocks: async (token: string, memberIdx: number) => {
+		const url = `${IP_PORT}/api/members/${memberIdx}/stocks`;
+		const result = await axios.get(url, {
+			headers: { Authorization: `Bearer ${token}` },
+		});
+		return result;
+	},
+
 	all: async (token: string) => {
 		const result = await axios.get(`${IP_PORT}/api/stocks`);
 		return result;

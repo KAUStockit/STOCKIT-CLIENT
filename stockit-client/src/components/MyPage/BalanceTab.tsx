@@ -24,7 +24,7 @@ const BalanceTab: React.FC<BalanceTabProp> = ({ myStock }) => {
 					<p key={idx}>{header}</p>
 				))}
 			</div>
-			<BalanceTabPages myStocks={myStocks} />
+			<BalanceTabPages />
 		</Container>
 	);
 };
