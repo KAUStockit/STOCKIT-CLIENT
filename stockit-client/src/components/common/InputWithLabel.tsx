@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
 
-// theme
 import { COLOR } from "../../constants/theme";
+import useValidationInput from "../../hooks/useValidateInput";
 
-import { REST_API_LOG } from "../../utils/Networking";
-
-// interface
 type InputWithLabelProps = {
 	label: string;
 	password: boolean;
@@ -15,25 +12,11 @@ type InputWithLabelProps = {
 };
 
 const InputWithLabel: React.FC<InputWithLabelProps> = React.forwardRef(({ label, password, placeholder }, ref: any) => {
-	// states
 	const [inputValue, setInputValue] = useState<string>("");
-	const [message, setMessage] = useState<string>("");
+	const { message, validateNickName } = useValidationInput();
 
 	const onInputChange = (e: React.FormEvent<HTMLInputElement>) => {
 		setInputValue(e.currentTarget.value);
-	};
-
-	const validateNickName = async (e: React.FormEvent<HTMLInputElement>) => {
-		if (e.currentTarget.value === "") {
-			setMessage("");
-			return;
-		}
-		try {
-			const result: any = await REST_API_LOG.checkValidNickName(e.currentTarget.value);
-			setMessage(result.data.message);
-		} catch (e) {
-			setMessage("이미 사용중인 닉네임입니다.");
-		}
 	};
 
 	return (

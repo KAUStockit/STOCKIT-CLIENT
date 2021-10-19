@@ -20,7 +20,7 @@ const Header: React.FC = () => {
 			setUser(cookie.nickname);
 			setUserRecoilState(cookie);
 		}
-	});
+	}, []);
 
 	const onLogoClick = (e: React.MouseEvent) => {
 		e.preventDefault();

@@ -26,7 +26,7 @@ const TradeModal: React.FC<TradeModalProp> = ({ type, hide, price, name, id }) =
 	const buyOrSell = () => (type === "buy" ? "사기" : "팔기");
 
 	const onDoneClick = async () => {
-		const result = await REST_STOCK.order(token, user.memberIdx, id, {
+		await REST_STOCK.order(token, user.id, id, {
 			stockOrderPrice: price,
 			stockOrderCount: quantity[0],
 			orderType: buyOrSell(),

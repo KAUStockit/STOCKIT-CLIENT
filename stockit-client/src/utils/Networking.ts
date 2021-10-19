@@ -29,12 +29,12 @@ export const REST_API_LOG = {
 export const REST_STOCK = {
 	order: async (
 		token: string,
-		memberIdx: number,
+		id: number,
 		stockCode: number,
 		data: { stockOrderPrice: number; stockOrderCount: number; orderType: string }
 	) => {
 		const convertedData = { ...data, orderType: data.orderType === "사기" ? "Buy" : "Sell" };
-		const result = await axios.post(`${IP_PORT}/api/orders/${memberIdx}/${stockCode}/new`, convertedData, {
+		const result = await axios.post(`${IP_PORT}/api/orders/${id}/${stockCode}/new`, convertedData, {
 			headers: { Authorization: `Bearer ${token}` },
 		});
 		return result;

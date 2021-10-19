@@ -1,131 +1,75 @@
-import React, { useState } from "react";
+import styled from "@emotion/styled";
 
-// components
-import MyStockList from "./MyStockList";
+import { COLOR } from "../../constants/theme";
 import Doughnutchart from "./DoghnutChart";
-
-// pseudo data
-import { myStockData, PIE_CHART_DATA } from "../../utils/DemoData";
-
-// theme
-import { Container, Total, StockBalance, Pages } from "./BalanceTabStyle";
-
-// interface
+import { PIE_CHART_DATA, myStockData } from "../../utils/DemoData";
 import { BalanceTabProp, MyStock } from "../../interfaces/TradeInterface";
+import { useState } from "react";
+import MyPageSummary from "./MyPageSummary";
+import BalanceTabPages from "./BalanceTabPages";
 
 const BalanceTab: React.FC<BalanceTabProp> = ({ myStock }) => {
-	const [myStocks, setMyStocks] = useState<MyStock[]>(myStockData);
-	const [currentPage, setCurrentPage] = useState<number>(1);
-
-	// 페이지 수
-	let totalPages = (() => {
-		let tmp = [];
-		for (let i = 0; i < myStocks.length / 5; i++) {
-			tmp.push(i + 1);
-		}
-		return tmp;
-	})();
-
-	// 페이지 이전 버튼 클릭
-	const onPrevClick = () => {
-		if (currentPage > 1) {
-			setCurrentPage((currentPage) => currentPage - 1);
-		}
-	};
-
-	// 페이지 숫자 클릭
-	const onPageClick = (e: React.MouseEvent) => {
-		setCurrentPage(+e.currentTarget.innerHTML);
-	};
-
-	// 페이지 다음 버튼 클릭
-	const onNextClick = () => {
-		if (currentPage < totalPages.length) {
-			setCurrentPage((currentPage) => currentPage + 1);
-		}
-	};
-
+	const [myStocks] = useState<MyStock[]>(myStockData);
 	return (
 		<Container>
 			<div>
 				<Doughnutchart chartData={PIE_CHART_DATA} />
-				<Total>
-					<div>
-						<div className="info_gray">보유금액</div>
-						<span className="info_black">2,000,000</span>
-					</div>
-					<div>
-						<div className="info_gray">총 매수금액</div>
-						<span className="info_black">2,000,000</span>
-					</div>
-					<div>
-						<div className="info_gray">총 평가금액</div>
-						<span className="info_black">2,000,000</span>
-					</div>
-					<div>
-						<div className="info_gray">총 보유자산</div>
-						<span className="info_black">2,000,000,000</span>
-					</div>
-					<div>
-						<div className="info_gray">총 평가손익</div>
-						<span className="info_black">+2,000,000,000</span>
-					</div>
-					<div>
-						<div className="info_gray">총 평가 수익률</div>
-						<span className="info_percent">+200%</span>
-					</div>
-				</Total>
+				<MyPageSummary />
 			</div>
 			<div>
 				<p>보유 주식 목록</p>
 			</div>
 			<div>
-				<p>종목명</p>
-				<p>보유수량</p>
-				<p>매수평균가</p>
-				<p>평가금액</p>
-				<p>평가손익</p>
+				{tableHeaders.map((header, idx) => (
+					<p key={idx}>{header}</p>
+				))}
 			</div>
-			<StockBalance>
-				{myStocks.map((stock, idx) => {
-					if (idx < currentPage * 5 && idx > (currentPage - 1) * 5) {
-						return (
-							<MyStockList
-								key={idx}
-								name={stock.name}
-								quantity={stock.quantity}
-								price={stock.price}
-								evaluation={stock.quantity * stock.currentPrice}
-							/>
-						);
-					}
-					return <div key={idx}></div>;
-				})}
-				<Pages>
-					<div onClick={onPrevClick} className="page-button">
-						<img src="/assets/pageLeftArrow.png" alt="" />
-					</div>
-					<div>
-						{totalPages.map((item, idx) => {
-							return (
-								<p
-									key={idx}
-									onClick={onPageClick}
-									style={item === currentPage ? { color: "black" } : { color: "grey" }}
-								>
-									{item}
-								</p>
-							);
-						})}
-					</div>
-					<div onClick={onNextClick} className="page-button">
-						<img src="/assets/pageRightArrow.png" alt="" />
-					</div>
-				</Pages>
-			</StockBalance>
+			<BalanceTabPages myStocks={myStocks} />
 		</Container>
 	);
 };
+
+const Container = styled.div`
+	& > div:nth-of-type(1) {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		flex-direction: row;
+		border-bottom: 1px solid ${COLOR.BOX_BORDER};
+	}
+
+	& > div:nth-of-type(2) {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		flex-direction: row;
+		height: 40px;
+
+		& > p {
+			font-size: 15px;
+			padding-left: 20px;
+		}
+	}
+
+	& > div:nth-of-type(3) {
+		width: 96%;
+		padding: 0 2%;
+		display: flex;
+		align-items: center;
+		justify-content: space-evenly;
+		background-color: rgba(226, 226, 226, 0.3);
+		height: 40px;
+		font-size: 14px;
+
+		& > p {
+			display: block;
+			padding-left: 20px;
+			padding-right: 20px;
+		}
+	}
+`;
+
+const tableHeaders = ["종목명", "보유수량", "매수평균가", "평가금액", "평가손익"];
 
 export default BalanceTab;
 

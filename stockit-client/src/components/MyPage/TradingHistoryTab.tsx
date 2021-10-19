@@ -10,16 +10,17 @@ import { REST_STOCK } from "../../utils/Networking";
 import { TradingHistoryTabProp } from "../../interfaces/BalanceInterface";
 
 const TradingHistoryTab: React.FC<TradingHistoryTabProp> = () => {
-	const [cnt, setCnt] = useState(3);
+	const [cnt] = useState(3);
 	const [histories, setHistories] = useState<any>([]);
 	const user = getCookie("user");
 
 	useEffect(() => {
-		if (user) getHistoryData();
+		user && getHistoryData();
 	}, []);
 
 	const getHistoryData = async () => {
-		const result = await REST_STOCK.myOrders(user.token, user.memberIdx);
+		const result = await REST_STOCK.myOrders(user.token, user.id);
+		console.log(result);
 		const {
 			data: {
 				data: { orders },
