@@ -2,14 +2,12 @@ import styled from "@emotion/styled";
 
 import { COLOR } from "../../constants/theme";
 import Doughnutchart from "./DoghnutChart";
-import { PIE_CHART_DATA, myStockData } from "../../utils/DemoData";
-import { BalanceTabProp, MyStock } from "../../interfaces/TradeInterface";
-import { useState } from "react";
+import { PIE_CHART_DATA } from "../../utils/DemoData";
+import { BalanceTabProp } from "../../interfaces/TradeInterface";
 import MyPageSummary from "./MyPageSummary";
 import BalanceTabPages from "./BalanceTabPages";
 
-const BalanceTab: React.FC<BalanceTabProp> = ({ myStock }) => {
-	const [myStocks] = useState<MyStock[]>(myStockData);
+const BalanceTab: React.FC<BalanceTabProp> = () => {
 	return (
 		<Container>
 			<div>
@@ -72,5 +70,3 @@ const Container = styled.div`
 const tableHeaders = ["종목명", "보유수량", "매수평균가", "평가금액", "평가손익"];
 
 export default BalanceTab;
-
-// pseudo data
