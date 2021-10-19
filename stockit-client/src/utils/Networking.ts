@@ -13,15 +13,15 @@ export const REST_API_LOG = {
 		return result.data;
 	},
 	signUp: async (data: { name: string; password: string; email: string; nickname: string }) => {
-		const result = await axios.post(`${IP_PORT}/api/members/new`, data);
+		const result = await axios.post(`${IP_PORT}/api/members`, data);
 		return result.data;
 	},
 	checkValidNickName: async (nickname: string) => {
-		const result = await axios.get(`${IP_PORT}/api/members/login/validate/nickname?nickname=${nickname}`);
+		const result = await axios.get(`${IP_PORT}/api/members/login/valid-nickname?nickname=${nickname}`);
 		return result;
 	},
 	checkValidEmailAddress: async (email: string) => {
-		const result = await axios.get(`${IP_PORT}/api/members/login/validate/email?email=${email}`);
+		const result = await axios.get(`${IP_PORT}/api/members/login/valid-email?email=${email}`);
 		return result;
 	},
 };
@@ -46,11 +46,11 @@ export const REST_STOCK = {
 		return result;
 	},
 	all: async (token: string) => {
-		const result = await axios.get(`${IP_PORT}/api/stocks/info/list`);
+		const result = await axios.get(`${IP_PORT}/api/stocks`);
 		return result;
 	},
 	getStock: async (stockCode: number) => {
-		const result = await axios.get(`${IP_PORT}/api/stocks/info/${stockCode}`);
+		const result = await axios.get(`${IP_PORT}/api/stocks/${stockCode}`);
 		return result;
 	},
 	getRank: async (token: string) => {
