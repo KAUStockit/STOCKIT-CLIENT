@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router";
-import { Container, Logo, HeaderRightBox } from "./HeaderStyle";
-import { getCookie, removeCookie } from "../../utils/Cookie";
-import { userState } from "../../model/User";
 import { useSetRecoilState } from "recoil";
+import styled from "@emotion/styled";
 
-// Components
+import { COLOR } from "../../constants/theme";
+import { getCookie } from "../../utils/Cookie";
+import { userState } from "../../model/User";
 import ToolTip from "./ToolTip";
+import useHeaderNavigation from "../../hooks/useHeaderNaviation";
+import HeaderRightButton from "./HeaderRightButton";
+import Logo from "./Logo";
 
 const Header: React.FC = () => {
-	const history = useHistory();
 	const [user, setUser] = useState("");
+	const { onSignInClick, onSignUpClick, onBalanceClick, onTradeClick, onPlayGroundClick, onLogoClick } =
+		useHeaderNavigation(user);
 	const cookie = getCookie("user");
 	const setUserRecoilState = useSetRecoilState(userState);
 
@@ -21,50 +24,6 @@ const Header: React.FC = () => {
 			setUserRecoilState(cookie);
 		}
 	}, []);
-
-	const onLogoClick = (e: React.MouseEvent) => {
-		e.preventDefault();
-		history.push("/");
-	};
-
-	const onPlayGroundClick = (e: React.MouseEvent) => {
-		e.preventDefault();
-		history.push("/playground");
-	};
-
-	const onTradeClick = (e: React.MouseEvent) => {
-		e.preventDefault();
-		const lastStockId = window.localStorage.getItem("lastStockId");
-		history.push(`/${lastStockId}/trade`);
-	};
-
-	const onBalanceClick = (e: React.MouseEvent) => {
-		e.preventDefault();
-		history.push("/balance");
-	};
-
-	const onSignUpClick = (e: React.MouseEvent) => {
-		e.preventDefault();
-		if (user.length === 0) {
-			history.push("/signup");
-		} else {
-			history.push("/logout");
-		}
-	};
-
-	const onSignInClick = (e: React.MouseEvent) => {
-		e.preventDefault();
-		if (user.length === 0) {
-			history.push("/signin");
-		} else {
-			history.push("/mypage");
-		}
-	};
-
-	const onLogout = () => {
-		removeCookie("user");
-		window.location.reload();
-	};
 
 	const onMouseMoveMyWallet = (e: React.MouseEvent) => {
 		const tooltip = document.getElementById("tooltip");
@@ -80,33 +39,7 @@ const Header: React.FC = () => {
 
 	return (
 		<Container>
-			<Logo>
-				<svg
-					onClick={onLogoClick}
-					xmlns="http://www.w3.org/2000/svg"
-					width="107"
-					height="32"
-					viewBox="0 0 107 32"
-					style={{ cursor: "pointer" }}
-				>
-					<text
-						id="Stockit"
-						transform="translate(0 25)"
-						fill="#fff"
-						fontSize="32"
-						fontFamily="Helvetica-Bold, Helvetica"
-						fontWeight="700"
-					>
-						<tspan x="0" y="0">
-							Stoc
-						</tspan>
-						<tspan y="0" fill="#00fab6">
-							kit
-						</tspan>
-					</text>
-				</svg>
-			</Logo>
-
+			<Logo logoClickHandler={onLogoClick} />
 			<div onMouseLeave={onLeaveMyWallet}>
 				<a href="#" onClick={onPlayGroundClick} onMouseMove={onMouseMoveMyWallet}>
 					놀이터
@@ -118,22 +51,42 @@ const Header: React.FC = () => {
 					내지갑
 				</a>
 			</div>
-			<HeaderRightBox>
-				<span>
-					{user.length === 0 ? (
-						<span>
-							<span onClick={onSignInClick}>로그인</span> | <span onClick={onSignUpClick}>회원가입</span>
-						</span>
-					) : (
-						<span>
-							<span>{user}</span> | <span onClick={onLogout}>로그아웃</span>
-						</span>
-					)}
-				</span>
-			</HeaderRightBox>
+			<HeaderRightButton user={user} signInHandler={onSignInClick} signUpHandler={onSignUpClick} />
 			<ToolTip content={"asdfasdfasd"} />
 		</Container>
 	);
 };
+
+export const Container = styled.div`
+	width: 100vw;
+	height: 69px;
+	background: ${COLOR.BLUE};
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	color: white;
+
+	& > span {
+		cursor: pointer;
+	}
+
+	& > div:nth-of-type(2) {
+		width: 20%;
+		min-width: 300px;
+		height: 100%;
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+	}
+
+	& > div > a {
+		all: unset;
+		color: white;
+		cursor: pointer;
+		padding-left: 5%;
+	}
+	& > div > a:hover {
+	}
+`;
 
 export default Header;
