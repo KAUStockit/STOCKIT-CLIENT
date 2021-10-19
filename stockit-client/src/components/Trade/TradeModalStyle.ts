@@ -14,39 +14,7 @@ export const Modal = styled.div`
 	height: 100vh;
 	backdrop-filter: blur(3px);
 `;
-export const DoneModalFrame = styled.div`
-	background-color: white;
-	position: absolute;
-	box-shadow: 3px 1px 3px 3px #7c7c7c;
-	border-radius: 5px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	height: 320px;
-	width: 380px;
 
-	& > p:nth-of-type(1) {
-		padding-bottom: 0px;
-		margin-top: 0px;
-		margin-bottom: 0px;
-		font-size: 18px;
-	}
-
-	& > p:nth-of-type(2) {
-		color: #898989;
-		margin-bottom: 30px;
-	}
-
-	& > button {
-		background: ${COLOR.BLUE};
-		width: 30%;
-	}
-
-	& > button:active {
-		background: ${COLOR.GRAPH_BLUE};
-	}
-`;
 export const ModalFrame = styled.div`
 	background-color: white;
 	position: absolute;

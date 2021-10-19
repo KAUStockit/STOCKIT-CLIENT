@@ -11,39 +11,16 @@ import { CHART_DATA } from "../../utils/DemoData";
 
 // interface
 import { ChartProp, ChartDataInterface } from "../../interfaces/TradeInterface";
-
-const filters = ["1일", "1주", "1개월", "3개월", "1년", "3년"];
+import ChartPicker from "./ChartPicker";
 
 const Chart: React.FC<ChartProp> = ({ stockId, level }) => {
 	// states
 	const [filter, setFilter] = useState("1일");
 
-	// functions
-	const onFilterClick = (e: React.MouseEvent) => {
-		setFilter(e.currentTarget.innerHTML);
-	};
-
 	return (
 		<div>
 			<ChartGraph className="chart__chart">
-				<Picker className="chart__picker">
-					{filters.map((item, idx) => (
-						<div
-							key={idx}
-							onClick={onFilterClick}
-							style={
-								item === filter
-									? {
-											backgroundColor: COLOR.BLUE,
-											color: "white",
-									  }
-									: {}
-							}
-						>
-							{item}
-						</div>
-					))}
-				</Picker>
+				<ChartPicker filter={filter} setFilter={setFilter} />
 				<div className="linechart">{configureChart(CHART_DATA, level)}</div>
 			</ChartGraph>
 		</div>
@@ -108,28 +85,8 @@ const configureChart = (chartData: ChartDataInterface, level: LEVEL) => {
 	return <Line data={data} options={options} type="line" id="hihi" style={{ height: "360px" }} />;
 };
 
-//* css : @emotion/styled
-
 const ChartGraph = styled.div`
 	box-shadow: 1px 1px 2px 2px #e2e2e2;
-`;
-
-const Picker = styled.div`
-	display: flex;
-	justify-content: flex-start;
-	border-bottom: 1px solid #dedede;
-
-	& > div {
-		border-right: 1px solid #dedede;
-		width: 50px;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		color: #4d4d4d;
-		height: 40px;
-		font-size: 15px;
-		cursor: pointer;
-	}
 `;
 
 export default React.memo(Chart);

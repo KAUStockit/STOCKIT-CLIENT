@@ -9,9 +9,9 @@ import { ChatMessageObject } from "../../interfaces/TradeInterface";
 
 // socket endpoint
 function Chat() {
-	const [currentUser, setCurrentUser] = useState(1); // 채팅방 현재 유저수
-	const [messages, setMessages] = useState<ChatMessageObject[]>([]); // 채팅 내용
-	const [currentMessage, setCurrentMessage] = useState<string>(""); // 내가 입력하는 채팅 내용
+	const [currentUser] = useState(1); // 채팅방 현재 유저수
+	const [messages] = useState<ChatMessageObject[]>([]); // 채팅 내용
+	const [_, setCurrentMessage] = useState<string>(""); // 내가 입력하는 채팅 내용
 
 	const onInputChange = (e: any) => {
 		setCurrentMessage(e.currentTarget.value);

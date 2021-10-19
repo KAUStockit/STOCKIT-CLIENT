@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 import React, { useState, useEffect } from "react";
 import { COLOR } from "../../constants/theme";
 
-// interface
 import { ArticleProp } from "../../interfaces/TradeInterface";
 import Information from "./Information";
 
