@@ -13,14 +13,10 @@ export interface ChartProp {
 	stockId: number;
 	level: LEVEL;
 	id: string;
+	userId: number;
 }
 
-export interface ChartDataInterface {
-	id: number;
-	name: string;
-	filter: string;
-	data: Array<{ seq: number; label: string; price: number }>;
-}
+export type ChartDataInterface = Array<{ seq: number; label: string; price: number }>;
 
 export interface ChatMessageObject {
 	// 주고받는 메시지의 타입

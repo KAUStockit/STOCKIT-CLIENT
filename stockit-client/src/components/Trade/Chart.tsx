@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 
 import { Line } from "react-chartjs-2";
@@ -7,15 +7,39 @@ import { COLOR } from "../../constants/theme";
 import { CHART_DATA } from "../../utils/DemoData";
 import { ChartProp, ChartDataInterface } from "../../interfaces/TradeInterface";
 import ChartPicker from "./ChartPicker";
+import { STOCK_STREAM_SUBSCRIBE } from "../../utils/Networking";
+import { Stock } from "../../interfaces/MainInterface";
 
-const Chart: React.FC<ChartProp> = ({ stockId, level }) => {
+const Chart = ({ stockId, level, userId }: ChartProp) => {
+	const [chartData, setChartData] = useState<ChartDataInterface>(CHART_DATA);
 	const [filter, setFilter] = useState("1일");
+
+	useEffect(() => {
+		const eventSource = new EventSource(`${STOCK_STREAM_SUBSCRIBE}?userId=${userId}`);
+
+		eventSource.onopen = (e) => {
+			console.log(e);
+		};
+
+		eventSource.onmessage = (e) => {
+			const data: Stock[] = JSON.parse(e.data);
+			const currentStockData = data.filter((stock) => stock.stockCode === +stockId)[0];
+			if (chartData.length < 10)
+				setChartData((data) => [...data, { seq: 123, label: "6/21", price: currentStockData.price }]);
+			else
+				setChartData((data) => [...data.splice(1), { seq: 123, label: "6/21", price: currentStockData.price }]);
+		};
+
+		return () => {
+			eventSource.close();
+		};
+	}, []);
 
 	return (
 		<div>
 			<ChartGraph className="chart__chart">
 				<ChartPicker filter={filter} setFilter={setFilter} />
-				<div className="linechart">{configureChart(CHART_DATA, level)}</div>
+				<div className="linechart">{configureChart(chartData, level)}</div>
 			</ChartGraph>
 		</div>
 	);
@@ -23,7 +47,7 @@ const Chart: React.FC<ChartProp> = ({ stockId, level }) => {
 
 const configureChart = (chartData: ChartDataInterface, level: LEVEL) => {
 	const data = {
-		labels: chartData.data.map((item) => {
+		labels: chartData.map((item) => {
 			return item.label;
 		}),
 		datasets: [
@@ -32,7 +56,7 @@ const configureChart = (chartData: ChartDataInterface, level: LEVEL) => {
 				borderWidth: 3,
 				hoverBackgroundColor: COLOR.GRAPH_BLUE,
 				hoverBorderColor: COLOR.BLUE,
-				data: chartData.data.map((item) => item.price),
+				data: chartData.map((item) => item.price),
 				pointBackgroundColor: "rgba(0, 0, 0, 0)",
 				pointBorderColor: "rgba(0, 0, 0, 0)",
 				tension: 0.2,
@@ -45,9 +69,7 @@ const configureChart = (chartData: ChartDataInterface, level: LEVEL) => {
 	const options = {
 		responsive: true,
 		maintainAspectRatio: false,
-		animation: {
-			easing: "easeInOutBack",
-		},
+		animation: false,
 		scales: {
 			y: {
 				gridLines: {

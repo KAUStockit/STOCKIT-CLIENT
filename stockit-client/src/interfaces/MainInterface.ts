@@ -29,4 +29,7 @@ export interface Stock {
 	price: number;
 	stockCreatedDate: string;
 	active: boolean;
+	description?: string | null;
+	category?: string | null;
+	percentage?: number;
 }

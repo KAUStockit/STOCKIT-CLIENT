@@ -78,4 +78,4 @@ export const ADMIN = {
 	},
 };
 
-export const MAIN_STREAM_SUBSCRIBE = `${IP_PORT}/streaming/stockList/subscribe`;
+export const STOCK_STREAM_SUBSCRIBE = `${IP_PORT}/api/streaming/stockList/subscribe`;
