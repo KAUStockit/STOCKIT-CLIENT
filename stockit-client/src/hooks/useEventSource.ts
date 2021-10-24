@@ -27,7 +27,7 @@ const useEventSource = (stockId: number, userId: number) => {
 		return () => {
 			eventSource.close();
 		};
-	}, []);
+	}, [chartData]);
 
 	return chartData;
 };
