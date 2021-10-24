@@ -1,9 +1,9 @@
 // 메인 화면 컴포넌트
 import React, { useState, useEffect } from "react";
+import styled from "@emotion/styled";
 
 import { getCookie } from "../utils/Cookie";
 import { REST_STOCK } from "../utils/Networking";
-import { Content, MainBottom } from "./MainStyle";
 import StockCard from "../components/Main/StockCard";
 import { COLOR } from "../constants/theme";
 import ToolTip from "../components/common/ToolTip";
@@ -55,5 +55,29 @@ function Main() {
 		</Content>
 	);
 }
+
+const Content = styled.div`
+	margin: 50px 15% 0 15%;
+`;
+
+const MainBottom = styled.div`
+	margin-top: 50px;
+
+	& > h3 {
+		font-weight: 700;
+		font-size: 18px;
+	}
+
+	& > div {
+		display: flex;
+		justify-content: flex-start;
+		width: 68vw;
+	}
+
+	& > div > div {
+		margin-right: 20px;
+		width: 20vw;
+	}
+`;
 
 export default Main;
