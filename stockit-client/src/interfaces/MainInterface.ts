@@ -22,3 +22,11 @@ export enum LEVEL {
 	EASY = "easy",
 	HARD = "hard",
 }
+
+export interface Stock {
+	stockCode: number;
+	stockName: string;
+	price: number;
+	stockCreatedDate: string;
+	active: boolean;
+}

@@ -2,8 +2,7 @@ import axios from "axios";
 
 const IP_ADDRESS = "http://3.37.250.12";
 const PORT = "8080";
-const IP_PORT = `${IP_ADDRESS}:${PORT}`;
-// const IP_PORT = ``;
+export const IP_PORT = `${IP_ADDRESS}:${PORT}`;
 
 export const REST_API_LOG = {
 	logIn: async (data: { email: string; password: string }) => {
@@ -78,3 +77,5 @@ export const ADMIN = {
 		return result;
 	},
 };
+
+export const MAIN_STREAM_SUBSCRIBE = `${IP_PORT}/streaming/stockList/subscribe`;

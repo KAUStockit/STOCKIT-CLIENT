@@ -1,20 +1,14 @@
-// 거래소 화면 좌측에 위치한 차트 컴포넌트
-
 import React, { useState } from "react";
 import styled from "@emotion/styled";
+
 import { Line } from "react-chartjs-2";
 import { LEVEL } from "../../interfaces/MainInterface";
 import { COLOR } from "../../constants/theme";
-
-// data
 import { CHART_DATA } from "../../utils/DemoData";
-
-// interface
 import { ChartProp, ChartDataInterface } from "../../interfaces/TradeInterface";
 import ChartPicker from "./ChartPicker";
 
 const Chart: React.FC<ChartProp> = ({ stockId, level }) => {
-	// states
 	const [filter, setFilter] = useState("1일");
 
 	return (
