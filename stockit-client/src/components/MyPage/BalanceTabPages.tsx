@@ -16,6 +16,7 @@ const BalanceTabPages = () => {
 			.then((result) => {
 				if (!result) throw new Error("fetching stock list failed");
 				const stocks = result.data?.data;
+				console.log(stocks);
 				setMyStocks(stocks);
 			})
 			.catch(console.log);

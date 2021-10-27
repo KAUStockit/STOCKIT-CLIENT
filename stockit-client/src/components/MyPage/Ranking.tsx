@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { COLOR } from "../../constants/theme";
 
 // interface
 import { RankingProp, RankingItemProp } from "../../interfaces/BalanceInterface";
+import { REST_STOCK } from "../../utils/Networking";
+import { getCookie } from "../../utils/Cookie";
+import { RankItem } from "../../interfaces/MyPageInterface";
 
 const Ranking: React.FC<RankingProp> = ({ name, rank }) => {
+	const token = getCookie("user").token;
+	const [rankingData, setRankingData] = useState<RankItem[]>([]);
+
+	useEffect(() => {
+		REST_STOCK.getRank(token).then((result) => result.data).then(setRankingData);
+	}, []);
+
 	return (
 		<Container>
 			<CurrentRanking>
@@ -19,7 +29,7 @@ const Ranking: React.FC<RankingProp> = ({ name, rank }) => {
 			</CurrentRanking>
 			<RankTable>
 				{rankingData.map((item, idx) => {
-					return <RankingItem key={idx} rank={item.rank} name={item.name} value={item.value} />;
+					return <RankingItem key={idx} rank={idx+1} name={item.name} value={item.earningRate} />;
 				})}
 			</RankTable>
 		</Container>
@@ -76,35 +86,35 @@ const RankRow = styled.div`
 export default Ranking;
 
 // pseudo data
-const rankingData: RankingItemProp[] = [
-	{
-		rank: 1,
-		name: "문상혁",
-		value: 23.3,
-	},
-	{
-		rank: 2,
-		name: "김주안",
-		value: 10.4,
-	},
-	{
-		rank: 3,
-		name: "박수현",
-		value: 10.2,
-	},
-	{
-		rank: 4,
-		name: "권태형",
-		value: -0.4,
-	},
-	{
-		rank: 5,
-		name: "최재혁",
-		value: -6.7,
-	},
-	{
-		rank: 6,
-		name: "문규진",
-		value: -99.9,
-	},
-];
+// const rankingData: RankingItemProp[] = [
+// 	{
+// 		rank: 1,
+// 		name: "문상혁",
+// 		value: 23.3,
+// 	},
+// 	{
+// 		rank: 2,
+// 		name: "김주안",
+// 		value: 10.4,
+// 	},
+// 	{
+// 		rank: 3,
+// 		name: "박수현",
+// 		value: 10.2,
+// 	},
+// 	{
+// 		rank: 4,
+// 		name: "권태형",
+// 		value: -0.4,
+// 	},
+// 	{
+// 		rank: 5,
+// 		name: "최재혁",
+// 		value: -6.7,
+// 	},
+// 	{
+// 		rank: 6,
+// 		name: "문규진",
+// 		value: -99.9,
+// 	},
+// ];

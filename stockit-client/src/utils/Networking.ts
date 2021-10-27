@@ -1,4 +1,5 @@
 import axios from "axios";
+import { RankItem } from "../interfaces/MyPageInterface";
 
 const IP_ADDRESS = "http://3.37.250.12";
 const PORT = "8080";
@@ -61,8 +62,8 @@ export const REST_STOCK = {
 		return result;
 	},
 	getRank: async (token: string) => {
-		const result = await axios.get(`${IP_PORT}/api/members/rank_list`);
-		return result;
+		const result: { data: { data: RankItem[] } } = await axios.get(`${IP_PORT}/api/members/rank`);
+		return result.data;
 	},
 };
 

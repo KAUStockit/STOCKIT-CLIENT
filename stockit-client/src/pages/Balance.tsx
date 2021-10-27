@@ -15,7 +15,7 @@ import { COLOR } from "../constants/theme";
 
 const MyPage: React.FC<MyPageProp> = () => {
 	const [currentTab, setCurrentTab] = useState<string>("보유주식");
-	const [myStock, setMyStock] = useState(myStockData);
+	const [myStock] = useState(myStockData);
 
 	const onTabClicked = (e: React.MouseEvent) => {
 		if (currentTab === "보유주식" && e.currentTarget.innerHTML === "거래내역") {
