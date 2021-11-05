@@ -12,14 +12,17 @@ export const REST_API_LOG = {
 		});
 		return result.data;
 	},
+
 	signUp: async (data: { name: string; password: string; email: string; nickname: string }) => {
 		const result = await axios.post(`${IP_PORT}/api/members`, data);
 		return result.data;
 	},
+
 	checkValidNickName: (nickname: string) => {
 		const result = axios.get(`${IP_PORT}/api/members/login/valid-nickname?nickname=${nickname}`);
 		return result;
 	},
+
 	checkValidEmailAddress: (email: string) => {
 		const result = axios.get(`${IP_PORT}/api/members/login/valid-email?email=${email}`);
 		return result;
@@ -39,12 +42,14 @@ export const REST_STOCK = {
 		});
 		return result;
 	},
+
 	myOrders: (token: string, memberIdx: number) => {
 		const result = axios.get(`${IP_PORT}/api/members/${memberIdx}/orders`, {
 			headers: { Authorization: `Bearer ${token}` },
 		});
 		return result;
 	},
+
 	myStocks: (token: string, memberIdx: number) => {
 		const url = `${IP_PORT}/api/members/${memberIdx}/stocks`;
 		const result = axios.get(url, {
@@ -53,17 +58,24 @@ export const REST_STOCK = {
 		return result;
 	},
 
-	all: (token: string) => {
+	all: () => {
 		const result = axios.get(`${IP_PORT}/api/stocks`);
 		return result;
 	},
+
 	getStock: (stockCode: number) => {
 		const result = axios.get(`${IP_PORT}/api/stocks/${stockCode}`);
 		return result;
 	},
-	getRank: async (token: string) => {
+
+	getRank: async () => {
 		const result: { data: { data: RankItem[] } } = await axios.get(`${IP_PORT}/api/members/rank`);
 		return result.data;
+	},
+
+	getStocksUnderPrice10000: () => {
+		const result = axios.get(`${IP_PORT}/api/stocks?price=10000`);
+		return result;
 	},
 };
 

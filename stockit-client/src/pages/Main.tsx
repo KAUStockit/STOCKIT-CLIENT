@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 
-import { getCookie } from "../utils/Cookie";
 import { REST_STOCK } from "../utils/Networking";
 import StockCard from "../components/Main/StockCard";
 import { COLOR } from "../constants/theme";
@@ -22,7 +21,7 @@ function Main() {
 
 	useEffect(() => {
 		!localStorage.getItem("session") ?? localStorage.setItem("session", "");
-		REST_STOCK.all(getCookie("user")?.token)
+		REST_STOCK.all()
 			.then((res) => res.data.data)
 			.then((res) =>
 				res

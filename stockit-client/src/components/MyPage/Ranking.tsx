@@ -5,15 +5,15 @@ import { COLOR } from "../../constants/theme";
 // interface
 import { RankingProp, RankingItemProp } from "../../interfaces/BalanceInterface";
 import { REST_STOCK } from "../../utils/Networking";
-import { getCookie } from "../../utils/Cookie";
 import { RankItem } from "../../interfaces/MyPageInterface";
 
 const Ranking: React.FC<RankingProp> = ({ name, rank }) => {
-	const token = getCookie("user").token;
 	const [rankingData, setRankingData] = useState<RankItem[]>([]);
 
 	useEffect(() => {
-		REST_STOCK.getRank(token).then((result) => result.data).then(setRankingData);
+		REST_STOCK.getRank()
+			.then((result) => result.data)
+			.then(setRankingData);
 	}, []);
 
 	return (
@@ -29,7 +29,7 @@ const Ranking: React.FC<RankingProp> = ({ name, rank }) => {
 			</CurrentRanking>
 			<RankTable>
 				{rankingData.map((item, idx) => {
-					return <RankingItem key={idx} rank={idx+1} name={item.name} value={item.earningRate} />;
+					return <RankingItem key={idx} rank={idx + 1} name={item.name} value={item.earningRate} />;
 				})}
 			</RankTable>
 		</Container>
