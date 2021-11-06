@@ -16,49 +16,49 @@ export const REST_API_LOG = {
 		const result = await axios.post(`${IP_PORT}/api/members`, data);
 		return result.data;
 	},
-	checkValidNickName: async (nickname: string) => {
-		const result = await axios.get(`${IP_PORT}/api/members/login/valid-nickname?nickname=${nickname}`);
+	checkValidNickName: (nickname: string) => {
+		const result = axios.get(`${IP_PORT}/api/members/login/valid-nickname?nickname=${nickname}`);
 		return result;
 	},
-	checkValidEmailAddress: async (email: string) => {
-		const result = await axios.get(`${IP_PORT}/api/members/login/valid-email?email=${email}`);
+	checkValidEmailAddress: (email: string) => {
+		const result = axios.get(`${IP_PORT}/api/members/login/valid-email?email=${email}`);
 		return result;
 	},
 };
 
 export const REST_STOCK = {
-	order: async (
+	order: (
 		token: string,
 		id: number,
 		stockCode: number,
 		data: { stockOrderPrice: number; stockOrderCount: number; orderType: string }
 	) => {
 		const convertedData = { ...data, orderType: data.orderType === "사기" ? "Buy" : "Sell" };
-		const result = await axios.post(`${IP_PORT}/api/orders/${id}/${stockCode}/new`, convertedData, {
+		const result = axios.post(`${IP_PORT}/api/orders/${id}/${stockCode}/new`, convertedData, {
 			headers: { Authorization: `Bearer ${token}` },
 		});
 		return result;
 	},
-	myOrders: async (token: string, memberIdx: number) => {
-		const result = await axios.get(`${IP_PORT}/api/members/${memberIdx}/orders`, {
+	myOrders: (token: string, memberIdx: number) => {
+		const result = axios.get(`${IP_PORT}/api/members/${memberIdx}/orders`, {
 			headers: { Authorization: `Bearer ${token}` },
 		});
 		return result;
 	},
-	myStocks: async (token: string, memberIdx: number) => {
+	myStocks: (token: string, memberIdx: number) => {
 		const url = `${IP_PORT}/api/members/${memberIdx}/stocks`;
-		const result = await axios.get(url, {
+		const result = axios.get(url, {
 			headers: { Authorization: `Bearer ${token}` },
 		});
 		return result;
 	},
 
-	all: async (token: string) => {
-		const result = await axios.get(`${IP_PORT}/api/stocks`);
+	all: (token: string) => {
+		const result = axios.get(`${IP_PORT}/api/stocks`);
 		return result;
 	},
-	getStock: async (stockCode: number) => {
-		const result = await axios.get(`${IP_PORT}/api/stocks/${stockCode}`);
+	getStock: (stockCode: number) => {
+		const result = axios.get(`${IP_PORT}/api/stocks/${stockCode}`);
 		return result;
 	},
 	getRank: async (token: string) => {
@@ -68,11 +68,8 @@ export const REST_STOCK = {
 };
 
 export const ADMIN = {
-	newStock: async (
-		data: { stockName: string; price: number; category: string; description: string },
-		token: string
-	) => {
-		const result = await axios.post(`${IP_PORT}/api/stocks/new`, data, {
+	newStock: (data: { stockName: string; price: number; category: string; description: string }, token: string) => {
+		const result = axios.post(`${IP_PORT}/api/stocks/new`, data, {
 			headers: { Authorization: `Bearer ${token}` },
 		});
 		return result;
