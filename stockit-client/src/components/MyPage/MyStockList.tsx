@@ -2,8 +2,8 @@ import React from "react";
 import styled from "@emotion/styled";
 import { COLOR } from "../../constants/theme";
 
-// interface
 import { MyStockListProp } from "../../interfaces/BalanceInterface";
+import { currency } from "../../utils/utils";
 
 const MyStockList: React.FC<MyStockListProp> = ({ name, quantity, price, evaluation, icon }) => {
 	return (
@@ -13,8 +13,8 @@ const MyStockList: React.FC<MyStockListProp> = ({ name, quantity, price, evaluat
 				{name}
 			</div>
 			<div>{quantity}</div>
-			<div>{price}</div>
-			<div>{evaluation}</div>
+			<div>{currency(price)}</div>
+			<div>{currency(evaluation)}</div>
 			<div>{((evaluation - price * quantity) / (price * quantity)) * 100}%</div>
 		</Container>
 	);

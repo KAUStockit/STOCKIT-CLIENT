@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MyStock } from "../interfaces/TradeInterface";
+import { MyStock } from "../interfaces/MyPageInterface";
 
 const usePagenation = (myStocks: Array<MyStock>) => {
 	const [currentPage, setCurrentPage] = useState<number>(1);

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { RankItem } from "../interfaces/MyPageInterface";
+import { MyStocks } from "../interfaces/MyPageInterface";
 
 const IP_ADDRESS = "http://3.37.250.12";
 const PORT = "8080";
@@ -52,7 +53,7 @@ export const REST_STOCK = {
 
 	myStocks: (token: string, memberIdx: number) => {
 		const url = `${IP_PORT}/api/members/${memberIdx}/stocks`;
-		const result = axios.get(url, {
+		const result = axios.get<MyStocks>(url, {
 			headers: { Authorization: `Bearer ${token}` },
 		});
 		return result;

@@ -1,40 +1,40 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styled from "@emotion/styled";
 
 import usePagenation from "../../hooks/usePagenation";
-import { MyStock } from "../../interfaces/TradeInterface";
+import { MyStock } from "../../interfaces/MyPageInterface";
 import MyStockList from "./MyStockList";
 import { REST_STOCK } from "../../utils/Networking";
 import { getCookie } from "../../utils/Cookie";
 
 const BalanceTabPages = () => {
-	const [myStocks, setMyStocks] = useState<MyStock[]>([]);
+	const [myStocksCurrent, setMyStocksCurrent] = useState<MyStock[]>([]);
+	console.log(myStocksCurrent);
+	let myStocksBought = useRef<MyStock[] | null>([]);
 	const user = getCookie("user");
 
 	useEffect(() => {
-		REST_STOCK.myStocks(user.token, user.id)
-			.then((result) => {
-				if (!result) throw new Error("fetching stock list failed");
-				const stocks = result.data?.data;
-				console.log(stocks);
-				setMyStocks(stocks);
-			})
-			.catch(console.log);
+		REST_STOCK.myStocks(user.token, user.id).then((result) => {
+			console.log(result);
+			if (!result) throw new Error("fetching stock list failed");
+			myStocksBought.current = result.data.data.first;
+			setMyStocksCurrent(result.data.data.second);
+		});
 	}, []);
 
-	const { currentPage, totalPages, onPrevClick, onPageClick, onNextClick } = usePagenation(myStocks);
+	const { currentPage, totalPages, onPrevClick, onPageClick, onNextClick } = usePagenation(myStocksCurrent);
 	return (
 		<>
 			<StockBalance>
-				{myStocks.map((stock, idx) => {
-					if (idx < currentPage * 5 && idx > (currentPage - 1) * 5) {
+				{myStocksCurrent.map((stock, idx) => {
+					if (idx < currentPage * 5 && idx >= (currentPage - 1) * 5) {
 						return (
 							<MyStockList
 								key={idx}
-								name={stock.name}
-								quantity={stock.quantity}
-								price={stock.price}
-								evaluation={stock.quantity * stock.currentPrice}
+								name={stock.stockName}
+								quantity={myStocksBought.current![idx].amount}
+								price={myStocksBought.current![idx].price}
+								evaluation={myStocksBought.current![idx].amount * myStocksBought.current![idx].price}
 							/>
 						);
 					}

@@ -14,7 +14,6 @@ function Main() {
 	const [stockRankList, setStockRankList] = useState<StockObject[][]>([[]]);
 	const [tenThousandStockList, setTenThousandStockList] = useState<Stock[]>([]);
 	const [selectedCard, setSelectedCard] = useState(0); // 인기순 / 시총순 / 수익률 순서
-	console.log(tenThousandStockList);
 
 	useEffect(() => {
 		!localStorage.getItem("session") ?? localStorage.setItem("session", "");
