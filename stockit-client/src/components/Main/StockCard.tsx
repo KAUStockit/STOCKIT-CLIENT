@@ -2,16 +2,12 @@ import React from "react";
 import styled from "@emotion/styled";
 import { useHistory } from "react-router";
 
-// components
-import RateBox from "../common/RateBox";
-
-// interface
 import { StockCardProp } from "../../interfaces/MainInterface";
+import { COLOR } from "../../constants/theme";
 
-const StockCard: React.FC<StockCardProp> = ({ name, rate, id }) => {
+const StockCard: React.FC<StockCardProp> = ({ name, price, id }) => {
 	const history = useHistory();
 
-	// functions
 	const onClick = () => {
 		history.push(`./${id}/trade`);
 	};
@@ -19,7 +15,7 @@ const StockCard: React.FC<StockCardProp> = ({ name, rate, id }) => {
 	return (
 		<Card onClick={onClick}>
 			<p>{name}</p>
-			<RateBox rate={rate} />
+			<span>{price}원</span>
 		</Card>
 	);
 };
@@ -38,10 +34,18 @@ const Card = styled.div`
 		font-weight: 500;
 	}
 
-	& > div {
+	& > span {
 		position: relative;
 		top: 70%;
 		margin-right: 2vh;
+		display: block;
+		height: 30px;
+		padding: 3px 15px;
+		border-radius: 10px;
+		color: ${COLOR.GRAPH_BLUE};
+		background-color: rgba(71, 149, 255, 0.15);
+		font-size: 18px;
+		font-weight: 500;
 	}
 `;
 

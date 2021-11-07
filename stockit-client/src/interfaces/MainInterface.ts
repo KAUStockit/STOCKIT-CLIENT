@@ -14,7 +14,7 @@ export type StockListProps = {
 
 export type StockCardProp = {
 	name: string;
-	rate: number;
+	price: number;
 	id: number;
 };
 

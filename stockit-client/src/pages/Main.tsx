@@ -3,21 +3,18 @@ import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 
 import { REST_STOCK } from "../utils/Networking";
-import StockCard from "../components/Main/StockCard";
 import { COLOR } from "../constants/theme";
-import ToolTip from "../components/common/ToolTip";
-import { StockObject } from "../interfaces/MainInterface";
-import { Stock } from "../interfaces/MainInterface";
+import { StockObject, Stock } from "../interfaces/MainInterface";
 import MainRank from "../components/Main/MainRank";
 import MainCards from "../components/Main/MainCards";
+import StockCard from "../components/Main/StockCard";
+import ToolTip from "../components/common/ToolTip";
 
 function Main() {
-	// states
-	const [stockRankList, setStockRankList] = useState<StockObject[][]>([[]]); // setter는 통신시 설정
-	const [tenThousandStockList, setTenThousandStockList] = useState<StockObject[]>([]); // setter는 통신시 설정
+	const [stockRankList, setStockRankList] = useState<StockObject[][]>([[]]);
+	const [tenThousandStockList, setTenThousandStockList] = useState<Stock[]>([]);
 	const [selectedCard, setSelectedCard] = useState(0); // 인기순 / 시총순 / 수익률 순서
-
-	// event handlers
+	console.log(tenThousandStockList);
 
 	useEffect(() => {
 		!localStorage.getItem("session") ?? localStorage.setItem("session", "");
@@ -31,6 +28,9 @@ function Main() {
 					.slice(3, 21)
 			)
 			.then((data) => setStockRankList([data, data, data]));
+		REST_STOCK.getStocksUnderPrice10000()
+			.then((res) => res.data.data)
+			.then(setTenThousandStockList);
 	}, []);
 
 	return (
@@ -45,7 +45,7 @@ function Main() {
 					<h3>10000원으로 살 수 있는 주식</h3>
 					<div>
 						{tenThousandStockList.map((stock, idx) => (
-							<StockCard key={idx} id={stock.id} name={stock.name} rate={stock.rate} />
+							<StockCard key={idx} id={stock.stockCode} name={stock.stockName} price={stock.price} />
 						))}
 					</div>
 				</MainBottom>
